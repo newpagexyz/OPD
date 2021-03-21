@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ОПД</title>
+</head>
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="/static/style/null.css">
+ <link rel="shortcut icon" href="/static/img/logo.png">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+<body>
+   <div class="wrapper" id="app">
+      <a class="navBtn">
+         <div class="navBtn__ico"></div>
+         <div class="navBtn__text">Вверх</div>
+      </a>
+      <header class="header">
+         <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
+         <div class="header__items">
+            <div class="header__lable"><a href="">Список</a></div>
+            <div class="header__lable"><a href="">Авторизация</a></div>
+         </div>
+      </header>
+      <main>
+         <div class="toolbox">
+            <div class="toolbox__item">
+               <div class="toolbox__search">
+               </div>
+            </div>
+            <div class="toolbox__item">
+               <a class="toolbox__lable">Скрыть фильтр</a>
+            </div>
+            <div class="toolbox__item">
+               <a class="toolbox__lable">Сортировать по: </a>
+               <v-seclect>
+                  <option>название</option>
+                  <option>название</option>
+                  <option>название</option>
+               </v-seclect>
+            </div>
+            <div class="toolbox__item">
+                <a class="toolbox__lable">Сохранить в Excel</a>
+            </div>
+         </div>
+         <div class="content">
+            <div class="filterbar">
+               <header>
+                  <a class="filterbar__lable">Сбросить фильтр</a>
+                  <a class="filterbar__lable">Применть</a>
+               </header>
+               <div class="filterbar__content">
+                  <div class="filterbar__item">
+                     <div class="filterbar__header">
+                        <div class="filterbar__checkbox"></div>
+                        <div class="filterbar__title"></div>
+                        <div class="filterbar__arrow"></div>
+                     </div>
+                     <div class="filterbar__body">
+                        <div class="filterbar__point"></div>
+                        <div class="filterbar__interval">
+                           <div class="filterbar__value">
+                              <div class="filterbar__ico"></div>
+                              <div class="filterbar__input"></div>
+                           </div>
+                           <div class="filterbar__value">
+                              <div class="filterbar__ico"></div>
+                              <div class="filterbar__input"></div>
+                           </div>
+                        </div>
+                        <div class="filterbar__output">
+                           <div class="filterbar__count"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="list">
+               <header>
+                  <div class="list__lable"></div>
+                  <div class="list__nav"></div>
+               </header>
+               <div class="list__content">
+                  <div class="list__item">
+                     <div class="list__img"><img src="" alt="img"></div>
+                     <div class="list__body">
+                        <div class="list__title"></div>
+                        <div class="list__subtitle"></div>
+                        <div class="list__text"></div>
+                     </div>
+                     <!--Правая часть item-->
+                     <div class="list__btns">
+                        <div class="list__info">
+                           <a href="">
+                              <div class="list__lable">Техническое описание</div>
+                           <div class="list__pdf"><img src="" alt="pdf"></div>
+                           </a>
+                        </div>
+                        <div class="list__btn">
+                           <a href="">Подробнее > </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </main>
+
+   </div>
+</body>
+</html>
