@@ -10,18 +10,17 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 <link rel="stylesheet" href="/static/style/null.css">
  <link rel="shortcut icon" href="/static/img/logo.png">
- <link rel="stylesheet" type="text/css" href="/static/style/index.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 <body>
-   <div class="wrapper" id="app">
+   <v-app class="wrapper" id="app">
       <a class="navBtn">
-         <div class="navBtn__ico">^</div>
+         <div class="navBtn__ico">&#8657;</div>
          <div class="navBtn__text">Вверх</div>
       </a>
       <header class="header">
@@ -31,7 +30,8 @@
             <div class="header__lable"><a href="">Авторизация</a></div>
          </div>
       </header>
-      <main>
+      
+         <main>
          <div class="toolbox">
             
                <div class="toolbox__search">
@@ -69,67 +69,146 @@
                             value
                           ></v-checkbox>
                         <div class="filterbar__title">Разрешение (bits)</div>
-                        <div class="filterbar__arrow">^</div>
+                        <div class="filterbar__arrow">&#9660;</div>
                      </div>
                      <div class="filterbar__body">
-                         
-<template>
-  <v-card
-    flat
-    color="transparent"
-  >
-    <v-subheader>Min and max range slider</v-subheader>
-
-    <v-card-text>
-      <v-row>
-        <v-col class="px-4">
-          <v-range-slider
-            v-model="range"
-            :max="max"
-            :min="min"
-            hide-details
-            class="align-center"
-          >
-            <template v-slot:prepend>
-              <v-text-field
-                :value="range[0]"
-                class="mt-0 pt-0"
-                hide-details
-                single-line
-                type="number"
-                style="width: 60px"
-                @change="$set(range, 0, $event)"
-              ></v-text-field>
-            </template>
-            <template v-slot:append>
-              <v-text-field
-                :value="range[1]"
-                class="mt-0 pt-0"
-                hide-details
-                single-line
-                type="number"
-                style="width: 60px"
-                @change="$set(range, 1, $event)"
-              ></v-text-field>
-            </template>
-          </v-range-slider>
-        </v-col>
-      </v-row>
-    </v-card-text>
-  </v-card>
-</template>
-                        <div class="filterbar__interval">
-                           <div class="filterbar__value">
-                              <div class="filterbar__ico"></div>
-                              <div class="filterbar__input"></div>
-                           </div>
-                           <div class="filterbar__value">
-                              <div class="filterbar__ico"></div>
-                              <div class="filterbar__input"></div>
-                           </div>
-                        </div>
+                     <template>
+                               <v-range-slider
+                                 v-model="range"
+                                 :max="max"
+                                 :min="min"
+                                 hide-details
+                                 class="align-center"
+                               >
+                                 <template v-slot:prepend>
+                                    <div class="filter_bound upper">>></div> 
+                                   <v-text-field
+                                     :value="range[0]"
+                                     class="mt-0 pt-0"
+                                     hide-details
+                                     single-line
+                                     type="number"
+                                     style="width: 3vw"
+                                     @change="$set(range, 0, $event)"
+                                   ></v-text-field>
+                                 </template>
+                                 <template v-slot:append>
+                                    <div class="filter_bound bottom "><<</div>      
+                                   <v-text-field
+                                     :value="range[1]"
+                                     class="mt-0 pt-0"
+                                     hide-details
+                                     single-line
+                                     type="number"
+                                     style="width: 3vw"
+                                     @change="$set(range, 1, $event)"
+                                   ></v-text-field>
+                                 </template>
+                               </v-range-slider>
+                     </template>
+              
                         <div class="filterbar__output">
-                           <div class="filterbar__count"></div>
+                           <div class="filterbar__count">94 шт</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="filterbar__item">
+                     <div class="filterbar__header">
+                        <v-checkbox
+                            input-value="true"
+                            value
+                          ></v-checkbox>
+                        <div class="filterbar__title">Разрешение (bits)</div>
+                        <div class="filterbar__arrow">&#9660;</div>
+                     </div>
+                     <div class="filterbar__body">
+                     <template>
+                               <v-range-slider
+                                 v-model="range"
+                                 :max="max"
+                                 :min="min"
+                                 hide-details
+                                 class="align-center"
+                               >
+                                 <template v-slot:prepend>
+                                    <div class="filter_bound upper">>></div> 
+                                   <v-text-field
+                                     :value="range[0]"
+                                     class="mt-0 pt-0"
+                                     hide-details
+                                     single-line
+                                     type="number"
+                                     style="width: 3vw"
+                                     @change="$set(range, 0, $event)"
+                                   ></v-text-field>
+                                 </template>
+                                 <template v-slot:append>
+                                    <div class="filter_bound bottom "><<</div>      
+                                   <v-text-field
+                                     :value="range[1]"
+                                     class="mt-0 pt-0"
+                                     hide-details
+                                     single-line
+                                     type="number"
+                                     style="width: 3vw"
+                                     @change="$set(range, 1, $event)"
+                                   ></v-text-field>
+                                 </template>
+                               </v-range-slider>
+                     </template>
+              
+                        <div class="filterbar__output">
+                           <div class="filterbar__count">94 шт</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="filterbar__item">
+                     <div class="filterbar__header">
+                        <v-checkbox
+                            input-value="true"
+                            value
+                          ></v-checkbox>
+                        <div class="filterbar__title">Разрешение (bits)</div>
+                        <div class="filterbar__arrow">&#9660;</div>
+                     </div>
+                     <div class="filterbar__body">
+                     <template>
+                               <v-range-slider
+                                 v-model="range"
+                                 :max="max"
+                                 :min="min"
+                                 hide-details
+                                 class="align-center"
+                               >
+                                 <template v-slot:prepend>
+                                    <div class="filter_bound upper">>></div> 
+                                   <v-text-field
+                                     :value="range[0]"
+                                     class="mt-0 pt-0"
+                                     hide-details
+                                     single-line
+                                     type="number"
+                                     style="width: 3vw"
+                                     @change="$set(range, 0, $event)"
+                                   ></v-text-field>
+                                 </template>
+                                 <template v-slot:append>
+                                    <div class="filter_bound bottom "><<</div>      
+                                   <v-text-field
+                                     :value="range[1]"
+                                     class="mt-0 pt-0"
+                                     hide-details
+                                     single-line
+                                     type="number"
+                                     style="width: 3vw"
+                                     @change="$set(range, 1, $event)"
+                                   ></v-text-field>
+                                 </template>
+                               </v-range-slider>
+                     </template>
+              
+                        <div class="filterbar__output">
+                           <div class="filterbar__count">94 шт</div>
                         </div>
                      </div>
                   </div>
@@ -137,24 +216,58 @@
             </div>
             <div class="list">
                <header>
-                  <div class="list__lable"></div>
-                  <div class="list__nav"></div>
+                  <div class="list__lable">Страницы: </div>
+                  <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
                </header>
                <div class="list__content">
                   <div class="list__item">
-                     <div class="list__img"><img src="" alt="img"></div>
+                     <div class="list__img"><img src="/static/img/logo.png" alt="img"></div>
                      <div class="list__body">
-                        <div class="list__title"></div>
-                        <div class="list__subtitle"></div>
-                        <div class="list__text"></div>
+                        <div class="list__title">ADS8167</div>
+                        <div class="list__subtitle">Прицизионный</div>
+                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
                      </div>
                      <!--Правая часть item-->
                      <div class="list__btns">
                         <div class="list__info">
-                           <a href="">
                               <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img src="" alt="pdf"></div>
-                           </a>
+                           <div class="list__pdf"><img src="/static/img/logo.png" alt="pdf"></div>
+                        </div>
+                        <div class="list__btn">
+                           <a href="">Подробнее > </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="list__item">
+                     <div class="list__img"><img src="/static/img/logo.png" alt="img"></div>
+                     <div class="list__body">
+                        <div class="list__title">ADS8167</div>
+                        <div class="list__subtitle">Прицизионный</div>
+                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
+                     </div>
+                     <!--Правая часть item-->
+                     <div class="list__btns">
+                        <div class="list__info">
+                              <div class="list__lable">Техническое описание</div>
+                           <div class="list__pdf"><img src="/static/img/logo.png" alt="pdf"></div>
+                        </div>
+                        <div class="list__btn">
+                           <a href="">Подробнее > </a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="list__item">
+                     <div class="list__img"><img src="/static/img/logo.png" alt="img"></div>
+                     <div class="list__body">
+                        <div class="list__title">ADS8167</div>
+                        <div class="list__subtitle">Прицизионный</div>
+                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
+                     </div>
+                     <!--Правая часть item-->
+                     <div class="list__btns">
+                        <div class="list__info">
+                              <div class="list__lable">Техническое описание</div>
+                           <div class="list__pdf"><img src="/static/img/logo.png" alt="pdf"></div>
                         </div>
                         <div class="list__btn">
                            <a href="">Подробнее > </a>
@@ -165,9 +278,12 @@
             </div>
          </div>
          </main>
+      
 
-   </div>
+   </v-app>
 </body>
+ <link rel="stylesheet" type="text/css" href="/static/style/index.css">
+
 <script type="text/javascript" src="/static/main/index.js"></script>
 
 </html>
