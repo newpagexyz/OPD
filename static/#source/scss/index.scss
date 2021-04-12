@@ -1,3 +1,6 @@
+body{
+   font-family: 'RocknRoll', sans-serif;
+}
 .wrapper {
    position: relative;
    display: flex;
@@ -22,14 +25,16 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   padding: 0 2.5vw;
+   padding: 0 1.7vw;
+   padding-left: 2.5vw;
+
 
    color: #fff;
-   font-size: 3vh;
+   font-size: 2.6vh;
    font-weight: 600;
 }
 .header__title {
-   
+   cursor: pointer;
 }
 .header__items {
    padding-right: 1.5vw;
@@ -38,6 +43,7 @@
    justify-content: space-around;
    align-items: center;
    color: #fff;
+
 }
 .header__lable {
    color: #fff;
@@ -49,35 +55,112 @@ main{
    flex: 1 1 auto;
    display: flex;
    flex-direction: column;
-   padding: 0 2.5vw;
+   padding: 0 2.8vw;
 }
 .toolbox {
-   flex: 0 0 10vh;
+   flex: 0 0 12vh;
    //width: 100vw;
    display: flex;
-   gap: 2vw;
+   
    align-items: center;
+   justify-content: flex-end;
+   gap: 3.1vw;
+   border-bottom: 1px solid #000;
+   padding-bottom: 1.2vh;
 }
 .toolbox__item {
    color: #534999;
-   flex: 0 0 15vw;
-   font-size: 3vh;
+   
+   font-size: 2.5vh;
    text-align: end;
+   display: flex;
+   
 }
 .toolbox__search {
+   position: relative;
    flex: 1 1 auto;
+   //max-width: 40vw;
+   border: 2px solid #000;
+   height: 7vh;
+   border-radius: 1vh;
+   width: 100%;
+   & input{
+      width: 100%;
+      height: 100%;
+      font-size: 3vh;
+      padding-left: 1.8vh;
+   }
 }
-.toolbox__lable {}
-.content {}
-.filterbar {}
-.filterbar__lable {}
-.filterbar__content {}
-.filterbar__item {}
-.filterbar__header {}
+.toolbox_searchIco{
+   position: absolute;
+   right: 1.5vh;
+   top: 1.5vh;
+   font-size: 3vh;
+}
+.toolbox__lable {
+   white-space: nowrap;
+   cursor: pointer;
+}
+.content {
+   display: flex;
+   width: 100%;
+}
+.filterbar {
+   flex: 0 0 16vw;
+   & header{
+      display: flex;
+      justify-content: flex-start;
+      padding-left: 0.7vw;
+      align-items: center;
+      height: 6.5vh;
+      padding-bottom: 0vh;
+      border-bottom: 0.4vh solid #0b2765;
+      gap: 1.6vw;
+      & a{
+         font-size: 1.7vh;
+      }
+
+   }
+}
+.filterbar__lable {
+   cursor: pointer;
+}
+.filterbar__content {
+   overflow: auto;
+   height: 70vh;
+}
+.filterbar__item {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+
+}
+.filterbar__header {
+   position: relative;
+   background-color: #e7efff;
+   padding: 0 0.3vw;
+   height: 5vh;
+   display: flex;
+   align-items: center;
+   gap: 1vh;
+
+}
 .filterbar__checkbox {}
-.filterbar__title {}
-.filterbar__arrow {}
-.filterbar__body {}
+.filterbar__title {
+   color: #000
+}
+.filterbar__arrow {
+   position: absolute;
+   font-size: 3vh;
+   right:  1.7vh;
+   top: 1.5vh;
+}
+.filterbar__body {
+   background-color: #fff;
+   height: 19.4vh;
+   display: flex;
+   flex-direction: column;
+}
 .filterbar__point {}
 .filterbar__interval {}
 .filterbar__value {}
@@ -85,7 +168,9 @@ main{
 .filterbar__input {}
 .filterbar__output {}
 .filterbar__count {}
-.list {}
+.list {
+   flex: 1 1 auto;
+}
 .list__lable {}
 .list__nav {}
 .list__content {}

@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="/static/style/null.css">
  <link rel="shortcut icon" href="/static/img/logo.png">
  <link rel="stylesheet" type="text/css" href="/static/style/index.css">
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -36,15 +35,16 @@
          <div class="toolbox">
             
                <div class="toolbox__search">
-                  <input type="text" name="">
-                  <div class="toolbox_searchIco"></div>
+                  <input type="text" name="" placeholder="Поиск">
+                  <div class="toolbox_searchIco">🔎</div>
                </div>
             
             <div class="toolbox__item">
                <a class="toolbox__lable">Скрыть фильтр</a>
             </div>
             <div class="toolbox__item">
-               <a class="toolbox__lable">Сортировать по: </a>
+               <a class="toolbox__lable">Сортировать по: &nbsp;</a>
+               <a class="toolbox__lable"> Названию </a>  
               <!-- <v-seclect>
                   <option>название</option>
                   <option>название</option>
@@ -64,12 +64,60 @@
                <div class="filterbar__content">
                   <div class="filterbar__item">
                      <div class="filterbar__header">
-                        <div class="filterbar__checkbox"></div>
-                        <div class="filterbar__title"></div>
-                        <div class="filterbar__arrow"></div>
+                        <v-checkbox
+                            input-value="true"
+                            value
+                          ></v-checkbox>
+                        <div class="filterbar__title">Разрешение (bits)</div>
+                        <div class="filterbar__arrow">^</div>
                      </div>
                      <div class="filterbar__body">
-                        <div class="filterbar__point"></div>
+                         
+<template>
+  <v-card
+    flat
+    color="transparent"
+  >
+    <v-subheader>Min and max range slider</v-subheader>
+
+    <v-card-text>
+      <v-row>
+        <v-col class="px-4">
+          <v-range-slider
+            v-model="range"
+            :max="max"
+            :min="min"
+            hide-details
+            class="align-center"
+          >
+            <template v-slot:prepend>
+              <v-text-field
+                :value="range[0]"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+                @change="$set(range, 0, $event)"
+              ></v-text-field>
+            </template>
+            <template v-slot:append>
+              <v-text-field
+                :value="range[1]"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+                @change="$set(range, 1, $event)"
+              ></v-text-field>
+            </template>
+          </v-range-slider>
+        </v-col>
+      </v-row>
+    </v-card-text>
+  </v-card>
+</template>
                         <div class="filterbar__interval">
                            <div class="filterbar__value">
                               <div class="filterbar__ico"></div>
@@ -120,4 +168,6 @@
 
    </div>
 </body>
+<script type="text/javascript" src="/static/main/index.js"></script>
+
 </html>
