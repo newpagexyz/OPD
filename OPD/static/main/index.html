@@ -12,7 +12,7 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 <link rel="stylesheet" href="/static/style/null.css">
- <link rel="shortcut icon" href="/static/img/logo.png">
+ <link rel="shortcut icon" :href="src+'/img/logo.png'">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -221,7 +221,7 @@
                </header>
                <div class="list__content">
                   <div class="list__item">
-                     <div class="list__img"><img src="/static/img/logo.png" alt="img"></div>
+                     <div class="list__img"><img :src="src+'/img/logo.png'" alt="img"></div>
                      <div class="list__body">
                         <div class="list__title">ADS8167</div>
                         <div class="list__subtitle">Прицизионный</div>
@@ -231,7 +231,7 @@
                      <div class="list__btns">
                         <div class="list__info">
                               <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img src="/static/img/logo.png" alt="pdf"></div>
+                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
                         </div>
                         <div class="list__btn">
                            <a href="">Подробнее > </a>
@@ -239,7 +239,7 @@
                      </div>
                   </div>
                   <div class="list__item">
-                     <div class="list__img"><img src="/static/img/logo.png" alt="img"></div>
+                     <div class="list__img"><img :src="src+'/img/logo.png'" alt="img"></div>
                      <div class="list__body">
                         <div class="list__title">ADS8167</div>
                         <div class="list__subtitle">Прицизионный</div>
@@ -249,7 +249,7 @@
                      <div class="list__btns">
                         <div class="list__info">
                               <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img src="/static/img/logo.png" alt="pdf"></div>
+                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
                         </div>
                         <div class="list__btn">
                            <a href="">Подробнее > </a>
@@ -257,7 +257,7 @@
                      </div>
                   </div>
                   <div class="list__item">
-                     <div class="list__img"><img src="/static/img/logo.png" alt="img"></div>
+                     <div class="list__img"><img :src="src+'/img/logo.png'" alt="img"></div>
                      <div class="list__body">
                         <div class="list__title">ADS8167</div>
                         <div class="list__subtitle">Прицизионный</div>
@@ -267,7 +267,7 @@
                      <div class="list__btns">
                         <div class="list__info">
                               <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img src="/static/img/logo.png" alt="pdf"></div>
+                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
                         </div>
                         <div class="list__btn">
                            <a href="">Подробнее > </a>
@@ -282,8 +282,8 @@
 
    </v-app>
 </body>
- <link rel="stylesheet" type="text/css" href="/static/style/index.css">
+ <link rel="stylesheet" type="text/css" :href="src+'/style/index.css'">
 
-<script type="text/javascript" src="/static/main/index.js"></script>
+<script type="text/javascript" :src="src+'/main/index.js'"></script>
 
 </html>
