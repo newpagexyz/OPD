@@ -1,0 +1,56 @@
+body {
+  font-family: 'RocknRoll', sans-serif; }
+
+.wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.v-application a {
+  color: #382d89; }
+
+.header {
+  background-color: #2d3074;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 10vh;
+  flex: 0 0 10vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 1.7vw;
+  padding-left: 2.5vw;
+  color: #fff;
+  font-size: 2.6vh;
+  font-weight: 600; }
+
+.header__title {
+  cursor: pointer; }
+
+.header__items {
+  padding-right: 1.5vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 3.2vw;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #fff; }
+
+.header__lable {
+  color: #fff; }
+  .header__lable a {
+    color: #fff; }
