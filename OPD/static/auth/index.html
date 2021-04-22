@@ -30,21 +30,32 @@
  </div>
     <div id="app">
  <v-app id="inspire" >
+  <header class="header">
+         <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
+         <div class="header__items">
+            <div class="header__lable"><a href="">Список</a></div>
+            <div class="header__lable"><a href="">Авторизация</a></div>
+         </div>
+      </header>
         <div class="auth-card ">
             <div class="card card__container">
                 <div class="card__logo">
-                    <div class="card_img ibg">
-                        <img :src="src+'/img/logo.png'" alt="logo">
-                    </div>
+                    
                     <div class="card__title" >Авторизация</div>
                 </div>
                     <form action="" method="post" class="card__main" id="login-form">
+                      <div class="card__block">
+                        <div class="card__subtitle">
+                        Для редактирования и добавления данных авторизируйтесь как Администратор.
+                      </div>
+                      </div>
+                      
                         <div class="card__inputs">
                             <input__text1 _type="email"  required
                             _placeholder="Логин"  _name="email" _tabindex="1" v-model="email" autocomplete = "email"></input__text1>
                             <input__text1 _type="password" 
                                 _placeholder="Пароль" required _name="password" _tabindex="2" v-model="password" autocomplete = "current-password" v-on:keyup.enter="onEnter" v-on:keyup.enter="onEnterClick"></input__text1>
-                            <a  class="change__password" tabindex="3" style='color: #fff;' @click='dialog=true'>Забыли пароль?</a>
+                           
                             <v-dialog v-model="dialog" max-width="480px">
                               <v-card clas='purple darken-2 text-center'>
                                 <v-card-title class="headline">Введите почту. Будет выслано письмо для восстановления пароля.</v-card-title>
@@ -56,7 +67,7 @@
                                      <v-spacer></v-spacer>
                                      <v-spacer></v-spacer>
                                      <v-card-actions>
-                                     <btn_blues text='Восстановить' _submit=true _width=200px
+                                     <btn_blues text='Восстановить' _submit=true 
                                       @click='EventForgotPassword'_tabindex=5 ></btn_blues>
                                   <v-spacer></v-spacer>
                                 </v-card-actions>
@@ -64,13 +75,13 @@
                             </v-dialog>
                         </div>
                         <div class="card__futter">
-                            <btn_dark-blue text='Регистрация' _submit=true  _tabindex=4 @click='dialog2=true'></btn_dark-blue>
+                            <btn_dark-blue text='Назад' _submit=true _tabindex=5  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
                             <v-dialog v-model="dialog2" max-width="500px">
                               <v-card clas='purple darken-2 text-center'>
                                 <v-card-title class="headline">Для регистрации отправьте заявку на почту ВШТМ.</v-card-title>
                               </v-card>
                             </v-dialog>
-                            <btn_blues text='Вход' _submit=true _width=150px _tabindex=5  @click="handleSubmit" v-on:keyup.enter="onEnter"></btn_blues>
+                            <btn_blues text='Вход' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="onEnter"></btn_blues>
                         </div>
                         
                     </form>
@@ -81,6 +92,7 @@
      </v-app>
     </div>
 </body>
+  <link rel="stylesheet" type="text/css" href="/OPD/static/style/header.css">
 
 <script src="/OPD/static/components/btns/btn_standart.js"></script>
 <script src="/OPD/static/components/btns/btn_blue.js"></script>

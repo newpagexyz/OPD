@@ -5,15 +5,15 @@ main{
    padding: 0 2.8vw;
 }
 .toolbox {
-   flex: 0 0 12vh;
+   flex: 0 0 9vh;
    //width: 100vw;
    display: flex;
    
    align-items: center;
-   justify-content: flex-end;
+   justify-content: flex-start;
    gap: 3.1vw;
-   border-bottom: 0.1vh solid #000;
-   padding-bottom: 1.2vh;
+   border-bottom: 0.1vh solid rgba(0,0,0,0.50);
+  // padding-bottom: 1.2vh;
 }
 .toolbox__item {
    color: #534999;
@@ -27,7 +27,7 @@ main{
    position: relative;
    flex: 1 1 auto;
    //max-width: 40vw;
-   border: 0.3vh solid #000;
+   border: 0.3vh solid rgba(0,0,0,0.50);
    height: 7vh;
    border-radius: 1vh;
    width: 100%;
@@ -41,13 +41,185 @@ main{
 .toolbox_searchIco{
    position: absolute;
    right: 1.5vh;
-   top: 0.9vh;
+   top: 1.5vh;
    font-size: 3vh;
+   height: 3.5vh;
+   width: 3.5vh;
+   & img{
+      width: 100%;
+      height: 100%;
+   }
 }
 .toolbox__lable {
    white-space: nowrap;
    cursor: pointer;
    & a{
       color: #382d89;
+   }
+}
+////content
+.content {
+   max-height: 80vh;
+   width: 76.1vw;
+   margin: 0 auto;
+}
+.panel {
+   
+}
+.panel__title {
+   margin: 2.3vh 0;
+   margin-left: 1.5vw;
+   height: 5vh;
+   font-size: 3.5vh;
+   color: #000;
+}
+.panel__name {
+   color: #4b4194;
+}
+.panel__card {
+   display: flex;
+   
+   height: 60vh;
+}
+//изменеие vue tab
+.v-sheet.v-card{
+  border-radius: 0.5vh;
+}
+.v-tabs-bar{
+   height: 6vh;
+}
+.v-slide-group__next, .v-slide-group__prev{
+   flex: 0 1 5vw;
+}
+.v-tabs-slider-wrapper{
+   height: 0.2vh;
+   width: 2vw  ;
+}
+.v-tab{
+   min-width: 5vw;
+   max-width: 15vw ;
+   padding: 0 1vw;
+   font-size: 1.5vh;
+   letter-spacing: 0.05vw;
+}
+.v-tabs-items{
+   height: 50vh;
+}
+.v-window-item--active{
+   padding: 1vh 0;
+   height: 100%;
+}
+//
+//измеения vue table
+.v-data-table{
+   border-radius: 0;
+
+}
+.v-data-table--dense>.v-data-table__wrapper>table>tbody>tr>td, .v-data-table--dense>.v-data-table__wrapper>table>tbody>tr>th, .v-data-table--dense>.v-data-table__wrapper>table>tfoot>tr>td, .v-data-table--dense>.v-data-table__wrapper>table>tfoot>tr>th, .v-data-table--dense>.v-data-table__wrapper>table>thead>tr>td, .v-data-table--dense>.v-data-table__wrapper>table>thead>tr>th{
+   height: 4vh;
+}
+.v-data-table>.v-data-table__wrapper>table>tbody>tr>td, .v-data-table>.v-data-table__wrapper>table>tfoot>tr>td, .v-data-table>.v-data-table__wrapper>table>thead>tr>td{
+   font-size: 1.5vh;
+}
+.v-data-table>.v-data-table__wrapper>table>tbody>tr>td, .v-data-table>.v-data-table__wrapper>table>tbody>tr>th, .v-data-table>.v-data-table__wrapper>table>tfoot>tr>td, .v-data-table>.v-data-table__wrapper>table>tfoot>tr>th, .v-data-table>.v-data-table__wrapper>table>thead>tr>td, .v-data-table>.v-data-table__wrapper>table>thead>tr>th{
+   padding: 0 1vw;
+}
+//
+.panel__slide {
+   height: 60vh;
+  flex: 1 1 auto;
+}
+.panel__text {
+
+margin:  0 2vh 0 2vh;
+padding-right: 2vh;
+padding-bottom: 1.5vh;
+font-size: 2vh;
+
+border-bottom: rgba(0,0,0,0.10) solid 0.05vh;
+max-height: 37vh;
+overflow: auto;
+&::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0.05);
+    width: 10px;
+    height: 10px;
+   }
+   &::-webkit-scrollbar-thumb{
+
+    background-color: #0f1e81;
+  border-radius: 30px;
+   }
+
+}
+.panel__href{
+   font-family:Roboto,sans-serif ;
+   margin:  1.3vh 2vh;
+    font-size: 1.5vh;
+   font-weight: 500;
+   color: rgba(0,0,0,0.54);
+   letter-spacing: 0.05vw;
+   
+}
+.panel__file {
+
+   margin:  1.3vh 2vh;
+   display: flex;
+   gap: 1vw;
+   align-items: center;
+}
+.panel__ico {
+   cursor: pointer;
+   height: 3vh;
+   width: 3vh;
+   & img{
+      width: 100%;
+      height: 100%;
+   }
+}
+.panel__filename {
+   cursor: pointer;
+    font-size: 1.3vh;
+   font-weight: 500;
+   color: rgba(0,0,0,0.54);
+   letter-spacing: 0.05vw;
+   &:hover{
+      text-decoration: underline;
+   };
+}
+.panle__arch {
+   flex: 0 0 38vw;
+  
+}
+.panel__img {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   padding-top: 3vh;
+   & img{
+      width: 80%;
+      height: 80%;
+
+      object-fit: contain;
+   }
+}
+.panel_footer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 3vw;
+   color: #323e7d;
+   font-size: 2vh;
+   cursor: pointer;
+
+}
+.panel_before {
+   &:hover{
+      text-decoration: underline;
+   }
+}
+.panel__after {
+   &:hover{
+      text-decoration: underline;
    }
 }

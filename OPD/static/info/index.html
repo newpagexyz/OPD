@@ -18,41 +18,34 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 <body>
+  <div class="preloader">
+  <link rel="stylesheet" href="/OPD/static/style/preloader.css">
+  <script src="/OPD/static/components/preloader.js"></script>
+  <div class="preloader__row">
+    <div class="preloader__item"></div>
+    <div class="preloader__item"></div>
+  </div>
+ </div>
    <v-app class="wrapper" id="app">
       <header class="header">
          <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
          <div class="header__items">
             <div class="header__lable"><a href="">Список</a></div>
-            <div class="header__lable"><a href="">Авторизация</a></div>
+            <div class="header__lable"><a href="/OPD/static/auth/">Авторизация</a></div>
          </div>
       </header>
       <main>
         <div class="toolbox">
             
-               <div class="toolbox__search">
-                  <input type="text" name="" placeholder="Поиск">
-                  <div class="toolbox_searchIco">🔎</div>
-               </div>
-            
+               
             <div class="toolbox__item">
-               <a class="toolbox__lable">Скрыть фильтр</a>
+               <a class="toolbox__lable" href="/OPD/static/main/">← Обратно к поиску</a>
             </div>
-            <div class="toolbox__item">
-               <a class="toolbox__lable">Сортировать по: &nbsp;</a>
-               <a class="toolbox__lable"> Названию </a>  
-              <!-- <v-seclect>
-                  <option>название</option>
-                  <option>название</option>
-                  <option>название</option>
-               </v-seclect> -->
-            </div>
-            <div class="toolbox__item">
-                <a class="toolbox__lable">Сохранить в Excel</a>
-            </div>
+           
          </div>
          <div class="content">
            <div class="panel">
-             <div class="panel__title">Информация о <a class="panel__name">8167</a></div>
+            <div class="panel__title">Информация о <a class="panel__name"><b>ADS8167</b></a></div>
              <div class="panel__card">
               <div class="panel__slide">
                 <template>
@@ -95,6 +88,24 @@
                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                           proident, sunt in culpa qui officrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                           proident, sunt in culpa qui officirud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                           proident, sunt in culpa qui officiia deserunt mollit anim id est laborum.
+                           proident, suproident, sunt in culpa qui officia deserunt mollit anim id est laborum.nt in culpa qui officia deserunt mollit anim id est laborum.
+                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                         </div>
+                         <div class="panel__href">
+                           ДОКУМЕНТАЦИЯ
+                         </div>
+                         <div class="panel__file">
+                           <div class="panel__ico"> <img src="/OPD/static/img/logo.png" alt="pdf"></div>
+                           <div class="panel__filename">Техническое описание</div>
                          </div>
                       </v-tab-item>
                     </v-tabs>
@@ -114,7 +125,7 @@
                         :key="1"
                       >
                       <div class="panel__img">
-                         <img src="/OPD/static/img/logo.png">
+                         <img src="/OPD/static/img/lExwQBh4NLU.jpg">
                       </div>
                       </v-tab-item>
                     </v-tabs>
@@ -123,8 +134,8 @@
                </div>
              </div>
              <div class="panel_footer">
-               <div class="panel_before"><К предыдущему</div>
-               <div class="panel__after">К следующему></div>
+               <div class="panel_before">← К предыдущему</div>
+               <div class="panel__after">К следующему →</div>
              </div>
            </div>
          </div>

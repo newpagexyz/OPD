@@ -12,13 +12,21 @@
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="/static/style/null.css">
- <link rel="shortcut icon" :href="src+'/img/logo.png'">
+<link rel="stylesheet" href="/OPD/static/style/null.css">
+ <link rel="shortcut icon" href="/OPD/img/logo.png">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 <body>
+  <div class="preloader">
+  <link rel="stylesheet" href="/OPD/static/style/preloader.css">
+  <script src="/OPD/static/components/preloader.js"></script>
+  <div class="preloader__row">
+    <div class="preloader__item"></div>
+    <div class="preloader__item"></div>
+  </div>
+ </div>
    <v-app class="wrapper" id="app">
       <a class="navBtn">
          <div class="navBtn__ico">&#8657;</div>
@@ -28,7 +36,7 @@
          <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
          <div class="header__items">
             <div class="header__lable"><a href="">Список</a></div>
-            <div class="header__lable"><a href="">Авторизация</a></div>
+            <div class="header__lable"><a href="/OPD/static/auth/">Авторизация</a></div>
          </div>
       </header>
       
@@ -37,7 +45,7 @@
             
                <div class="toolbox__search">
                   <input type="text" name="" placeholder="Поиск">
-                  <div class="toolbox_searchIco">🔎</div>
+                  <div class="toolbox_searchIco"><img src="/OPD/static/img/loop.png" alt=""></div>
                </div>
             
             <div class="toolbox__item">
@@ -63,116 +71,35 @@
                   <a class="filterbar__lable">Применть</a>
                </header>
                <div class="filterbar__content">
-                  <div class="filterbar__item">
+                  <div class="filterbar__item" v-for='(item,id) in hides'>
                      <div class="filterbar__header">
                         <v-checkbox
                             input-value="true"
                             value
                           ></v-checkbox>
                         <div class="filterbar__title">Разрешение (bits)</div>
-                        <div class="filterbar__arrow">&#9660;</div>
+                        <div class="filterbar__arrow" @click="Hiden(id)">&#9660;</div>
                      </div>
-                     <div class="filterbar__body">
+                     <div class="filterbar__body" v-if='item & id == (hides.length-1)'>
                      <template>
-                               <v-range-slider
-                                 v-model="range"
-                                 :max="max"
-                                 :min="min"
-                                 hide-details
-                                 class="align-center"
-                               >
-                                 <template v-slot:prepend>
-                                    <div class="filter_bound upper">>></div> 
-                                   <v-text-field
-                                     :value="range[0]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(range, 0, $event)"
-                                   ></v-text-field>
-                                 </template>
-                                 <template v-slot:append>
-                                    <div class="filter_bound bottom "><<</div>      
-                                   <v-text-field
-                                     :value="range[1]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(range, 1, $event)"
-                                   ></v-text-field>
-                                 </template>
-                               </v-range-slider>
-                     </template>
-              
+                        <v-container fluid>
+                          <v-checkbox
+                            v-model="selected"
+                            label="John"
+                            value="John"
+                          ></v-checkbox>
+                          <v-checkbox
+                            v-model="selected"
+                            label="Jacob"
+                            value="Jacob"
+                          ></v-checkbox>
+                        </v-container>
+                      </template>
                         <div class="filterbar__output">
                            <div class="filterbar__count">94 шт</div>
                         </div>
                      </div>
-                  </div>
-                  <div class="filterbar__item">
-                     <div class="filterbar__header">
-                        <v-checkbox
-                            input-value="true"
-                            value
-                          ></v-checkbox>
-                        <div class="filterbar__title">Разрешение (bits)</div>
-                        <div class="filterbar__arrow">&#9660;</div>
-                     </div>
-                     <div class="filterbar__body">
-                     <template>
-                               <v-range-slider
-                                 v-model="range"
-                                 :max="max"
-                                 :min="min"
-                                 hide-details
-                                 class="align-center"
-                               >
-                                 <template v-slot:prepend>
-                                    <div class="filter_bound upper">>></div> 
-                                   <v-text-field
-                                     :value="range[0]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(range, 0, $event)"
-                                   ></v-text-field>
-                                 </template>
-                                 <template v-slot:append>
-                                    <div class="filter_bound bottom "><<</div>      
-                                   <v-text-field
-                                     :value="range[1]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(range, 1, $event)"
-                                   ></v-text-field>
-                                 </template>
-                               </v-range-slider>
-                     </template>
-              
-                        <div class="filterbar__output">
-                           <div class="filterbar__count">94 шт</div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="filterbar__item">
-                     <div class="filterbar__header">
-                        <v-checkbox
-                            input-value="true"
-                            value
-                          ></v-checkbox>
-                        <div class="filterbar__title">Разрешение (bits)</div>
-                        <div class="filterbar__arrow">&#9660;</div>
-                     </div>
-                     <div class="filterbar__body">
+                     <div class="filterbar__body" v-if='item & id != (hides.length-1)'>
                      <template>
                                <v-range-slider
                                  v-model="range"
@@ -221,11 +148,11 @@
                   <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
                </header>
                <div class="list__content">
-                  <div class="list__item">
-                     <div class="list__img"><img :src="src+'/img/logo.png'" alt="img"></div>
+                  <div class="list__item" v-for="item in 3">
+                     <div class="list__img"><img :src="src+'/img/photo.jpg'" alt="img"></div>
                      <div class="list__body">
                         <div class="list__title">ADS8167</div>
-                        <div class="list__subtitle">Прицизионный</div>
+                        <div class="list__subtitle">Прецизионный</div>
                         <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
                      </div>
                      <!--Правая часть item-->
@@ -235,43 +162,7 @@
                            <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
                         </div>
                         <div class="list__btn">
-                           <a href="">Подробнее > </a>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="list__item">
-                     <div class="list__img"><img :src="src+'/img/logo.png'" alt="img"></div>
-                     <div class="list__body">
-                        <div class="list__title">ADS8167</div>
-                        <div class="list__subtitle">Прицизионный</div>
-                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
-                     </div>
-                     <!--Правая часть item-->
-                     <div class="list__btns">
-                        <div class="list__info">
-                              <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
-                        </div>
-                        <div class="list__btn">
-                           <a href="">Подробнее > </a>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="list__item">
-                     <div class="list__img"><img :src="src+'/img/logo.png'" alt="img"></div>
-                     <div class="list__body">
-                        <div class="list__title">ADS8167</div>
-                        <div class="list__subtitle">Прицизионный</div>
-                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
-                     </div>
-                     <!--Правая часть item-->
-                     <div class="list__btns">
-                        <div class="list__info">
-                              <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
-                        </div>
-                        <div class="list__btn">
-                           <a href="">Подробнее > </a>
+                           <a href="/OPD/static/info/">Подробнее > </a>
                         </div>
                      </div>
                   </div>
@@ -283,8 +174,10 @@
 
    </v-app>
 </body>
- <link rel="stylesheet" type="text/css" :href="src+'/style/index.css'">
+  <link rel="stylesheet" type="text/css" href="/OPD/static/style/header.css">
 
-<script type="text/javascript" :src="src+'/main/index.js'"></script>
+ <link rel="stylesheet" type="text/css" href="/OPD/static/style/index.css">
+
+<script type="text/javascript" src="/OPD/static/main/index.js"></script>
 
 </html>

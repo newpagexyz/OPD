@@ -6,66 +6,94 @@
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	height: 100vh;
+	padding-top: 6.5vh;
+	height: 100%;
 	width: 100vw;
 	font-family: 'Roboto', sans-serif;
-  background: linear-gradient(45deg, rgba(103, 0, 31, .8), rgba(34, 101, 163, .5)), url(/OPD/static/img/WM_WM8775SEDS-AB.jpg); 
 background-size: cover;
 }
 .card {
-	width: 500px;
-	height: 38em;
+	width: 37.6vw;
+	height: 53vh;
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
-	-webkit-border-radius: 20px;
-	border-radius: 40px;
 	-webkit-box-shadow: 0 0 50px 5px rgba(0, 0, 0, 0.60);
 	box-shadow: 0 0 50px 5px rgba(0, 0, 0, 0.60);
 }
 .card__logo{
-	border-radius: 40px;
-	border-radius-top: 20px;
-	height: 21em;
-	background-color: #0029c1;
+	
+	
+	height:7.5vh;
+	
 	display: flex;
-	justify-content: space-around;
+	
 	align-items: center;
 	color: #110568;
 	background-color: #fff;
-}
-.card_img{
-	flex: 0 1 200px;
-	display: flex;
-	justify-content: center;
-}
-.card_img>img{
-	height: 8em;
-	width: 8em;
+		position: relative;
 }
 
+
 .card__title {
-	flex: 1 1 auto;
+	height: 100%;
+	width: 12.7vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-align: left;
-	font-size: 3em;
-	margin-right: 5px;
+	font-size: 2.8vh;
+	
+	background-color: #e7efff;
+
+
 }
+.card__title:before{
+ 		content: "";
+ 		top: 0;
+ 		left: 0;
+ 		position: absolute;
+ 		display: block;
+ 		width: 12.7vw;
+ 		height: 0.5vh;
+ 		background: #031d5f;
+ 		z-index: 999;
+
+	}
+	.card{
+		box-shadow: 0 0px 0px 0px rgba(0,0,0,0.5);
+	}
+	.card__block{
+				height: 12.5vh;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+	}
+	.card__subtitle{
+		width: 25vw;
+		display: flex;
+		justify-content: center;
+		text-align: center;
+		font-size:2.15vh
+	}
 .card__main {
-	border-bottom-left-radius: 39px;
-	border-bottom-right-radius: 39px;
+	
 
 	width: 100%;
 	height: 100%;
-	background-color: #0a239a;
+	
 	display: flex;
+	align-items: center;
 	flex-direction: column;
+	box-shadow: inset 0px 0px 0.5vh rgba(0,0,0,0.5);
 }
 .card__inputs{
-	margin-top: 20px;
+	width: 90%;
 	flex: 1 1 auto;
-	display: flex;flex-direction: column;
-	justify-content: space-around;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2vh	;
 	align-items: center;
 }
 .change__password{
@@ -77,8 +105,11 @@ background-size: cover;
 	font-size: 1.5em;
 }
 .card__futter {
-	flex: 0 0 100px;
+	flex: 0 0 10vh;
 	display: flex;
 	justify-content: center;
 	gap: 1vw;
+}
+.card__futter:first-child{
+	background-color: #cccbcc;
 }
