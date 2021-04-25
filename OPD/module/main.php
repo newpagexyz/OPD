@@ -128,30 +128,36 @@
                     
                     if(!empty($_FILES)){
                         if(isset($_FILES['tech'])){
-                            $token=self::gen_token();
-                            while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)){
-                                $token=self::gen_token();
-                            }
-                            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)) {
-                                $query=$query.'`tech`              ="'.$tech.'",';       
+                            if($this->check_doc($_FILES['tech']['name'])){
+                                $token=self::gen_token().".".(pathinfo($_FILES['tech']['name']))['extension'];
+                                while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)){
+                                    $token=self::gen_token().".".(pathinfo($_FILES['tech']['name']))['extension'];
+                                }
+                                if (move_uploaded_file($_FILES['tech']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)) {
+                                    $query=$query.'`tech`              ="'.$token.'",';       
+                                }
                             }
                         }
                         if(isset($_FILES['cxeme'])){
-                            $token=self::gen_token();
-                            while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)){
-                                $token=self::gen_token();
-                            }
-                            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)) {
-                                $query=$query.'`cxeme`              ="'.$tech.'",';       
+                            if($this->check_img($_FILES['cxeme']['name'])){
+                                $token=self::gen_token().".".(pathinfo($_FILES['cxeme']['name']))['extension'];
+                                while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)){
+                                    $token=self::gen_token().".".(pathinfo($_FILES['cxeme']['name']))['extension'];
+                                }
+                                if (move_uploaded_file($_FILES['cxeme']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)) {
+                                    $query=$query.'`cxeme`              ="'.$token.'",';       
+                                }
                             }
                         }
                         if(isset($_FILES['image'])){
-                            $token=self::gen_token();
-                            while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)){
-                                $token=self::gen_token();
-                            }
-                            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)) {
-                                $query=$query.'`image`              ="'.$tech.'",';       
+                            if($this->check_img($_FILES['image']['name'])){
+                                $token=self::gen_token().".".(pathinfo($_FILES['image']['name']))['extension'];
+                                while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)){
+                                    $token=self::gen_token().".".(pathinfo($_FILES['image']['name']))['extension'];
+                                }
+                                if (move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)) {
+                                    $query=$query.'`image`              ="'.$token.'",';       
+                                }
                             }
                         }
                     }
@@ -215,6 +221,137 @@
             }
             return false;
         }
+        function search_adc(){
+            /*Вернет список ацп, удавлетворяющих параметрам*/
+            if(!empty($_GET)){
+                $query='
+                    SELECT *  FROM `ADC` WHERE 
+                    ';
+                if(isset($_GET['model'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['model']);
+                    $query=$query." model LIKE '%".$tmp."%' AND ";
+                }
+                if(isset($_GET['resolution_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['resolution_min']);
+                    $query=$query." `resolution` >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['resolution_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['resolution_max']);
+                    $query=$query." `resolution` <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['channels_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['channels_min']);
+                    $query=$query." `channels` >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['channels_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['channels_max']);
+                    $query=$query." channels <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['max_sample_rate_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['max_sample_rate_max']);
+                    $query=$query." max_sample_rate >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['max_sample_rate_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['max_sample_rate_min']);
+                    $query=$query." max_sample_rate <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['interface'])){
+                    $tmp=$_GET['interface'];
+                    $parts=explode(";", $tmp);
+                    $query=$query." ( ";
+                    foreach($parts as $val){
+                        $val==$this->mysqli->real_escape_string($val);
+                        $query=$query." interface='".$val."' OR ";
+                    }
+                    $query=$query=substr($query, 0,-3)." ) AND ";
+                }
+                if(isset($_GET['arch'])){
+                    $tmp=$_GET['arch'];
+                    $parts=explode(";", $tmp);
+                    $query=$query." ( ";
+                    foreach($parts as $val){
+                        $val==$this->mysqli->real_escape_string($val);
+                        $query=$query." arch='".$val."' OR ";
+                    }
+                    $query=$query=substr($query, 0,-3)." ) AND ";
+                }
+                if(isset($_GET['max_INL_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['max_INL_min']);
+                    $query=$query." max_INL >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['max_INL_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['max_INL_max']);
+                    $query=$query." max_INL <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['SNR_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['SNR_min']);
+                    $query=$query." SNR >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['SNR_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['SNR_max']);
+                    $query=$query." SNR <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['SFDR_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['SFDR_min']);
+                    $query=$query." SFDR >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['SFDR_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['SFDR_max']);
+                    $query=$query." SFDR <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['power_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['power_min']);
+                    $query=$query." power >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['power_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['power_max']);
+                    $query=$query." power <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['temperature_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['temperature_min']);
+                    $query=$query." temperature >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['temperature_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['temperature_max']);
+                    $query=$query." temperature <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['analog_input_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['analog_input_min']);
+                    $query=$query." analog_input >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['analog_input_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['analog_input_max']);
+                    $query=$query." analog_input <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['FoMW_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['FoMW_min']);
+                    $query=$query." FoMW >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['FoMW_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['FoMW_max']);
+                    $query=$query." FoMW <=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['max_DNL_min'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['max_DNL_min']);
+                    $query=$query." max_DNL >=".intval($tmp)." AND ";
+                }
+                if(isset($_GET['max_DNL_max'])){
+                    $tmp=$this->mysqli->real_escape_string($_GET['max_DNL_max']);
+                    $query=$query." max_DNL <=".intval($tmp)." AND ";
+                }
+                $query=substr($query, 0,-4).";";
+                //echo $query;
+                $ret=$this->mysqli->query($query);
+                if($ret->num_rows>0){
+                    $arr=array();
+                    while($ar=$ret->fetch_assoc()){
+                        array_push($arr,$ar);
+                    }
+                    return $arr;
+                }
+            }
+            return false;
+        }
         public function interfaces(){
             /*
                 Список внесенных архитектур
@@ -229,7 +366,7 @@
             }          
             return $arr;
         }
-        public function edit_adc($key,$val,$id){
+        public function edit_adc($id,$key=false,$val=false){
             /*
                 Добавить АЦП
                 Принимает на вход принимает параметры АЦП, возвращает в случае успеха id, иначе false
@@ -238,33 +375,44 @@
                 $query='
                     UPDATE `ADC` SET
                     ';
-                    
+                    if($key AND $val){
+                        $add=",";
+                    }
+                    else{
+                        $add="";
+                    }
                     if(!empty($_FILES)){
                         if(isset($_FILES['tech'])){
-                            $token=self::gen_token();
-                            while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)){
-                                $token=self::gen_token();
-                            }
-                            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)) {
-                                $query=$query.'`tech`              ="'.$tech.'",';       
+                            if($this->check_doc($_FILES['tech']['name'])){
+                                $token=self::gen_token().".".(pathinfo($_FILES['tech']['name']))['extension'];
+                                while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)){
+                                    $token=self::gen_token().".".(pathinfo($_FILES['tech']['name']))['extension'];
+                                }
+                                if (move_uploaded_file($_FILES['tech']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/tech/'.$token)) {
+                                    $query=$query.'`tech`              ="'.$token.'"'.$add;       
+                                }
                             }
                         }
                         if(isset($_FILES['cxeme'])){
-                            $token=self::gen_token();
-                            while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)){
-                                $token=self::gen_token();
-                            }
-                            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)) {
-                                $query=$query.'`cxeme`              ="'.$tech.'",';       
+                            if($this->check_img($_FILES['tech']['name'])){
+                                $token=self::gen_token().".".(pathinfo($_FILES['cxeme']['name']))['extension'];
+                                while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)){
+                                    $token=self::gen_token().".".(pathinfo($_FILES['cxeme']['name']))['extension'];
+                                }
+                                if (move_uploaded_file($_FILES['cxeme']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)) {
+                                    $query=$query.'`cxeme`              ="'.$token.'"'.$add;       
+                                }
                             }
                         }
                         if(isset($_FILES['image'])){
-                            $token=self::gen_token();
-                            while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)){
-                                $token=self::gen_token();
-                            }
-                            if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)) {
-                                $query=$query.'`image`              ="'.$tech.'",';       
+                            if($this->check_img($_FILES['image']['name'])){
+                                $token=self::gen_token().".".(pathinfo($_FILES['image']['name']))['extension'];
+                                while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)){
+                                    $token=self::gen_token().".".(pathinfo($_FILES['image']['name']))['extension'];
+                                }
+                                if (move_uploaded_file($_FILES['image']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/files/image/'.$token)) {
+                                    $query=$query.'`image`              ="'.$token.'"'.$add;       
+                                }
                             }
                         }
                     }
@@ -285,7 +433,7 @@
                     $key=="max_DNL"){
                         $query=$query.'`'.$key.'`              ="'.$val.'"';   
                     }
-                    $query=$query.'WHERE `id`='.intval($id).';';
+                    $query=$query.' WHERE `id`='.intval($id).';';
                 $ret=$this->mysqli->query($query);
                 return $ret;
         }
@@ -373,11 +521,12 @@
                     SELECT `model` FROM `ADC` WHERE `".$type."`='$token';
                 ";			
                 $res=$this->mysqli->query($query);
-                if($re=$res->fetch_assoc){
-                    if (file_exists($_SERVER['DOCUMENT_ROOT'].'/files/'.$type.'/'.$token)){
+                $file=$_SERVER['DOCUMENT_ROOT'].'/files/'.$type.'/'.$token;
+                if($re=$res->fetch_assoc()){
+                    if (file_exists($file)){
                         header('Content-Description: File Transfer');
                         header('Content-Type: application/octet-stream');
-                        header('Content-Disposition: attachment; filename="'.basename($file).'"');
+                        header('Content-Disposition: attachment; filename="'.basename($re['model'].".".(pathinfo($file))['extension']).'"');
                         header('Expires: 0');
                         header('Cache-Control: must-revalidate');
                         header('Pragma: public');
@@ -393,6 +542,24 @@
                 header("Content-Length: " . strlen($image));
                 echo $image;
                 return true;
+            }
+            return false;
+        }
+        protected function check_doc($file){
+            $file=(pathinfo($file))['extension'];
+            foreach (self::DOC_FORMATS as  $key => $value) {
+                if($value==$file){
+                    return true;
+                }
+            }
+            return false;
+        }
+        protected function check_img($file){
+            $file=(pathinfo($file))['extension'];
+            foreach (self::IMAGE_FORMATS as  $key => $value) {
+                if($value==$file){
+                    return true;
+                }
             }
             return false;
         }
