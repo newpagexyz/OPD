@@ -1,7 +1,7 @@
 /*Setup db*/
 CREATE DATABASE `adc_db`;
 ALTER DATABASE adc_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER adc@locahost IDENTIFIED BY "enter_password_here";
+CREATE USER adc@locahost IDENTIFIED BY "123";
 GRANT ALL PRIVILEGES ON adc_db.* TO adc@localhost;
 use `adc_db`;
 
@@ -9,6 +9,14 @@ CREATE TABLE `users`(
     `id`            INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `email`         VARCHAR(70) UNIQUE,
     `password`      CHAR(64)
+);
+
+CREATE TABLE `connections`(
+    `id`            INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `uid`           INT UNSIGNED,
+    `session`       CHAR(64) UNIQUE,
+    `token`         CHAR(64),
+    FOREIGN KEY (`uid`) REFERENCES `users` (id) ON DELETE CASCADE
 );
 
 
@@ -49,3 +57,7 @@ CREATE TABLE ADC(
             ON UPDATE CASCADE ON DELETE CASCADE,
     FULLTEXT            (`description`)
 );
+/*
+Добавить первого пользователя
+*/
+INSERT INTO `users` SET `email`="admin@example.com", `password`='81d40d94fee4fb4eeb1a21bb7adb93c06aad35b929c1a2b024ae33b3a9b79e23';
