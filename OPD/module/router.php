@@ -23,10 +23,13 @@
                 }
             break;
             case"auth":
-                include_once($_SERVER['DOCUMENT_ROOT']."/templates/auth/auth.html");
+                include_once($_SERVER['DOCUMENT_ROOT']."/static/auth/index.html");
+            break;
+            case"info":
+                include_once($_SERVER['DOCUMENT_ROOT']."/static/info/index.html");
             break;
             case"index":
-                include_once($_SERVER['DOCUMENT_ROOT']."/templates/index/index_template.php");
+                include_once($_SERVER['DOCUMENT_ROOT']."/static/main/index.html");
             break;
             default:
             include_once($_SERVER['DOCUMENT_ROOT']."/templates/index/index_template.php");
