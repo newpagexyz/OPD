@@ -56,11 +56,19 @@
                     Errors::code400();
                 }
             break;
+            case "show_adc":
+                if(isset( $_GET['id'])){
+                    $ans = $Main->show_adc($_GET['id']);
+                    echo $ans ? json_encode($ans,JSON_UNESCAPED_UNICODE) : "false";
+                }
+                else{
+                    Errors::code400();
+                }
+            break;
             case "edit_adc":
                 if(isset($_GET['session']) AND isset($_GET['token']) AND isset($_GET['key']) AND isset( $_GET['val']) AND isset( $_GET['id'])){
                     if($Main->connect_id($_GET['session'], $_GET['token'])){
-                        $ans = $Main->add_adc($_GET['key'],$_GET['val'], $_GET['id']);
-                        echo $ans ? $ans : "false";
+                        echo $Main->edit_adc($_GET['key'],$_GET['val'], $_GET['id']) ? "true" : "false";
                     }
                     else{
                         Errors::code403();
@@ -112,7 +120,7 @@
                     Errors::code400();
                 }
             break;
-            case "upload_file":
+            case "file":
                 if(isset($_GET['session']) AND isset($_GET['token']) AND isset($_GET['type'])  AND isset($_GET['file_token'])){
                     if($Main->connect_id($_GET['session'], $_GET['token'])){
                         $Main->upload_file($_GET['type'],$_GET['file_token']);

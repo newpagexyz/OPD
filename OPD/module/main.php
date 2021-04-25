@@ -116,7 +116,7 @@
                 Принимает на вход принимает параметры АЦП, возвращает в случае успеха id, иначе false
             */
                 $query='
-                    INSERT INTO `adc` SET
+                    INSERT INTO `ADC` SET
                     `model`             ="'.$model.'",
                     `description`       ="'.$description.'",
                     `resolution`        ="'.$resolution.'",
@@ -161,7 +161,7 @@
                     `power`             ="'.$power.'",
                     `temperature`       ="'.$temperature.'",
                     `analog_input`      ="'.$analog_input.'",
-                    `FoMW`              ="'.$Fomw.'",
+                    `FoMW`              ="'.$FoMW.'",
                     `max_DNL`           ="'.$max_DNL.'";
                     ';
 
@@ -185,7 +185,7 @@
                 Удалить АЦП
             */
             $query='
-                DELETE FROM  `adc` WHERE id='.intval($id).';
+                DELETE FROM  `ADC` WHERE id='.intval($id).';
                 ';
             $ret=$this->mysqli->query($query);
             return $ret;
@@ -203,6 +203,17 @@
                 $arr[$ar['id']]=$ar['value'];
             }          
             return $arr;
+        }
+        function show_adc($id){
+            /*Вернет информацию о АЦП */
+            $query='
+                SELECT *  FROM `ADC`;
+                ';
+            $ret=$this->mysqli->query($query);
+            if($ret){
+                return $ret->fetch_assoc();
+            }
+            return false;
         }
         public function interfaces(){
             /*
@@ -225,7 +236,7 @@
             */
                 $val=$this->mysqli->real_escape_string($val);
                 $query='
-                    UPDATE `adc` SET
+                    UPDATE `ADC` SET
                     ';
                     
                     if(!empty($_FILES)){
@@ -359,7 +370,7 @@
 			$token=$this->mysqli->real_escape_string($token);
             if($type="tech"){
                 $query="
-                    SELECT `model` FROM `adc` WHERE `".$type."`='$token';
+                    SELECT `model` FROM `ADC` WHERE `".$type."`='$token';
                 ";			
                 $res=$this->mysqli->query($query);
                 if($re=$res->fetch_assoc){
