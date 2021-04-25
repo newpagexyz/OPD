@@ -34,6 +34,14 @@
                     Errors::code400();
                 }
             break;
+            case "archs":
+                $ans=$Main->archs();
+                echo $ans ? json_encode($ans,JSON_UNESCAPED_UNICODE) : "false";
+            break;
+            case "interfaces":
+                $ans=$Main->interfaces();
+                echo $ans ? json_encode($ans,JSON_UNESCAPED_UNICODE) : "false";
+            break;
             case "add_adc":
                 if(isset($_GET['session']) AND isset($_GET['token']) AND isset($_GET['model']) AND isset( $_GET['description']) AND isset( $_GET['resolution']) AND isset( $_GET['channels']) AND isset( $_GET['max_sample_rate']) AND isset( $_GET['interface']) AND isset( $_GET['arch']) AND isset( $_GET['max_INL']) AND isset( $_GET['SNR']) AND isset( $_GET['SFDR']) AND isset( $_GET['power']) AND isset( $_GET['temperature']) AND isset( $_GET['analog_input']) AND isset( $_GET['FoMW']) AND isset( $_GET['max_DNL'])){
                     if($Main->connect_id($_GET['session'], $_GET['token'])){
@@ -63,12 +71,12 @@
                 }
             break;
             case "allow_reg":
-                if(isset($_GET['session']) AND isset($_GET['token'])){
+                if(isset($_GET['view'])){
+                    echo $Main->allow_reg(1,1) ? "true" : "false";
+                }
+                elseif(isset($_GET['session']) AND isset($_GET['token'])){
                     if($Main->connect_id($_GET['session'], $_GET['token'])){
-                        if(isset($_GET['view'])){
-                            echo $Main->allow_reg(1,1) ? "true" : "false";
-                        }
-                        elseif(isset($_GET['val'])){
+                        if(isset($_GET['val'])){
                             echo $Main->allow_reg($_GET['val']) ? "true" : "false";
                         }  
                         else{

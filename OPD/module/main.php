@@ -90,13 +90,9 @@
                     `password`      ="'.self::pass_hash($password).'";
                     ';
                 $ret=$this->mysqli->query($query);
-                if($ret->num_rows>0){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                return true;
             }
+            return false;
         }
         public function change_pass($password){
             /*
@@ -106,18 +102,13 @@
             if($this->id){
                 $email=$this->mysqli->real_escape_string($email);
                 $query='
-                    UPDATE USERS `users` SET
+                    UPDATE `users` SET
                     `password`      ="'.self::pass_hash($password).'"
                     WHERE id='.$this->id.';
                     ';
-                $ret=$this->mysqli->query($query);
-                if($ret->num_rows>0){
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                    return $this->mysqli->query($query);
             }
+            return false;
         }
         public function add_adc($model,$description,$resolution,$channels,$max_sample_rate,$interface,$arch,$max_INL,$SNR,$SFDR,$power,$temperature,$analog_input,$FoMW,$max_DNL){
             /*
@@ -198,6 +189,34 @@
                 ';
             $ret=$this->mysqli->query($query);
             return $ret;
+        }
+        public function archs(){
+            /*
+                Список внесенных архитектур
+            */
+            $query='
+                SELECT *  FROM `archs`;
+                ';
+            $ret=$this->mysqli->query($query);
+            $arr=array();
+            while($ar=$ret->fetch_assoc()){
+                $arr[$ar['id']]=$ar['value'];
+            }          
+            return $arr;
+        }
+        public function interfaces(){
+            /*
+                Список внесенных архитектур
+            */
+            $query='
+                SELECT * FROM `interfaces`;
+                ';
+            $ret=$this->mysqli->query($query);
+            $arr=array();
+            while($ar=$ret->fetch_assoc()){
+                $arr[$ar['id']]=$ar['value'];
+            }          
+            return $arr;
         }
         public function edit_adc($key,$val,$id){
             /*
