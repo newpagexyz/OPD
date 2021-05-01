@@ -28,18 +28,18 @@
   </div>
  </div>
    <v-app class="wrapper" id="app">
-      <a class="navBtn">
-         <div class="navBtn__ico">&#8657;</div>
-         <div class="navBtn__text">Вверх</div>
-      </a>
-      <header class="header">
+      
+      <header class="header" name="top">
          <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
          <div class="header__items">
             <div class="header__lable"><a href="/info">Список</a></div>
             <div class="header__lable"><a href="/auth/">Авторизация</a></div>
          </div>
       </header>
-      
+      <a class="navBtn" herf="#top">
+         <div class="navBtn__ico">&#8657;</div>
+         <div class="navBtn__text">Вверх</div>
+      </a>
          <main>
          <div class="toolbox">
             
@@ -148,21 +148,28 @@
                   <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
                </header>
                <div class="list__content">
-                  <div class="list__item" v-for="item in 3">
-                     <div class="list__img"><img :src="src+'/img/photo.jpg'" alt="img"></div>
+                  <div class="list__item" v-for="item,id in ARCs">
+                     <div class="list__img">
+                      <img :src="src+'/img/photo.jpg'" alt="img" v-if="item.image == null">
+                      <img :src="'https://adc.newpage.xyz/file/image/'+item.image" alt="img" v-else>
+                    </div>
+                     
                      <div class="list__body">
-                        <div class="list__title">ADS8167</div>
-                        <div class="list__subtitle">Прецизионный</div>
-                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
+                        <div class="list__title">{{item.model}}</div>
+                        <div class="list__subtitle">{{item.arch}}</div>
+                        <div class="list__text">{{item.resolution}}-bit {{item.channels}}r-sb {{item.max_sample_rate}}-ch {{item.interface}} , {{item.max_INL}}</div>
                      </div>
                      <!--Правая часть item-->
                      <div class="list__btns">
-                        <div class="list__info">
+                        <div class="list__info" >
                               <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
+                           <div class="list__pdf" @click="OpenTech(id)">
+                            <img :src="src+'/img/logo.png'" alt="pdf" v-if='item.tech != null'>
+                            <!-- Здесь может быть изображение грустного файлика(отсутствующего-->
+                          </div>
                         </div>
                         <div class="list__btn">
-                           <a href="/info/">Подробнее > </a>
+                           <a @click='GoToInfo(id)'>Подробнее > </a>
                         </div>
                      </div>
                   </div>
