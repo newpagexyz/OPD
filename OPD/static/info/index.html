@@ -39,13 +39,13 @@
             
                
             <div class="toolbox__item">
-               <a class="toolbox__lable" href="/">← Обратно к поиску</a>
+               <a class="toolbox__lable" href="/static/main/">← Обратно к поиску</a>
             </div>
            
          </div>
          <div class="content">
            <div class="panel">
-            <div class="panel__title">Информация о <a class="panel__name"><b>ADS8167</b></a></div>
+            <div class="panel__title">Информация о <a class="panel__name"><b>{{ADC_this.model}}</b></a></div>
              <div class="panel__card">
               <div class="panel__slide">
                 <template>
@@ -66,11 +66,11 @@
 
                               <tbody>
                                 <tr
-                                  v-for="item in desserts"
-                                  :key="item.name"
+                                  v-for="item,name in ADC_this"
+                                 v-if="name != 'image' & name != 'tech' & name != 'cxeme' & name != 'id' & name != 'model' & name != 'description'"
                                 >
-                                  <td>{{ item.name }}</td>
-                                  <td>{{ item.calories }}</td>
+                                  <td>{{ name}}</td>
+                                  <td>{{ item }}</td>
                                 </tr>
                               </tbody>
                             </template>
@@ -82,29 +82,16 @@
                         :key="2"
                       >
                          <div class="panel__text">
-                           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officirud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officiia deserunt mollit anim id est laborum.
-                           proident, suproident, sunt in culpa qui officia deserunt mollit anim id est laborum.nt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                         </div>
+                          {{ADC_this.description}}
+                           </div>
                          <div class="panel__href">
                            ДОКУМЕНТАЦИЯ
                          </div>
-                         <div class="panel__file">
-                           <div class="panel__ico"> <img src="/static/img/logo.png" alt="pdf"></div>
+                         <div class="panel__file" @click="OpenTech()">
+                           <div class="panel__ico" >
+                            <img :src="src+'/img/logo.png'" alt="pdf" v-if='ADC_this.tech != null'>
+                            <!-- Здесь может быть изображение грустного файлика(отсутствующего-->
+                          </div>
                            <div class="panel__filename">Техническое описание</div>
                          </div>
                       </v-tab-item>
@@ -125,7 +112,8 @@
                         :key="1"
                       >
                       <div class="panel__img">
-                         <img src="/static/img/lExwQBh4NLU.jpg">
+                          <img src="/static/img/lExwQBh4NLU.jpg" alt="cxeme" v-if="ADC_this.cxeme == null">
+                          <img :src="'https://adc.newpage.xyz/file/cxeme/'+ADC_this.cxeme" alt="cxeme" v-else>
                       </div>
                       </v-tab-item>
                     </v-tabs>
@@ -134,8 +122,8 @@
                </div>
              </div>
              <div class="panel_footer">
-               <div class="panel_before">← К предыдущему</div>
-               <div class="panel__after">К следующему →</div>
+               <div class="panel_before" @click='OpenACD(-1)'>← К предыдущему</div>
+               <div class="panel__after" @click='OpenACD(1)'>К следующему →</div>
              </div>
            </div>
          </div>

@@ -23,11 +23,12 @@ new Vue({
         if (this.token == undefined || this.token == "empty") {
           window.location.href = `/static/auth/`
         }
-        this.GetADC()
+        this.GetADCs()
      },
      methods: {
       GoToInfo: function(id__name){
         localStorage.id = id__name;
+       
         window.location.href = '/static/info/'
       },
       OpenTech: function(id_name){
@@ -43,7 +44,7 @@ new Vue({
           this.hides.push(el)
         })
       },
-      GetADC: function(c_mane){
+      GetADCs: function(c_mane){
         fetch('https://adc.newpage.xyz/api/search_adc/?max_INL_max=10000000000000/').then(res => res.json())
                 .then(resJson => {
                   this.ARCs =  resJson;
