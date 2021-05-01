@@ -32,10 +32,10 @@ CREATE TABLE `archs`(
 CREATE TABLE ADC(
     `id`            INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     `model`             VARCHAR(255) UNIQUE,
-    `image`             VARCHAR(64),
+    `image`             VARCHAR(70),
     `description`       TEXT,
-    `cxeme`             VARCHAR(64),
-    `tech`              VARCHAR(64),
+    `cxeme`             VARCHAR(70),
+    `tech`              VARCHAR(70),
     `resolution`        DECIMAL(3, 1) UNSIGNED DEFAULT 4.5,
     `channels`          INT(2)        UNSIGNED DEFAULT 1,
     `max_sample_rate`   DECIMAL(11,6) UNSIGNED DEFAULT 1,
