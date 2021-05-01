@@ -1,11 +1,12 @@
 RewriteEngine on
         RewriteBase /
-        RewriteRule ^api/(.*)(/)(.*)$     /module/api.php?method=$1&$3 [QSA,L]
-        RewriteRule ^file/(.*)(/)(.*)$    /module/api.php?method=file&file_token=$3 [QSA,L]
-        RewriteRule ^auth(.*)             /module/router.php?page=auth [QSA,L]
-        RewriteRule ^info(.*)             /module/router.php?page=info [QSA,L]
-        RewriteRule ^admin(.*)            /module/router.php?page=admin [QSA,L]
-        RewriteRule ^$                    /module/router.php?page=index [QSA,L]
+        RewriteRule ^api/(.*)(/)(.*)$            /module/api.php?method=$1&$3 [QSA,L]
+        RewriteRule ^api/(.*)$                   /module/api.php?method=$1& [QSA,L]
+        RewriteRule ^file/(.*)(/)(.*)$           /module/api.php?method=file&type=$1&file_token=$3 [QSA,L]
+        RewriteRule ^auth(.*)                    /module/router.php?page=auth [QSA,L]
+        RewriteRule ^info(.*)                    /module/router.php?page=info [QSA,L]
+        RewriteRule ^admin(.*)                   /module/router.php?page=admin [QSA,L]
+        RewriteRule ^$                           /module/router.php?page=index [QSA,L]
 ErrorDocument 400 /module/error.php?code=400
 ErrorDocument 401 /module/error.php?code=401
 ErrorDocument 404 /module/error.php?code=404
