@@ -36,28 +36,21 @@
          <div class="navBtn__text">Вверх</div>
       </a>
          <main>
-         <div class="toolbox">
-            
-               <div class="toolbox__search">
-                  <input type="text" name="" placeholder="Поиск">
-                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
-               </div>
-            
-            <div class="toolbox__item">
-               <a class="toolbox__lable">Скрыть фильтр</a>
-            </div>
-            <div class="toolbox__item">
-               <a class="toolbox__lable">Сортировать по: &nbsp;</a>
-               <a class="toolbox__lable"> Названию </a>  
-              <!-- <v-seclect>
-                  <option>название</option>
-                  <option>название</option>
-                  <option>название</option>
-               </v-seclect> -->
-            </div>
-            <div class="toolbox__item">
-                <a class="toolbox__lable">Сохранить в Excel</a>
-            </div>
+            <div class="toolbox">
+              <div class="toolbox__search">
+                 <input type="text" name="" placeholder="Поиск">
+                 <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
+              </div>
+              <div class="toolbox__item">
+                 <a class="toolbox__lable">Скрыть фильтр</a>
+              </div>
+              <div class="toolbox__item">
+                 <a class="toolbox__lable">Сортировать по: &nbsp;</a>
+                 <a class="toolbox__lable"> Названию </a>  
+              </div>
+              <div class="toolbox__item">
+                  <a class="toolbox__lable">Сохранить в Excel</a>
+              </div>
          </div>
          <div class="content">
             <div class="filterbar">
@@ -74,72 +67,77 @@
                             value
                           ></v-checkbox>
                         <div class="filterbar__title">{{item.title}}</div>
-                        <div class="filterbar__arrow"  @click="Hiden(item.name)">&#9660;</div>
+                        <div class="filterbar__arrow"  @click="Hiden(item.name,'filter1',params)">&#9660;</div>
                      </div>
-                      <!--<div class="filterbar__body" v-if='item.hide & id != (params.length-1)'>
-                      v-if='item.hide & id == (params.length-1)' 
-                     <template>
-                        <v-container fluid>
-                          <v-checkbox
-                            v-model="selected"
-                            label="John"
-                            value="John"
-                          ></v-checkbox>
-                          <v-checkbox
-                            v-model="selected"
-                            label="Jacob"
-                            value="Jacob"
-                          ></v-checkbox>
-                        </v-container>
-                      </template>
-                        <div class="filterbar__output">
-                           <div class="filterbar__count">94 шт</div>
-                        </div>
-                     </div>-->
-                     <div class="filterbar__body" :id="'filter'+item.name"> 
-                     <template>
-                               <v-range-slider
-                                 v-model="item.range"
-                                 :max="item.max"
-                                 :min="item.min"
-                                 :step="0.00001"
-                                 hide-details
-                                 class="align-center"
-                                 @change="FilterSearch()"
-                               >
-                                 <template v-slot:prepend>
-                                    <div class="filter_bound upper">>></div> 
-                                   <v-text-field
-                                     :value="item.range[0]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(item.range, 0, $event)"
-                                   ></v-text-field>
-                                 </template>
-                                 <template v-slot:append>
-                                    <div class="filter_bound bottom "><<</div>      
-                                   <v-text-field
-                                     :value="item.range[1]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(item.range, 1, $event)"
-                                   ></v-text-field>
-                                 </template>
-                               </v-range-slider>
-                     </template>
+                     <div class="filterbar__body" :id="'filter1'+item.name"> 
+                       <template>
+                                 <v-range-slider
+                                   v-model="item.range"
+                                   :max="item.max"
+                                   :min="item.min"
+                                   :step="0.00001"
+                                   hide-details
+                                   class="align-center"
+                                   @change="FilterSearch()"
+                                 >
+                                   <template v-slot:prepend>
+                                      <div class="filter_bound upper">>></div> 
+                                     <v-text-field
+                                       :value="item.range[0]"
+                                       class="mt-0 pt-0"
+                                       hide-details
+                                       single-line
+                                       type="number"
+                                       style="width: 3vw"
+                                       @change="$set(item.range, 0, $event)"
+                                     ></v-text-field>
+                                   </template>
+                                   <template v-slot:append>
+                                      <div class="filter_bound bottom "><<</div>      
+                                     <v-text-field
+                                       :value="item.range[1]"
+                                       class="mt-0 pt-0"
+                                       hide-details
+                                       single-line
+                                       type="number"
+                                       style="width: 3vw"
+                                       @change="$set(item.range, 1, $event)"
+                                     ></v-text-field>
+                                   </template>
+                                 </v-range-slider>
+                       </template>
               
                         <div class="filterbar__output">
                            <div class="filterbar__count">{{new_ADCs.length}}</div>
                         </div>
                      </div>
+                </div>
+                  <div class="filterbar__item" v-for='(item) in paramsSelect'>
+                     <div class="filterbar__header">
+                        <v-checkbox
+                            :input-value="item.check"
+                            v-model='item.check'
+                            value
+                          ></v-checkbox>
+                        <div class="filterbar__title">{{item.title}}</div>
+                        <div class="filterbar__arrow"  @click="Hiden(item.name, 'filter2',paramsSelect)">&#9660;</div>
+                     </div>
+                      <div class="filterbar__body":id="'filter2'+item.name">
+                       <template>
+                          <v-container fluid>
+                            <v-checkbox v-for="el,id in item.values"
+                              v-model="item.selected"
+                              :label="el"
+                              :value="id"
+                            ></v-checkbox>
+                          </v-container>
+                        </template>
+                        <div class="filterbar__output">
+                           <div class="filterbar__count">{{new_ADCs.length}}</div>
+                        </div>
+                     </div>
                   </div>
-               </div>
+              </div>
             </div>
             <div class="list">
                <header>
@@ -174,7 +172,7 @@
                   </div>
                </div>
             </div>
-         </div>
+       </div>
          </main>
       
 

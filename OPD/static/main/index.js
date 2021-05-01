@@ -10,7 +10,224 @@ new Vue({
       max: 90,
       range: [-20, 70],
       hides: [1,1,0,0,0,0,0,0,0,0,0],
+      selected: ['John'],
+      ARCs: [],
+      new_ADCs: [],
+      paramsSelect:{
+        interface:{
+          name: 'interface',
+          title: 'Тип интерфейса',
+          selected: [],
+          values:['Byte-Wide','CMOS','DDR LVDS','Enhanced SPI','I2C','JESD204A','JESD204B','JESD204C','LVDS','Microwire','Parallel','Parallel CMOS','Parallel LVDS','QDR LVDS','SPI','Serial','Serial CMOS','Serial LVDS','Serial SPI','TTL','UART'],
+          hide: 0,
+          check: false,
+        },
+        arch:{
+          name: 'arch',
+          title: 'Архитектура',
+          selected: [],
+          values:['Delta-Sigma','Delta-Sigma Modulator','Flash','Folding Interpolating','Pipeline','SAR','Special','Two-Step'],
+          hide: 0,
+          check: false,
+        },
+      },
       params: {
+        resolution:{
+          name: 'resolution',
+          title: 'Разрешение',
+          range: [4.5,32],
+          min: 4.5,
+          max: 32,
+          hide: 1,
+          check: false,
+        },
+         channels:{
+          name: 'channels',
+          title: 'Число входных каналов ',
+          range: [1,32],
+          min: 1,
+          max: 32,
+          hide: 1,
+          check: false,
+        },
+        max_sample_rate:{
+          name: 'max_sample_rate',
+          title: 'Макс. Частота дискретизации',
+          range: [0.00001,10400],
+          min: 0.00001,
+          max: 10400,
+          hide: 0,
+          check: false,
+        },
+        max_INL:{
+          name: 'max_INL',
+          title: 'Макс. Интегральная нелинейность',
+          range: [0.0001,171780],
+          min: 0.0001,
+          max: 171780,
+          hide: 0,
+          check: false,
+        },
+        SNR:{
+          name: 'SNR',
+          title: 'Отношение сигнал/шум',
+          range: [-80,130],
+          min: -80,
+          max: 130,
+          hide: 0,
+          check: false,
+        },
+        SFDR:{
+          name: 'SFDR',
+          title: 'Реальный динамический диапазон',
+          range: [-118,125],
+          min: -118,
+          max: 125,
+          hide: 0,
+          check: false,
+        },
+        power:{
+          name: 'power',
+          title: 'Потребляемая мощность',
+          range: [0.0009,14000],
+          min: 0.0009,
+          max: 14000,
+          hide: 0,
+          check: false,
+        },
+        temperature:{
+          name: 'temperature',
+          title: 'Диапазон рабочих температур',
+          range: [-55,210],
+          min: -55,
+          max: 210,
+          hide: 0,
+          check: false,
+        },
+        analog_input:{
+          name: 'analog_input',
+          title: 'Аналоговый вход',
+          range: [0.001,8000],
+          min: 0.001,
+          max: 8000,
+          hide: 0,
+          check: false,
+        },
+        FoMW:{
+          name: 'FoMW',
+          title: 'Коэффициент качества по Уолдену',
+          range: [0.001,10000],
+          min: 0.001,
+          max: 10000,
+          hide: 0,
+          check: false,
+        },
+        max_DNL:{
+          name: 'max_DNL',
+          title: 'Макс. Дифф. нелинейность',
+          range: [-80,130],
+          min: -80,
+          max: 130,
+          hide: 0,
+          check: false,
+        },
+      },
+     },
+     mounted() {
+        this.token=this.getCookie('token')
+        this.session=this.getCookie('session')
+        // проверка на наличие куков
+        if (this.token == undefined || this.token == "empty") {
+          window.location.href = `/static/auth/`
+        }
+        this.GetADCs()
+        //скрытие всех полей
+        for(Num in this.params){
+          var elem = document.getElementById("filter1"+Num);
+          if(this.params[Num].hide == 0){
+            elem.style.display = 'none'
+          }
+          else{
+            elem.style.display = 'flex'
+          }
+        }
+         for(Num in this.paramsSelect){
+          var elem = document.getElementById("filter2"+Num);
+          if(this.paramsSelect[Num].hide == 0){
+            elem.style.display = 'none'
+          }
+          else{
+            elem.style.display = 'flex'
+          }
+        }
+     },
+     methods: {
+      FilterSearch:function(){
+        var str = '';
+        var str2= '';
+        var Arr =this.params;
+        var Arr2 =this.paramsSelect;
+        
+        //формирование апроса дял selected
+        for (key in Arr2) {
+          if(Arr2[key].check == true){
+            if(Arr2[key].selected.length != 0){
+                var mass= Arr2[key].selected
+            }
+            else{
+              var mass = [];
+              for(var i = 0; i< Arr2[key].values.length; i ++){
+                mass.push(i)
+              }
+          }
+          str2+=Arr2[key].name+'='+mass.join(';')+'&'
+          }
+        }
+        //формирование апроса дял range
+        for (key in Arr) {
+          if(Arr[key].check == true){
+            str+=Arr[key].name+'_min='+Arr[key].range[0]+'&'+Arr[key].name+'_max='+Arr[key].range[1]+'&'
+          }
+        }
+        
+        console.log(str2);
+        str=str2+str;
+        str=str.substr(0, str.length-1)
+        console.log(str);
+        //
+/*
+        fetch('https://adc.newpage.xyz/api/search_adc/?'+str).then(res => res.json())
+                .then(resJson => {
+                  this.new_ADCs =  resJson;
+                  console.log(resJson);
+                  if(resJson != false){
+                  this.ARCs = this.new_ADCs
+                }
+                else{
+                  alert('Ничего не найдено')
+                }
+        })*/
+      },
+      FilterReload: function(){
+        this.paramsSelect={
+        interface:{
+          name: 'interface',
+          title: 'Тип интерфейса',
+          selected: [],
+          values:['Byte-Wide','CMOS','DDR LVDS','Enhanced SPI','I2C','JESD204A','JESD204B','JESD204C','LVDS','Microwire','Parallel','Parallel CMOS','Parallel LVDS','QDR LVDS','SPI','Serial','Serial CMOS','Serial LVDS','Serial SPI','TTL','UART'],
+          hide: 0,
+          check: false,
+        },
+        arch:{
+          name: 'arch',
+          title: 'Архитектура',
+          selected: [],
+          values:['Delta-Sigma','Delta-Sigma Modulator','Flash','Folding Interpolating','Pipeline','SAR','Special','Two-Step'],
+          hide: 0,
+          check: false,
+        },
+      }
+        this.params={
         resolution:{
           name: 'resolution',
           title: 'Разрешение',
@@ -110,134 +327,6 @@ new Vue({
           hide: 0,
           check: false,
         },
-      },
-      selected: ['John'],
-      ARCs: [],
-      new_ADCs: [],
-
-     },
-     mounted() {
-        this.token=this.getCookie('token')
-        this.session=this.getCookie('session')
-        // проверка на наличие куков
-        if (this.token == undefined || this.token == "empty") {
-          window.location.href = `/static/auth/`
-        }
-        this.GetADCs()
-        for(Num in this.params){
-        var elem = document.getElementById("filter"+Num);
-        if(this.params[Num].hide == 0){
-          elem.style.display = 'none'
-        }
-        else{
-          elem.style.display = 'flex'
-        }
-        }
-     },
-     methods: {
-      FilterSearch:function(){
-        var str = '';
-        var Arr =this.params;
-        var k =0
-        for (key in Arr) {
-          k++;
-          if(Arr[key].check == true){
-            str+=Arr[key].name+'_min='+Arr[key].range[0]+'&'+Arr[key].name+'_max='+Arr[key].range[1]+'&'
-          }
-        }
-        str=str.substr(0, str.length-1)
-        fetch('https://adc.newpage.xyz/api/search_adc/?'+str).then(res => res.json())
-                .then(resJson => {
-                  this.new_ADCs =  resJson;
-                  console.log(resJson);
-                  if(resJson != false){
-                  this.ARCs = this.new_ADCs
-                }
-                else{
-                  alert('Ничего не найдено')
-                }
-
-                })
-      },
-      FilterReload: function(){
-        this.params={
-        resolution:{
-          name: 'Разрешение',
-          range: [4.5,32],
-          min: 4.5,
-          max: 32,
-          hide: 1,
-        },
-         channels:{
-          name: 'Число входных каналов ',
-          range: [1,32],
-          min: 1,
-          max: 32,
-          hide: 1,
-        },
-        max_sample_rate:{
-          name: 'Макс. Частота дискретизации',
-          range: [0.00001,10400],
-          min: 0.00001,
-          max: 10400,
-          hide: 1,
-        },
-        max_INL:{
-          name: 'Макс. Интегральная нелинейность',
-          range: [0.0001,171780],
-          min: 0.0001,
-          max: 171780,
-          hide: 1,
-        },
-        SNR:{
-          name: 'Отношение сигнал/шум',
-          range: [-80,130],
-          min: -80,
-          max: 130,
-          hide: 1,
-        },
-        SFDR:{
-          name: 'Реальный динамический диапазон',
-          range: [-118,125],
-          min: -118,
-          max: 125,
-          hide: 1,
-        },
-        power:{
-          name: 'Потребляемая мощность',
-          range: [0.0009,14000],
-          min: 0.0009,
-          max: 14000,
-          hide: 1,
-        },
-        temperature:{
-          name: 'Диапазон рабочих температур',
-          range: [-55,210],
-          min: -55,
-          max: 210,
-          hide: 1,
-        },
-        analog_input:{
-          name: 'Аналоговый вход',
-          range: [0.001,8000],
-          min: 0.001,
-          max: 8000,
-          hide: 1,
-        },
-        FoMW:{
-          name: 'Коэффициент качества по Уолдену',
-          range: [0.001,10000],
-          min: 0.001,
-          max: 10000,
-          hide: 1,
-        },
-        max_DNL:{
-          name: 'Макс. Дифференциальная нелинейность',
-          range: [-80,130],
-          min: -80,
-          max: 130,
-          hide: 1,
-        },
       }
       },
       GoToInfo: function(id__name){
@@ -259,13 +348,13 @@ new Vue({
           this.params.push(el)
         })
       },*/
-      Hiden: function(Num){
-        console.log( this.params[Num].hide);
-        this.params[Num].hide =  this.params[Num].hide == 1? 0: 1;
-        console.log( this.params[Num].hide);
-        console.log("filter"+Num);
-        var elem = document.getElementById("filter"+Num);
-        if(this.params[Num].hide == 0){
+      Hiden: function(Num,text,par){
+        console.log( par[Num].hide);
+        par[Num].hide =  par[Num].hide == 1? 0: 1;
+        console.log( par[Num].hide);
+        console.log(text+Num);
+        var elem = document.getElementById(text+Num);
+        if(par[Num].hide == 0){
           elem.style.display = 'none'
         }
         else{
