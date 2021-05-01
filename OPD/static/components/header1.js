@@ -32,9 +32,6 @@ Vue.component('header1', {
         
      },
      methods: {
-      SSS:function(){
-         
-      },
       Exit:function(c_name){
         this.deleteCookie(this.session);
         this.deleteCookie(this.token);

@@ -63,8 +63,10 @@ new Vue({
      methods: {
 
       OpenACD:function(value){
-        localStorage.id=parseInt(localStorage.id)+parseInt(value)
-        window.location.href = '/static/info/'
+        if(localStorage.id != 0){
+          localStorage.id=parseInt(localStorage.id)+parseInt(value)
+          window.location.href = '/static/info/'
+       }
       },
       OpenTech: function(id_name){
         console.log();
