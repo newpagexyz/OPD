@@ -43,7 +43,7 @@
                     
                     <div class="card__title" >Авторизация</div>
                 </div>
-                    <form action="" method="post" class="card__main" id="login-form">
+                    <form action="" method="get" class="card__main" id="login-form">
                       <div class="card__block">
                         <div class="card__subtitle">
                         Для редактирования и добавления данных авторизируйтесь как Администратор.
@@ -55,7 +55,6 @@
                             _placeholder="Логин"  _name="email" _tabindex="1" v-model="email" autocomplete = "email"></input__text1>
                             <input__text1 _type="password" 
                                 _placeholder="Пароль" required _name="password" _tabindex="2" v-model="password" autocomplete = "current-password" v-on:keyup.enter="onEnter" v-on:keyup.enter="onEnterClick"></input__text1>
-                           
                             <v-dialog v-model="dialog" max-width="480px">
                               <v-card clas='purple darken-2 text-center'>
                                 <v-card-title class="headline">Введите почту. Будет выслано письмо для восстановления пароля.</v-card-title>
