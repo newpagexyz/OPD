@@ -103,8 +103,8 @@ main {
 
 .filterbar {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 16vw;
-  flex: 0 0 16vw; }
+  -ms-flex: 0 0 17vw;
+  flex: 0 0 17vw; }
   .filterbar header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -180,7 +180,7 @@ main {
   display: none; }
 
 .filterbar__title {
-  font-size: 2vh;
+  font-size: 1.5vh;
   color: #000; }
 
 .filterbar__arrow {
@@ -225,7 +225,7 @@ main {
   padding-left: 1vh; }
 
 .v-input {
-  font-size: 2vh;
+  font-size: 1.5vh;
   -webkit-box-flex: 0;
   -ms-flex: 0 0 10vh;
   flex: 0 0 10vh; }

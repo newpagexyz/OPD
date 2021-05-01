@@ -87,7 +87,7 @@ main{
    width: 100%;
 }
 .filterbar {
-   flex: 0 0 16vw;
+   flex: 0 0 17vw;
    & header{
       display: flex;
       justify-content: flex-start;
@@ -156,7 +156,7 @@ main{
    }
 //
 .filterbar__title {
-      font-size: 2vh;
+      font-size: 1.5vh;
       color: #000
 }
 .filterbar__arrow {
@@ -199,7 +199,7 @@ left: 1.2vw;
 }
    //размеры ползунка
    .v-input{
-      font-size: 2vh;
+      font-size: 1.5vh;
       flex: 0 0 10vh;
    }
    .v-application--is-ltr .v-input__prepend-outer, .v-application--is-rtl .v-input__append-outer{
