@@ -195,7 +195,7 @@ new Vue({
         str=str.substr(0, str.length-1)
         console.log(str);
         //
-/*
+
         fetch('https://adc.newpage.xyz/api/search_adc/?'+str).then(res => res.json())
                 .then(resJson => {
                   this.new_ADCs =  resJson;
@@ -206,7 +206,7 @@ new Vue({
                 else{
                   alert('Ничего не найдено')
                 }
-        })*/
+        })
       },
       FilterReload: function(){
         this.paramsSelect={
