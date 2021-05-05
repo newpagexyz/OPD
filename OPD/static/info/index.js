@@ -64,8 +64,9 @@ new Vue({
 
       OpenACD:function(value){
         if(localStorage.id != 0){
+          this.GetInfoADC(parseInt(localStorage.id)+parseInt(value))
           localStorage.id=parseInt(localStorage.id)+parseInt(value)
-          window.location.href = '/static/info/'
+          /*window.location.href = '/static/info/'*/
        }
       },
       OpenTech: function(id_name){
@@ -81,19 +82,12 @@ new Vue({
                   console.log(resJson);
                       fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
                     .then(resJson2 => {
-                      
                       this.ADC_this.arch=resJson2[this.ADC_this.arch]
-                      
-
                     })
                     fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
                     .then(resJson3 => {
-                      
                       this.ADC_this.interface=resJson3[this.ADC_this.interface]
-                      
-
                     })
-
                 })
       },
       Exit:function(c_name){
