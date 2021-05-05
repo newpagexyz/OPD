@@ -3,51 +3,7 @@ new Vue({
     vuetify: new Vuetify(),
      data: {
       src: '/static',
-      checkbox1: true,
-      ADC_Id: '',
-      ADC_this: [],
-      desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-          },
-        ],
+      
      },
      mounted() {
        this.token=this.getCookie('token')
@@ -56,32 +12,10 @@ new Vue({
         if (this.token == undefined || this.token == "empty") {
           window.location.href = `/static/auth/`
         }
-        this.ADC_Id=localStorage.id;
-         console.log(localStorage.id);
-        this.GetInfoADC(localStorage.id)
+
      },
      methods: {
 
-      OpenACD:function(value){
-        if(localStorage.id != 0){
-          localStorage.id=parseInt(localStorage.id)+parseInt(value)
-          window.location.href = '/static/info/'
-       }
-      },
-      OpenTech: function(id_name){
-        console.log();
-        if(this.ADC_this.tech != null){
-         window.location.href = `https://adc.newpage.xyz/file/tech/`+this.ADC_this.tech
-        }
-      },
-      GetInfoADC: function(id_name){
-                fetch('https://adc.newpage.xyz/api/show_adc/?id='+id_name).then(res => res.json())
-                .then(resJson => {
-                  this.ADC_this =  resJson;
-                  console.log(resJson);
-
-                })
-      },
       Exit:function(c_name){
         this.deleteCookie(this.session);
         this.deleteCookie(this.token);
@@ -104,5 +38,33 @@ new Vue({
            }
         }
       },
+      handleSubmit: function(){
+         var form = new FormData(document.getElementById('adc-form'));
+              console.log(form.get('model'));
+              console.log(form.get('arch'));
+              console.log(form.get('interface'));
+              console.log(form.get('image'));
+              console.log(form.get('cxeme'));
+              console.log(form.get('tech'));
+              console.log(form.get('description'));
+              console.log(form.get('resolution'));
+              console.log(form.get('resolution'));
+
+             form.append('session',this.session)
+             form.append('token',this.token)
+             var Vform = new FormData();
+                 Vform.append('session',this.session)
+                 Vform.append('token',this.token)
+                 Vform.append('image',form.get('image'))
+                 Vform.append('image',form.get('cxeme'))
+                 Vform.append('image',form.get('tech'))
+          fetch('https://adc.newpage.xyz/api/edit_adc/', {
+                    method: 'POST',
+                    body: form
+                }).then(res => res.json())
+                .then(resJson => {
+                  console.log(resJson);
+                })
+      }
      },
 });

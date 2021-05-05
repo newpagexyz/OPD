@@ -42,7 +42,7 @@
            
          </div>
          <div class="content">
-           <div class="panel">
+           <form method="POST" class="panel" id="adc-form">
              <div class="panel__card">
               <div class="panel__info">
                <div class="panel__subtitle">Основная информация</div>
@@ -50,22 +50,22 @@
                     <div class="panel__item" >
                           <div class="panel__label">Название</div>
                           <input__text1 _type="text" 
-                                        _placeholder="" required _name="password"
-                                         _tabindex="1" v-model="password" 
+                                        _placeholder="" required _name="model"
+                                         _tabindex="1" 
                                         autocomplete = "current-password"></input__text1>
                         </div>
                         <div class="panel__item" >
                           <div class="panel__label">Архитектура</div>
                           <input__text1 _type="text" 
                                         _placeholder="" required _name="arch"
-                                         _tabindex="3" v-model="arch" 
+                                         _tabindex="3" 
                                         autocomplete = "current-password"></input__text1>
                         </div>
                         <div class="panel__item" >
                           <div class="panel__label">Тип интерфейса</div>
                           <input__text1 _type="text" 
                                         _placeholder="" required _name="interface"
-                                         _tabindex="4" v-model="interface" 
+                                         _tabindex="4" 
                                         autocomplete = "current-password"></input__text1>
                         </div>
                         <div class="panel__item" >
@@ -75,9 +75,9 @@
                             small-chips
                             truncate-length="50"
                             tabindex=1
-                            v-model='input_file'
-                            name='csv'
-                            @change="onAddFiles"
+                            
+                            name='image'
+                            
                           ></v-file-input>  
                         </div>
                         <div class="panel__item" >
@@ -87,9 +87,9 @@
                             small-chips
                             truncate-length="50"
                             tabindex=1
-                            v-model='input_file'
-                            name='csv'
-                            @change="onAddFiles"
+                            
+                            name='cxeme'
+                            
                           ></v-file-input>  
                         </div>
                          <div class="panel__item" >
@@ -99,15 +99,15 @@
                             small-chips
                             truncate-length="50"
                             tabindex=1
-                            v-model='input_file'
-                            name='csv'
-                            @change="onAddFiles"
+                            
+                            name='tech'
+                            
                           ></v-file-input>  
                         </div>
                         <div class="panel__item item_dop" >
                           <div class="panel__label">Краткое описание</div>
                           
-                            <textarea name="description" id="" cols="55" rows="10" class="panel__text">
+                            <textarea name="description" id="" cols="50" rows="10" class="panel__text">
                               
                             </textarea>
                         </div>
@@ -122,35 +122,35 @@
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="resolution"
-                             _tabindex="8" v-model="resolution" 
+                             _tabindex="8" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">бит</div>
                   </div>
                   <div class="panel__item">
-                     <div class="panel__label">Число выходных каналов</div>
+                     <div class="panel__label">Число входных каналов</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="channels"
-                             _tabindex="9" v-model="channels" 
+                             _tabindex="9" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">шт.</div>
                   </div><div class="panel__item">
-                     <div class="panel__label">Максю Частота дискретизации</div>
+                     <div class="panel__label">Макс. Частота дискретизации</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="max_sample_rate"
-                             _tabindex="10" v-model="max_sample_rate" 
+                             _tabindex="10"
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">МСПС</div>
                   </div><div class="panel__item">
-                     <div class="panel__label">Макс. ИНтегральная нелинейность</div>
+                     <div class="panel__label">Макс. Интегральная нелинейность</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="max_INL"
-                             _tabindex="11" v-model="max_INL" 
+                             _tabindex="11" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">+/- ЛСБ</div>
@@ -159,7 +159,7 @@
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="SNR"
-                             _tabindex="12" v-model="SNR" 
+                             _tabindex="12" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">дБ</div>
@@ -168,16 +168,16 @@
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="SFDR"
-                             _tabindex="13" v-model="SFDR" 
+                             _tabindex="13"
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">дБ</div>
                   </div><div class="panel__item">
-                     <div class="panel__label">потребляемая мощность</div>
+                     <div class="panel__label">Потребляемая мощность</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="power"
-                             _tabindex="14" v-model="power" 
+                             _tabindex="14" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">мВ</div>
@@ -186,37 +186,37 @@
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="temperature"
-                             _tabindex="15" v-model="temperature" 
+                             _tabindex="15" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">С</div>
                   </div><div class="panel__item">
-                     <div class="panel__label">Аналоговый выход</div>
+                     <div class="panel__label">Аналоговый вход</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="analog_input"
-                             _tabindex="16" v-model="analog_input" 
+                             _tabindex="16" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel">МГц</div>
                   </div><div class="panel__item">
-                     <div class="panel__label">Коэфициент качества по Уолдону</div>
+                     <div class="panel__label">Коэффициент качества по Уолдену</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="FoMW"
-                             _tabindex="17" v-model="FoMW" 
+                             _tabindex="17" 
                             autocomplete = "current-password"
                           ></input__text1>
                      <div class="panel__sublabel"></div>
                   </div><div class="panel__item">
-                     <div class="panel__label">Макс. ДИфф нелинейность</div>
+                     <div class="panel__label">Макс. Дифференциальная нелинейность</div>
                           <input__text1 
                             _type="text" 
                             _placeholder="" required _name="max_DNL"
-                             _tabindex="18" v-model="max_DNL" 
+                             _tabindex="18"  
                             autocomplete = "current-password"
                           ></input__text1>
-                     <div class="panel__sublabel">+/- ЛСб</div>
+                     <div class="panel__sublabel">+/- ЛСБ</div>
                   </div>
                 </div>
               </div>
@@ -224,10 +224,10 @@
              <div class="panel_footer">
                 <btn_dark-blue text='Отмена' _submit=true _tabindex=5  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
                             
-                <btn_blues text='Сохранить' _submit=true _tabindex=5  @click="" v-on:keyup.enter=""></btn_blues>
+                <btn_blues text='Сохранить' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
                        
              </div>
-           </div>
+           </form>
          </div>
 
       </main>

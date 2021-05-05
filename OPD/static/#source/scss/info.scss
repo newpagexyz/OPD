@@ -126,6 +126,17 @@ main{
 }
 .v-window-item--active{
    overflow: auto;
+   &::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0.05);
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+   }
+   &::-webkit-scrollbar-thumb{
+cursor: pointer;
+    background-color: #0f1e81;
+  border-radius: 30px;
+   }
 }
 //
 .panel__slide {
