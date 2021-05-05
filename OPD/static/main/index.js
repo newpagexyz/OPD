@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     vuetify: new Vuetify(),
      data: {
+      hide_filter: true,
       token: '',
       session: '',
       src: '/static',
@@ -162,6 +163,8 @@ new Vue({
         }
      },
      methods: {
+
+      //фильтр
       FilterSearch:function(){
         var str = '';
         var str2= '';
@@ -330,9 +333,22 @@ new Vue({
       }
       },
       GoToInfo: function(id__name){
-        localStorage.id = id__name;
-       
+        localStorage.id = this.ARCs[id__name].id;
         window.location.href = '/static/info/'
+      },
+      //доп кнопки
+      GoToEdit:function(id__name){
+        localStorage.id = this.ARCs[id__name].id;
+        window.location.href = '/static/edit_adc/'
+      },
+      toDel:function(id__name){
+        fetch('https://adc.newpage.xyz/api/delete_adc/?session='+this.session+'&token='+this.token+'&id='+this.ARCs[id__name].id).then(res => res.json())
+                .then(resJson => {
+                  alert('АЦП: ' +this.ARCs[id__name].model + 'был удален.')
+
+                })
+        console.log('ждем апи по удалению');;
+  
       },
       OpenTech: function(id_name){
         if(this.ARCs[id_name].tech != null){

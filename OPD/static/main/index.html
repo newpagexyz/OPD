@@ -42,7 +42,7 @@
                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
               </div>
               <div class="toolbox__item">
-                 <a class="toolbox__lable">Скрыть фильтр</a>
+                 <a class="toolbox__lable" @click="hide_filter == true ? false: true">Скрыть фильтр</a>
               </div>
               <div class="toolbox__item">
                  <a class="toolbox__lable">Сортировать по: &nbsp;</a>
@@ -53,7 +53,7 @@
               </div>
          </div>
          <div class="content">
-            <div class="filterbar">
+            <div class="filterbar" v-if='hide_filter'>
                <header>
                   <a class="filterbar__lable" @click='FilterReload()'>Сбросить фильтр</a>
                   <a class="filterbar__lable" @click='FilterSearch()'>Применть</a>
@@ -141,9 +141,9 @@
             </div>
             <div class="list">
                <header>
-                  <div class="list__lable">Страницы: </div>
+                <!--  <div class="list__lable">Страницы: </div>
                   <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
-               </header>
+               --></header>
                <div class="list__content">
                   <div class="list__item" v-for="item,id in ARCs">
                      <div class="list__img">
@@ -159,6 +159,12 @@
                      <!--Правая часть item-->
                      <div class="list__btns">
                         <div class="list__info" >
+                            <div class="item__edit" @click='GoToEdit(id)'>
+                              <img src="/static/img/edit.png" alt="edit item">
+                            </div>
+                            <div class="item__del" @click='toDel(id)'>
+                              <img src="/static/img/del.png" alt="dell item">
+                            </div>
                               <div class="list__lable">Техническое описание</div>
                            <div class="list__pdf" @click="OpenTech(id)">
                             <img :src="src+'/img/logo.png'" alt="pdf" v-if='item.tech != null'>
