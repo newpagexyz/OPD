@@ -213,7 +213,7 @@
         function show_adc($id){
             /*Вернет информацию о АЦП */
             $query='
-                SELECT *  FROM `ADC`;
+                SELECT *  FROM `ADC` WHERE id='.intval($id).';
                 ';
             $ret=$this->mysqli->query($query);
             if($ret){
