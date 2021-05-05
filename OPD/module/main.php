@@ -210,10 +210,10 @@
             }          
             return $arr;
         }
-        function show_adc($id){
+        function show_adc($id){ 
             /*Вернет информацию о АЦП */
             $query='
-                SELECT *  FROM `ADC`;
+                SELECT *  FROM `ADC` WHERE id='.intval($id).';
                 ';
             $ret=$this->mysqli->query($query);
             if($ret){
@@ -221,7 +221,7 @@
             }
             return false;
         }
-        function search_adc(){
+        public function search_adc(){
             /*Вернет список ацп, удавлетворяющих параметрам*/
             if(!empty($_GET)){
                 $query='
@@ -339,7 +339,11 @@
                     $tmp=$this->mysqli->real_escape_string($_GET['max_DNL_max']);
                     $query=$query." max_DNL <=".intval($tmp)." AND ";
                 }
-                $query=substr($query, 0,-4).";";
+                $query=substr($query, 0,-4);
+                if(isset($_GET['lid'])){
+                    $query=" WHERE `id`> ".intval($_GET['lid'])." ";    
+                }
+                $query=$query." LIMIT 100 ;";
                 //echo $query;
                 $ret=$this->mysqli->query($query);
                 if($ret->num_rows>0){
