@@ -79,6 +79,20 @@ new Vue({
                 .then(resJson => {
                   this.ADC_this =  resJson;
                   console.log(resJson);
+                      fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
+                    .then(resJson2 => {
+                      
+                      this.ADC_this.arch=resJson2[this.ADC_this.arch]
+                      
+
+                    })
+                    fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
+                    .then(resJson3 => {
+                      
+                      this.ADC_this.interface=resJson3[this.ADC_this.interface]
+                      
+
+                    })
 
                 })
       },
