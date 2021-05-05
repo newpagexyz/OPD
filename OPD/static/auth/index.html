@@ -55,32 +55,12 @@
                             _placeholder="Логин"  _name="email" _tabindex="1" v-model="email" autocomplete = "email"></input__text1>
                             <input__text1 _type="password" 
                                 _placeholder="Пароль" required _name="password" _tabindex="2" v-model="password" autocomplete = "current-password" v-on:keyup.enter="onEnter" v-on:keyup.enter="onEnterClick"></input__text1>
-                            <v-dialog v-model="dialog" max-width="480px">
-                              <v-card clas='purple darken-2 text-center'>
-                                <v-card-title class="headline">Введите почту. Будет выслано письмо для восстановления пароля.</v-card-title>
-                                <v-card-actions>
-                                  <v-spacer></v-spacer>
-                                  <input__text1 _type="email"  required
-                                    _placeholder="Enter Email"  _name="email" _tabindex="1"
-                                     v-model="forgotEmail" ></input__text1>
-                                     <v-spacer></v-spacer>
-                                     <v-spacer></v-spacer>
-                                     <v-card-actions>
-                                     <btn_blues text='Восстановить' _submit=true 
-                                      @click='EventForgotPassword'_tabindex=5 ></btn_blues>
-                                  <v-spacer></v-spacer>
-                                </v-card-actions>
-                              </v-card>
-                            </v-dialog>
+                           
                         </div>
                         <div class="card__futter">
                             <btn_dark-blue text='Назад' _submit=true _tabindex=5  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
-                            <v-dialog v-model="dialog2" max-width="500px">
-                              <v-card clas='purple darken-2 text-center'>
-                                <v-card-title class="headline">Для регистрации отправьте заявку на почту ВШТМ.</v-card-title>
-                              </v-card>
-                            </v-dialog>
-                            <btn_blues text='Вход' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="onEnter"></btn_blues>
+                            
+                            <btn_blues text='Вход' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
                         </div>
                         
                     </form>

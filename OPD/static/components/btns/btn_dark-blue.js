@@ -2,7 +2,7 @@ Vue.component('btn_dark-blue', {
     props: ['text','a','_submit','_width','_tabindex','_src'],
     template: `		
     <div class="btn_dark-blue ">
-            <link rel="stylesheet" href="/OPD/static/style/card__btn1.css">
+            <link rel="stylesheet" href="/static/style/card__btn1.css">
 
             <div class="card__btn1 btn1":style="{ width: _width }">
                 <img v-if='_src' :src=_src alt="" class="btn1__img">
