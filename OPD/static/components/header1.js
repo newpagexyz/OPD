@@ -10,7 +10,7 @@ Vue.component('header1', {
     <header class="header">
          <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
          <div class="header__items">
-            <div class="header__lable"><a href="/static/main">Список</a></div>
+            <div class="header__lable"><a href="/static/main/">Список</a></div>
             <div class="header__lable" >
             <a @click='Exit()' v-if='isAuth'>Выйти</a>
             <a href="/static/auth/" v-else>Авторизация</a>
@@ -20,6 +20,8 @@ Vue.component('header1', {
     `,
      mounted() {
         // проверка на наличие куков
+         this.token=this.getCookie('token')
+        this.session=this.getCookie('session')
         if (this.token == undefined || this.token == "empty") {
           this.isAuth=false;
         }
