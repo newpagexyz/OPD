@@ -21,4 +21,4 @@
             include_once($_SERVER['DOCUMENT_ROOT']."/static/error/500.html");
         }
     }
-?> 
+?>

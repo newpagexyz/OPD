@@ -344,7 +344,6 @@
                     $query=" WHERE `id`> ".intval($_GET['lid'])." ";    
                 }
                 $query=$query." LIMIT 100 ;";
-                //echo $query;
                 $ret=$this->mysqli->query($query);
                 if($ret->num_rows>0){
                     $arr=array();
@@ -520,7 +519,7 @@
                 Отдаёт юзеру файл
             */
 			$token=$this->mysqli->real_escape_string($token);
-            if($type="tech"){
+            if($type=="tech"){
                 $query="
                     SELECT `model` FROM `ADC` WHERE `".$type."`='$token';
                 ";			
@@ -538,14 +537,22 @@
                         readfile($file);
                         exit;
                     }
+                    return true;
                 }
             }
-            elseif($type="cxeme" OR $type="image"){
-                $image = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/files/'.$type.'/'.$token);
-                header('Content-type: image/jpeg;');
-                header("Content-Length: " . strlen($image));
-                echo $image;
-                return true;
+            elseif($type=="cxeme" OR $type="image"){
+                $file = $_SERVER['DOCUMENT_ROOT'].'/files/'.$type.'/'.$token;
+                if (file_exists($file)){
+                    $image = file_get_contents($file);
+                    header('Content-type: image/jpeg;');
+                    header("Content-Length: " . strlen($image));
+                    echo $image;
+                    exit;
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
             return false;
         }
