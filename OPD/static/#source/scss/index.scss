@@ -34,10 +34,17 @@ main{
    display: flex;
    
    align-items: center;
-   justify-content: flex-end;
+  justify-content: space-between;
    gap: 3.1vw;
    border-bottom: 0.1vh solid #000;
    padding-bottom: 1.2vh;
+   padding-right: 8vw;
+}
+.toolbox__box{
+   flex: 0 0 20vw;
+   display: flex;
+   justify-content: flex-end;
+   gap: 4vw;
 }
 .toolbox__item {
    color: #534999;
@@ -49,7 +56,7 @@ main{
 }
 .toolbox__search {
    position: relative;
-   flex: 1 1 auto;
+   flex: 0 1 50vw;
    //max-width: 40vw;
    border: 0.3vh solid #000;
    height: 7vh;
@@ -171,6 +178,18 @@ main{
    height: 19.4vh;
    display: flex;
    flex-direction: column;
+   overflow: auto;
+     &::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0.05);
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+   }
+   &::-webkit-scrollbar-thumb{
+cursor: pointer;
+    background-color: #0f1e81;
+  border-radius: 30px;
+   }
 }
 //полузунок в фильтрах
 .v-input__append-outer, .v-input__prepend-outer{

@@ -91,8 +91,7 @@ new Vue({
                 })
       },
       Exit:function(c_name){
-        this.deleteCookie(this.session);
-        this.deleteCookie(this.token);
+
         document.cookie = "token="+'empty'+"; path=/; ";
         document.cookie = "session="+'empty'+"; path=/; ";
         window.location.href = `/static/auth/`

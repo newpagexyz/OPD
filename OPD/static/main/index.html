@@ -41,16 +41,16 @@
                  <input type="text" name="" placeholder="Поиск">
                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
               </div>
-              <div class="toolbox__item">
-                 <a class="toolbox__lable" @click="hide_filter == true ? false: true">Скрыть фильтр</a>
+              <div class="toolbox__box">
+                  <!--<div class="toolbox__item">
+                   <a class="toolbox__lable" @click="hide_filter == true ? false: true">Скрыть фильтр</a>
+                </div>-->
+              
+                <div class="toolbox__item">
+                    <a class="toolbox__lable" href="/static/create_adc/">Добавть АЦП</a>
+                </div>
               </div>
-              <div class="toolbox__item">
-                 <a class="toolbox__lable">Сортировать по: &nbsp;</a>
-                 <a class="toolbox__lable"> Названию </a>  
-              </div>
-              <div class="toolbox__item">
-                  <a class="toolbox__lable">Сохранить в Excel</a>
-              </div>
+              
          </div>
          <div class="content">
             <div class="filterbar" v-if='hide_filter'>
@@ -128,7 +128,7 @@
                             <v-checkbox v-for="el,id in item.values"
                               v-model="item.selected"
                               :label="el"
-                              :value="id"
+                              :value="id+1"
                             ></v-checkbox>
                           </v-container>
                         </template>
@@ -159,10 +159,10 @@
                      <!--Правая часть item-->
                      <div class="list__btns">
                         <div class="list__info" >
-                            <div class="item__edit" @click='GoToEdit(id)'>
+                            <div class="item__edit" @click='GoToEdit(id)' v-if="token!= ''">
                               <img src="/static/img/edit.png" alt="edit item">
                             </div>
-                            <div class="item__del" @click='toDel(id)'>
+                            <div class="item__del" @click='toDel(id)' v-if="token!= ''">
                               <img src="/static/img/del.png" alt="dell item">
                             </div>
                               <div class="list__lable">Техническое описание</div>

@@ -19,8 +19,6 @@ Vue.component('header1', {
       </header>
     `,
      mounted() {
-        this.token=this.getCookie('token')
-        this.session=this.getCookie('session')
         // проверка на наличие куков
         if (this.token == undefined || this.token == "empty") {
           this.isAuth=false;
@@ -33,11 +31,11 @@ Vue.component('header1', {
      },
      methods: {
       Exit:function(c_name){
-        this.deleteCookie(this.session);
-        this.deleteCookie(this.token);
+ 
         document.cookie = "token="+'empty'+"; path=/; ";
         document.cookie = "session="+'empty'+"; path=/; ";
         window.location.href = `/static/auth/`
+        console.log('test');
       },
       ///
       //работа с куки

@@ -381,14 +381,34 @@ new Vue({
         fetch('https://adc.newpage.xyz/api/search_adc/?max_INL_max=10000000000000/').then(res => res.json())
                 .then(resJson => {
                   this.ARCs =  resJson;
-                  this.new_ADCs = resJson
+                  this.new_ADCs = resJson;
                   console.log(resJson);
+                  var Mass_archs=[]
+                  var Mass_interf=[]
 
+                   fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
+                    .then(resJson2 => {
+                      Mass_archs=resJson2
+                      fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
+                        .then(resJson3 => {
+                          Mass_interf=resJson3;
+                          for(var i=0; i<this.ARCs.length; i++){
+                            this.ARCs[i].arch=Mass_archs[i];
+                            this.ARCs[i].interface=Mass_interf[i];
+                            console.log('test');
+                            
+                          }
+                        })
+                    })
+                  
+
+                 
+                  
+                  
                 })
       },
       Exit:function(c_name){
-        this.deleteCookie(this.session);
-        this.deleteCookie(this.token);
+
         document.cookie = "token="+'empty'+"; path=/; ";
         document.cookie = "session="+'empty'+"; path=/; ";
         window.location.href = `/static/auth/`
