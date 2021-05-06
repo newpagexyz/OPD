@@ -6,55 +6,15 @@ new Vue({
       checkbox1: true,
       ADC_Id: '',
       ADC_this: [],
-      desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-          },
-        ],
+      Names: {},
+      
      },
      mounted() {
        this.token=this.getCookie('token')
         this.session=this.getCookie('session')
         // проверка на наличие куков
         if (this.token == undefined || this.token == "empty") {
-          window.location.href = `/static/auth/`
+         // window.location.href = `/static/auth/`
         }
         this.ADC_Id=localStorage.id;
          console.log(localStorage.id);
@@ -79,6 +39,24 @@ new Vue({
                 fetch('https://adc.newpage.xyz/api/show_adc/?id='+id_name).then(res => res.json())
                 .then(resJson => {
                   this.ADC_this =  resJson;
+
+                  this.Names = {
+                    model: 'Название',
+                    FoMW: 'Коэффициент качества по Уолдену',
+                    SFDR: 'Реальный динамический диапазон',
+                    SNR: 'Отношение сигнал/шум',
+                    analog_input: 'Аналоговый вход',
+                    channels: 'Число входных каналов',
+                    max_DNL: 'Макс. Дифференциальная нелинейность',
+                    max_INL: 'Макс. Интегральная нелинейность',
+                    max_sample_rate: 'Макс. Частота дискретизации',
+                    power: 'Потребляемая мощность',
+                    resolution: 'Разрешение',
+                    temperature: 'Диапазон рабочих температур',
+                    interface: 'Тип интерфейса',
+                    arch: 'Архитектура',
+                  }
+                   this.ADC_this.names = this.Names
                   console.log(resJson);
                       fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
                     .then(resJson2 => {

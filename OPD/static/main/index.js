@@ -139,7 +139,7 @@ new Vue({
         this.session=this.getCookie('session')
         // проверка на наличие куков
         if (this.token == undefined || this.token == "empty") {
-          window.location.href = `/static/auth/`
+         // window.location.href = `/static/auth/`
         }
         this.GetADCs()
         //скрытие всех полей
@@ -163,7 +163,9 @@ new Vue({
         }
      },
      methods: {
-
+toTop () {
+      this.$vuetify.goTo(0)
+    },
       //фильтр
       FilterSearch:function(){
         var str = '';

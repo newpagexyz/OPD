@@ -31,12 +31,13 @@
       <header1></header1>
       
       
-      <a class="navBtn" herf="#top">
+      
+         <main>
+          <a class="navBtn"  @click="toTop">
          <div class="navBtn__ico">&#8657;</div>
          <div class="navBtn__text">Вверх</div>
-      </a>
-         <main>
-            <div class="toolbox">
+        </a>
+            <div class="toolbox" name="top">
               <div class="toolbox__search">
                  <input type="text" name="" placeholder="Поиск">
                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
@@ -159,10 +160,10 @@
                      <!--Правая часть item-->
                      <div class="list__btns">
                         <div class="list__info" >
-                            <div class="item__edit" @click='GoToEdit(id)' v-if="token!= ''">
+                            <div class="item__edit" @click='GoToEdit(id)' v-if="token!= '' & token != 'empty'">
                               <img src="/static/img/edit.png" alt="edit item">
                             </div>
-                            <div class="item__del" @click='toDel(id)' v-if="token!= ''">
+                            <div class="item__del" @click='toDel(id)' v-if="token!= '' & token != 'empty'">
                               <img src="/static/img/del.png" alt="dell item">
                             </div>
                               <div class="list__lable">Техническое описание</div>
