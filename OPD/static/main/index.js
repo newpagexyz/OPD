@@ -163,15 +163,25 @@ new Vue({
         }
      },
      methods: {
-toTop () {
+      //кнопка вверх
+    toTop () {
       this.$vuetify.goTo(0)
     },
+    CheckOn:function(c){
+      if(c == 'interface'){
+        this.paramsSelect.interface.check = true;
+      }
+       if(c == 'arch'){
+        this.paramsSelect.arch.check = true;
+      }
+    },
       //фильтр
-      FilterSearch:function(){
+      FilterSearch:function(id){
         var str = '';
         var str2= '';
         var Arr =this.params;
         var Arr2 =this.paramsSelect;
+        this.params[id].check =true;
         
         //формирование апроса дял selected
         for (key in Arr2) {
@@ -207,6 +217,20 @@ toTop () {
                   console.log(resJson);
                   if(resJson != false){
                   this.ARCs = this.new_ADCs
+                  fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
+                    .then(resJson2 => {
+                      Mass_archs=resJson2
+                      fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
+                        .then(resJson3 => {
+                          Mass_interf=resJson3;
+                          for(var i=0; i<this.ARCs.length; i++){
+                           this.ARCs[i].arch=Mass_archs[this.ARCs[i].arch];
+                            this.ARCs[i].interface=Mass_interf[this.ARCs[i].interface];
+                            console.log('test');
+                            
+                          }
+                        })
+                    })
                 }
                 else{
                   alert('Ничего не найдено')
@@ -395,8 +419,8 @@ toTop () {
                         .then(resJson3 => {
                           Mass_interf=resJson3;
                           for(var i=0; i<this.ARCs.length; i++){
-                            this.ARCs[i].arch=Mass_archs[i];
-                            this.ARCs[i].interface=Mass_interf[i];
+                            this.ARCs[i].arch=Mass_archs[this.ARCs[i].arch];
+                            this.ARCs[i].interface=Mass_interf[this.ARCs[i].interface];
                             console.log('test');
                             
                           }

@@ -79,7 +79,7 @@
                                    :step="0.00001"
                                    hide-details
                                    class="align-center"
-                                   @change="FilterSearch()"
+                                   @change="FilterSearch(id)"
                                  >
                                    <template v-slot:prepend>
                                       <div class="filter_bound upper">>></div> 
@@ -113,7 +113,7 @@
                         </div>
                      </div>
                 </div>
-                  <div class="filterbar__item" v-for='(item) in paramsSelect'>
+                  <div class="filterbar__item" v-for='(item,num) in paramsSelect'>
                      <div class="filterbar__header">
                         <v-checkbox
                             :input-value="item.check"
@@ -130,6 +130,7 @@
                               v-model="item.selected"
                               :label="el"
                               :value="id+1"
+                             @click="CheckOn(num)"
                             ></v-checkbox>
                           </v-container>
                         </template>
