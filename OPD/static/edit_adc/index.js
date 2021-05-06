@@ -7,6 +7,11 @@ new Vue({
       ADC_Id: '',
       ADC_this: [],
       resolution: 'asdasdasd',
+      Arches:[],
+      Interfaces: [],
+      isChangeImg: false,
+      isChangeCxeme: false,
+      isChangeTech: false,
      },
      mounted() {
        this.token=this.getCookie('token')
@@ -35,10 +40,12 @@ new Vue({
             console.log(resJson);
                 fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
               .then(resJson2 => {
+                this.Arches=resJson2
                 this.ADC_this.arch=resJson2[this.ADC_this.arch]
               })
               fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
               .then(resJson3 => {
+                 this.Interfaces=resJson3
                 this.ADC_this.interface=resJson3[this.ADC_this.interface]
               })
           })
@@ -57,9 +64,24 @@ new Vue({
            }
         }
       },
+      //ввод файлов
+      onAddfileImg:function(){
+        console.log('test');
+        this.isChangeImg = true;
+      },
+      onAddfileCxeme:function(){
+        this.isChangeCxeme = true;
+      },
+      onAddfileTech:function(){
+        this.isChangeTech = true;
+      },
+      getKeyByValue:function(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+      },
       handleSubmit: function(){
          var form = new FormData(document.getElementById('adc-form'));
-              console.log(form.get('model'));
+              /*console.log(form.get('model'));
+
               console.log(form.get('arch'));
               console.log(form.get('interface'));
               console.log(form.get('image'));
@@ -67,23 +89,54 @@ new Vue({
               console.log(form.get('tech'));
               console.log(form.get('description'));
               console.log(form.get('resolution'));
-              console.log(form.get('resolution'));
-
-             form.append('session',this.session)
-             form.append('token',this.token)
-             var Vform = new FormData();
-                 Vform.append('session',this.session)
-                 Vform.append('token',this.token)
-                 Vform.append('image',form.get('image'))
-                 Vform.append('image',form.get('cxeme'))
-                 Vform.append('image',form.get('tech'))
-          fetch('https://adc.newpage.xyz/api/edit_adc/', {
+              console.log(form.get('resolution'));*/
+              
+          
+              for (el in this.ADC_this){
+                if(el != 'image'& el != 'cxeme' & el != 'tech'){
+                  var val =( el == 'arch')? this.getKeyByValue(this.Arches,form.get('arch')) : (el == 'interface')? this.getKeyByValue(this.Interfaces,form.get('interface')) : form.get(el);
+                  
+                  fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token+'&key='+el+'&val='+val+'&id='+this.ADC_this.id, {
+                    }).then(res => res.json())
+                    .then(resJson => {
+                      console.log(resJson);
+                    })
+                }else{
+                  if(this.isChangeImg){
+                    var Vform = new FormData();
+                    Vform.append('image',form.get('image'))
+                    fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token+'&id='+this.ADC_this.id, {
                     method: 'POST',
-                    body: form
-                }).then(res => res.json())
-                .then(resJson => {
-                  console.log(resJson);
-                })
+                    body: Vform
+                    }).then(res => res.json())
+                    .then(resJson => {
+                      console.log(resJson);
+                    })
+                  }
+                  if(this.isChangeCxeme){
+                    var Vform = new FormData();
+                    Vform.append('cxeme',form.get('cxeme'))
+                    fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token+'&id='+this.ADC_this.id, {
+                    method: 'POST',
+                    body: Vform
+                    }).then(res => res.json())
+                    .then(resJson => {
+                      console.log(resJson);
+                    })
+                  }
+                  if(this.isChangeTech){
+                    var Vform = new FormData();
+                    Vform.append('tech',form.get('tech'))
+                    fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token, {
+                    method: 'POST',
+                    body: Vform
+                    }).then(res => res.json())
+                    .then(resJson => {
+                      console.log(resJson);
+                    })
+                  }
+                }
+              }
       }
      },
 });

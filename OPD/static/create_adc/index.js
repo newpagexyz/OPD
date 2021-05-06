@@ -3,7 +3,8 @@ new Vue({
     vuetify: new Vuetify(),
      data: {
       src: '/static',
-      
+      Arches:[],
+      Interfaces: [],
      },
      mounted() {
        this.token=this.getCookie('token')
@@ -12,7 +13,14 @@ new Vue({
         if (this.token == undefined || this.token == "empty") {
           window.location.href = `/static/auth/`
         }
-
+            fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
+              .then(resJson2 => {
+                this.Arches=resJson2
+              })
+              fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
+              .then(resJson3 => {
+                 this.Interfaces=resJson3
+              })
      },
      methods: {
 
@@ -37,7 +45,11 @@ new Vue({
            }
         }
       },
+      getKeyByValue:function(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+      },
       handleSubmit: function(){
+         var val =( el == 'arch')? this.getKeyByValue(this.Arches,form.get('arch')) : (el == 'interface')? this.getKeyByValue(this.Interfaces,form.get('interface')) : form.get(el);
          var form = new FormData(document.getElementById('adc-form'));
               console.log(form.get('model'));
               console.log(form.get('arch'));
@@ -52,16 +64,15 @@ new Vue({
              form.append('session',this.session)
              form.append('token',this.token)
              var Vform = new FormData();
-                 Vform.append('session',this.session)
-                 Vform.append('token',this.token)
                  Vform.append('image',form.get('image'))
-                 Vform.append('image',form.get('cxeme'))
-                 Vform.append('image',form.get('tech'))
-          fetch('https://adc.newpage.xyz/api/edit_adc/', {
-                    method: 'POST',
-                    body: form
+                 Vform.append('cxeme',form.get('cxeme'))
+                 Vform.append('tech',form.get('tech'))
+          fetch('https://adc.newpage.xyz/api/add_adc/?session='+this.session+'&token='+this.token+'&model='+form.get('model')+'&description='+form.get('description')+'&resolution='+form.get('resolution')+'&channels='+form.get('channels')+'&max_sample_rate='+form.get('max_sample_rate')+'&interface='+this.getKeyByValue(this.Interfaces,form.get('interface'))+'&arch='+this.getKeyByValue(this.Arches,form.get('arch'))+'&max_INL='+form.get('max_INL')+'&SNR='+form.get('SNR')+'&SFDR='+form.get('SFDR')+'&power='+form.get('power')+'&temperature='+form.get('temperature')+'&analog_input='+form.get('analog_input')+'&FoMW='+form.get('FoMW')+'&max_DNL='+form.get('max_DNL'), {
+                  method: 'POST',
+                    body: Vform
                 }).then(res => res.json())
                 .then(resJson => {
+                  alert('АЦП добавлен.')
                   console.log(resJson);
                 })
       }
