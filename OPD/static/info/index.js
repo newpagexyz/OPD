@@ -8,34 +8,72 @@ new Vue({
       ADC_this: [],
       Names: {},
       Ed: {},
-      
+      MassIds: [],
+      btns: [true,true]
      },
      mounted() {
+
        this.token=this.getCookie('token')
         this.session=this.getCookie('session')
         // проверка на наличие куков
         if (this.token == undefined || this.token == "empty") {
          // window.location.href = `/static/auth/`
         }
+        this.MassIds=localStorage.MassIds.split(',')
+        console.log(this.MassIds);
         this.ADC_Id=localStorage.id;
          console.log(localStorage.id);
         this.GetInfoADC(localStorage.id)
      },
      methods: {
+      //перейти к новой АДЦ
+      OpenACD:function(value,btn){
 
-      OpenACD:function(value){
+        console.log(value + ' value');
+        this.btns= this.MassIds.length >1? [true,true] : [false,false]
+        var IndexNow = this.MassIds.indexOf(localStorage.id);
+        if ((IndexNow == this.MassIds.length-1 && btn == 1) || (IndexNow == 0 && btn == 0)){
+          if (btn == 1){
+            this.btns[1] =false
+          }
+          else{
+            this.btns[0] =false
+          }
+        }
+        else{
+            console.log(IndexNow);
+          var IndexNew = parseInt(IndexNow) + parseInt(value);
+           console.log(IndexNew);
+          if(IndexNew <= this.MassIds.length-1){
+            if( IndexNew >= 0 ){
+               var NewId = this.MassIds[IndexNew];
+               localStorage.id = NewId;
+            }else{
+              this.btns[0] =false
+            }
+          }
+          else{
+            this.btns[1] =false
+          }
+           this.GetInfoADC(localStorage.id)
+        }
+        
+        
+/*
         if(localStorage.id != 0){
           this.GetInfoADC(parseInt(localStorage.id)+parseInt(value))
           localStorage.id=parseInt(localStorage.id)+parseInt(value)
-          /*window.location.href = '/static/info/'*/
-       }
+          /*window.location.href = '/static/info/'
+       }*/
       },
+      //открыть документацию
       OpenTech: function(id_name){
         console.log();
         if(this.ADC_this.tech != null){
          window.location.href = `https://adc.newpage.xyz/file/tech/`+this.ADC_this.tech
         }
       },
+      //получить информацию об ацп
       GetInfoADC: function(id_name){
                 fetch('https://adc.newpage.xyz/api/show_adc/?id='+id_name).then(res => res.json())
                 .then(resJson => {
@@ -86,6 +124,7 @@ new Vue({
                     })
                 })
       },
+      //выход
       Exit:function(c_name){
 
         document.cookie = "token="+'empty'+"; path=/; ";

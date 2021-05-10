@@ -118,8 +118,8 @@
                </div>
              </div>
              <div class="panel_footer">
-               <div class="panel_before" @click='OpenACD(-1)'>← К предыдущему</div>
-               <div class="panel__after" @click='OpenACD(1)'>К следующему →</div>
+               <div class="panel_before" v-if="btns[0]" @click='OpenACD(-1,0)'>← К предыдущему</div>
+               <div class="panel__after" v-if="btns[1]" @click='OpenACD(1,1)'>К следующему →</div>
              </div>
            </div>
          </div>
