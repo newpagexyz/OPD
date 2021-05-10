@@ -5,6 +5,10 @@ new Vue({
       src: '/static',
       Arches:[],
       Interfaces: [],
+      selected_interface: '',
+      selected_arch: '',
+      dialogInterface: false,
+      dialogArch: false,
      },
      mounted() {
        this.token=this.getCookie('token')

@@ -9,6 +9,10 @@ new Vue({
       resolution: 'asdasdasd',
       Arches:[],
       Interfaces: [],
+      selected_interface: '',
+      selected_arch: '',
+      dialogInterface: false,
+      dialogArch: false,
       isChangeImg: false,
       isChangeCxeme: false,
       isChangeTech: false,
@@ -23,6 +27,7 @@ new Vue({
         this.ADC_Id=localStorage.id;
          console.log(localStorage.id);
         this.GetInfoADC(localStorage.id)
+        
      },
      methods: {
 
@@ -42,11 +47,14 @@ new Vue({
               .then(resJson2 => {
                 this.Arches=resJson2
                 this.ADC_this.arch=resJson2[this.ADC_this.arch]
+                this.selected_arch = [this.ADC_this.arch]
               })
               fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
               .then(resJson3 => {
                  this.Interfaces=resJson3
                 this.ADC_this.interface=resJson3[this.ADC_this.interface]
+                this.selected_interface = [this.ADC_this.interface]
+        
               })
           })
         },

@@ -30,6 +30,41 @@
      <header1></header1>
       
       <main>
+        <v-dialog v-model="dialogInterface" max-width="700px"  >
+          <v-card class='dialog' >
+            <v-card-title class="headline">Выберите тип интерфейса</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-container fluid>
+              <v-checkbox v-for="el,id in Interfaces"
+                 v-model="selected_interface"
+                  :label="el"
+                  :value="el"
+                 @click="dialogInterface = false"
+                ></v-checkbox>
+                </v-container>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogArch" max-width="700px"  >
+          <v-card class='dialog' >
+            <v-card-title class="headline">Выберите тип архитектуры</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-container fluid>
+              <v-checkbox v-for="el,id in Arches"
+                 v-model="selected_arch"
+                  :label="el"
+                  :value="el"
+                 @click="dialogArch = false"
+                ></v-checkbox>
+                </v-container>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
         <div class="toolbox">
             
                
@@ -54,18 +89,22 @@
                                          _tabindex="1" 
                                         autocomplete = "current-password"></input__text1>
                         </div>
-                        <div class="panel__item" >
+                        <div class="panel__item" @click="dialogArch = true;selected_arch=''; ">
                           <div class="panel__label">Архитектура</div>
-                          <input__text1 _type="text" 
+                          <input__text1 _type="text" _readonly="true"
+                                    readonly
                                         _placeholder="" required _name="arch"
                                          _tabindex="3" 
+                                         :_value="selected_arch"
                                         autocomplete = "current-password"></input__text1>
                         </div>
-                        <div class="panel__item" >
+                        <div class="panel__item"  @click="dialogInterface = true;selected_interface='';">
                           <div class="panel__label">Тип интерфейса</div>
-                          <input__text1 _type="text" 
+                          <input__text1 _type="text" readonly
+                                        _readonly="true"
                                         _placeholder="" required _name="interface"
                                          _tabindex="4" 
+                                         :_value="selected_interface"
                                         autocomplete = "current-password"></input__text1>
                         </div>
                         <div class="panel__item" >
