@@ -48,7 +48,7 @@
                 </div>-->
               
                 <div class="toolbox__item">
-                    <a class="toolbox__lable" href="/static/create_adc/">Добавить АЦП</a>
+                    <a class="toolbox__lable" href="/static/create_adc/" v-if="token!= '' & token != 'empty'">Добавить АЦП</a>
                 </div>
               </div>
               
@@ -57,7 +57,7 @@
             <div class="filterbar" v-if='hide_filter'>
                <header>
                   <a class="filterbar__lable" @click='FilterReload()'>Сбросить фильтр</a>
-                  <a class="filterbar__lable" @click='FilterSearch()'>Применить</a>
+                  <a class="filterbar__lable" @click='FilterSearch(0)'>Применить</a>
                </header>
                <div class="filterbar__content">
                   <div class="filterbar__item" v-for='(item,id) in params'>
@@ -65,6 +65,7 @@
                         <v-checkbox
                             :input-value="item.check"
                             v-model='item.check'
+
                             value
                           ></v-checkbox>
                         <div class="filterbar__title">{{item.title}}</div>
@@ -76,7 +77,7 @@
                                    v-model="item.range"
                                    :max="item.max"
                                    :min="item.min"
-                                   :step="0.00001"
+                                   :step="item.name == 'channels'? 1 : item.name == 'resolution'? 0.1 : item.name == 'max_DNL'? 0.000001 :item.name == 'max_INL'? 0.0001 : item.name == 'analog_input'? 0.0001 : item.name == 'FoMW'? 0.0001 :0.01"
                                    hide-details
                                    class="align-center"
                                    @change="FilterSearch(id)"
@@ -156,7 +157,7 @@
                      <div class="list__body">
                         <div class="list__title">{{item.model}}</div>
                         <div class="list__subtitle">{{item.arch}}</div>
-                        <div class="list__text">{{item.resolution}}-bit {{item.channels}}r-sb {{item.max_sample_rate}}-ch {{item.interface}} , {{item.max_INL}}</div>
+                        <div class="list__text">{{item.interface}}, {{item.resolution}}-,бит, {{item.channels}}-номер канала, {{item.max_sample_rate}}-msps, {{item.max_INL}} -(+/-LSB)</div>
                      </div>
                      <!--Правая часть item-->
                      <div class="list__btns">
@@ -167,15 +168,15 @@
                             <div class="item__del" @click='toDel(id)' v-if="token!= '' & token != 'empty'">
                               <img src="/static/img/del.png" alt="dell item">
                             </div>
-                              <div class="list__lable" v-if='item.tech != null'>Техническое описание</div>
-                              <div class="list__lable" v-else>&#160;</div>
+                              <div class="list__lable" v-if='item.tech != null'  @click="OpenTech(id)" >Техническое описание</div>
+                              <div class="list__lable" v-else >&#160;</div>
                            <div class="list__pdf" @click="OpenTech(id)">
                             <img :src="src+'/img/logo.png'" alt="pdf" v-if='item.tech != null'>
                             <!-- Здесь может быть изображение грустного файлика(отсутствующего-->
                           </div>
                         </div>
-                        <div class="list__btn">
-                           <a @click='GoToInfo(id)'>Подробнее > </a>
+                        <div class="list__btn"@click='GoToInfo(id)'>
+                           <a >Подробнее > </a>
                         </div>
                      </div>
                   </div>

@@ -177,11 +177,14 @@ new Vue({
     },
       //фильтр
       FilterSearch:function(id){
+        console.log(id);
         var str = '';
         var str2= '';
         var Arr =this.params;
         var Arr2 =this.paramsSelect;
-        this.params[id].check =true;
+        if(id != 0){
+          this.params[id].check =true;
+        }
         
         //формирование апроса дял selected
         for (key in Arr2) {
