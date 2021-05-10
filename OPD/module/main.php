@@ -434,7 +434,7 @@
                     $key=="analog_input" OR
                     $key=="FoMW" OR
                     $key=="max_DNL"){
-                        $query=$query.' `'.$key.'`              ="'.flaotval($val).'"';   
+                        $query=$query.' `'.$key.'`              ="'.floatval($val).'"';   
                     }
                     elseif($key=="model"){
                         $query=$query.' `model`              ="'.$this->mysqli->real_escape_string($val).'"';   
