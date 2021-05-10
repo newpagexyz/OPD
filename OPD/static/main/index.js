@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     vuetify: new Vuetify(),
      data: {
+      search_txt: '',
       hide_filter: true,
       token: '',
       session: '',
@@ -166,6 +167,33 @@ new Vue({
       //кнопка вверх
     toTop () {
       this.$vuetify.goTo(0)
+    },
+    Search: function(){
+      console.log(this.search_txt);
+
+      fetch('https://adc.newpage.xyz/api/search_adc/?model='+this.search_txt).then(res => res.json())
+                .then(resJson => {
+                   this.ARCs =  resJson;
+                  this.new_ADCs = resJson;
+                  console.log(resJson);
+                  var Mass_archs=[]
+                  var Mass_interf=[]
+
+                   fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
+                    .then(resJson2 => {
+                      Mass_archs=resJson2
+                      fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
+                        .then(resJson3 => {
+                          Mass_interf=resJson3;
+                          for(var i=0; i<this.ARCs.length; i++){
+                            this.ARCs[i].arch=Mass_archs[this.ARCs[i].arch];
+                            this.ARCs[i].interface=Mass_interf[this.ARCs[i].interface];
+                            console.log('test');
+                            
+                          }
+                        })
+                    })
+                })
     },
     CheckOn:function(c){
       if(c == 'interface'){
@@ -458,5 +486,6 @@ new Vue({
         }
       },
      },
+    
       
 });

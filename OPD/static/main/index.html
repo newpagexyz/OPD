@@ -39,7 +39,7 @@
         </a>
             <div class="toolbox" name="top">
               <div class="toolbox__search">
-                 <input type="text" name="" placeholder="Поиск">
+                 <input type="text" name="" v-model='search_txt'  placeholder="Поиск"  @keydown="Search">
                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
               </div>
               <div class="toolbox__box">
