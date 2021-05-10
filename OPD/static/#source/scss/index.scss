@@ -94,7 +94,7 @@ main{
    width: 100%;
 }
 .filterbar {
-   flex: 0 0 17vw;
+   flex: 0 0 21vw;
    & header{
       display: flex;
       justify-content: flex-start;
@@ -105,7 +105,7 @@ main{
       border-bottom: 0.4vh solid #0b2765;
       gap: 1.6vw;
       & a{
-         font-size: 1.7vh;
+         font-size: 2vh;
       }
 
    }
@@ -163,7 +163,7 @@ main{
    }
 //
 .filterbar__title {
-      font-size: 1.5vh;
+      font-size: 1.9vh;
       color: #000
 }
 .filterbar__arrow {
@@ -267,11 +267,11 @@ left: 1.2vw;
 
 .filterbar__output {
    background-color: #cccccc;
-   margin: 0 auto;
-   margin-top: 1.2vh;
+   margin: 1.5vh auto;
 
    width: 8.7vw;
-   height: 6vh;
+   flex: 0 0 6vh;
+  
    display: flex;
    justify-content: center;
    align-items: center;
