@@ -49,7 +49,6 @@ new Vue({
         return Object.keys(object).find(key => object[key] === value);
       },
       handleSubmit: function(){
-         var val =( el == 'arch')? this.getKeyByValue(this.Arches,form.get('arch')) : (el == 'interface')? this.getKeyByValue(this.Interfaces,form.get('interface')) : form.get(el);
          var form = new FormData(document.getElementById('adc-form'));
               console.log(form.get('model'));
               console.log(form.get('arch'));
@@ -72,7 +71,10 @@ new Vue({
                     body: Vform
                 }).then(res => res.json())
                 .then(resJson => {
-                  alert('АЦП добавлен.')
+                  if(resJson != false){
+                    alert('АЦП добавлен.')
+                  }
+                  
                   console.log(resJson);
                 })
       }

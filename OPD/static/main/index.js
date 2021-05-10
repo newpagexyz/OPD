@@ -269,6 +269,7 @@ new Vue({
         })
       },
       FilterReload: function(){
+        this.GetADCs();
         this.paramsSelect={
         interface:{
           name: 'interface',
