@@ -142,7 +142,9 @@ new Vue({
         if (this.token == undefined || this.token == "empty") {
          // window.location.href = `/static/auth/`
         }
-        this.GetADCs()
+        console.log(localStorage.MassIds);
+        this.GetADCs('start')
+      
         //скрытие всех полей
         for(Num in this.params){
           var elem = document.getElementById("filter1"+Num);
@@ -397,12 +399,25 @@ new Vue({
       },
       GoToInfo: function(id__name){
         localStorage.id = this.ARCs[id__name].id;
-        window.location.href = '/static/info/'
+        localStorage.MassIds = this.getIdsByFilterList().join(',')
+        
+       window.location.href = '/static/info/'
+      },
+      //получения массива id отфильтрованных ацп
+      getIdsByFilterList: function(){
+        var Mass = [];
+        for ( var i=0; i<this.ARCs.length; i++){
+          Mass[i]=this.ARCs[i].id;
+        }
+        console.log(Mass);
+        return Mass
       },
       //доп кнопки
       GoToEdit:function(id__name){
         localStorage.id = this.ARCs[id__name].id;
-        window.location.href = '/static/edit_adc/'
+        localStorage.MassIds = this.getIdsByFilterList().join(',')
+       
+       window.location.href = '/static/edit_adc/'
       },
       toDel:function(id__name){
         fetch('https://adc.newpage.xyz/api/delete_adc/?session='+this.session+'&token='+this.token+'&id='+this.ARCs[id__name].id).then(res => res.json())
@@ -460,10 +475,26 @@ new Vue({
                             PredMass[i].arch=Mass_archs[PredMass[i].arch];
                             PredMass[i].interface=Mass_interf[PredMass[i].interface];
                             console.log('test');
+                          
+                          }
+
+                             this.ARCs =  PredMass;
+                          this.new_ADCs = PredNewMass;
+                          if(c_mane != undefined){
+                              var arr = this.ARCs;
+                           this.ARCs={}
+                           var k=0
+                           arr.forEach(el =>{
+
+                            for (var i=0;i<localStorage.MassIds.slice(",").length; i++){
+                              if(el.id == localStorage.MassIds.slice(",")[i])
+                              this.ARCs[i]=el
+                            }
+                            k++;
+                           })
+                            console.log(typeof(this.ARCs));
                             
                           }
-                           this.ARCs =  PredMass;
-                          this.new_ADCs = PredNewMass;
                         })
                     })
                   
