@@ -117,14 +117,14 @@
             */
                 $query='
                     INSERT INTO `ADC` SET
-                    `model`             ="'.$model.'",
-                    `description`       ="'.$description.'",
-                    `resolution`        ="'.$resolution.'",
-                    `channels`          ="'.$channels.'",
-                    `max_sample_rate`   ="'.$max_sample_rate.'",
-                    `interface`         ="'.$interface.'",
-                    `arch`              ="'.$arch.'",
-                    `max_INL`           ="'.$max_INL.'",';
+                    `model`             ="'.$this->mysqli->real_escape_string($model).'",
+                    `description`       ="'.floatval($description).'",
+                    `resolution`        ="'.floatval($resolution).'",
+                    `channels`          ="'.floatval($channels).'",
+                    `max_sample_rate`   ="'.floatval($max_sample_rate).'",
+                    `interface`         ="'.floatval($interface).'",
+                    `arch`              ="'.floatval($arch).'",
+                    `max_INL`           ="'.floatval($max_INL).'",';
                     
                     if(!empty($_FILES)){
                         if(isset($_FILES['tech'])){
@@ -162,13 +162,13 @@
                         }
                     }
                     $query=$query.'
-                    `SNR`               ="'.$SNR.'",
-                    `SFDR`              ="'.$SFDR.'",
-                    `power`             ="'.$power.'",
-                    `temperature`       ="'.$temperature.'",
-                    `analog_input`      ="'.$analog_input.'",
-                    `FoMW`              ="'.$FoMW.'",
-                    `max_DNL`           ="'.$max_DNL.'";
+                    `SNR`               ="'.floatval($SNR).'",
+                    `SFDR`              ="'.floatval($SFDR).'",
+                    `power`             ="'.floatval($power).'",
+                    `temperature`       ="'.floatval($temperature).'",
+                    `analog_input`      ="'.floatval($analog_input).'",
+                    `FoMW`              ="'.floatval($FoMW).'",
+                    `max_DNL`           ="'.floatval($max_DNL).'";
                     ';
 
                 $ret=$this->mysqli->query($query);
@@ -233,11 +233,11 @@
                 }
                 if(isset($_GET['resolution_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['resolution_min']);
-                    $query=$query." `resolution` >=".intval($tmp)." AND ";
+                    $query=$query." `resolution` >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['resolution_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['resolution_max']);
-                    $query=$query." `resolution` <=".intval($tmp)." AND ";
+                    $query=$query." `resolution` <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['channels_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['channels_min']);
@@ -245,15 +245,15 @@
                 }
                 if(isset($_GET['channels_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['channels_max']);
-                    $query=$query." channels <=".intval($tmp)." AND ";
+                    $query=$query." channels <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['max_sample_rate_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['max_sample_rate_max']);
-                    $query=$query." max_sample_rate >=".intval($tmp)." AND ";
+                    $query=$query." max_sample_rate >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['max_sample_rate_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['max_sample_rate_min']);
-                    $query=$query." max_sample_rate <=".intval($tmp)." AND ";
+                    $query=$query." max_sample_rate <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['interface'])){
                     $tmp=$_GET['interface'];
@@ -277,67 +277,67 @@
                 }
                 if(isset($_GET['max_INL_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['max_INL_min']);
-                    $query=$query." max_INL >=".intval($tmp)." AND ";
+                    $query=$query." max_INL >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['max_INL_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['max_INL_max']);
-                    $query=$query." max_INL <=".intval($tmp)." AND ";
+                    $query=$query." max_INL <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['SNR_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['SNR_min']);
-                    $query=$query." SNR >=".intval($tmp)." AND ";
+                    $query=$query." SNR >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['SNR_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['SNR_max']);
-                    $query=$query." SNR <=".intval($tmp)." AND ";
+                    $query=$query." SNR <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['SFDR_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['SFDR_min']);
-                    $query=$query." SFDR >=".intval($tmp)." AND ";
+                    $query=$query." SFDR >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['SFDR_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['SFDR_max']);
-                    $query=$query." SFDR <=".intval($tmp)." AND ";
+                    $query=$query." SFDR <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['power_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['power_min']);
-                    $query=$query." power >=".intval($tmp)." AND ";
+                    $query=$query." power >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['power_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['power_max']);
-                    $query=$query." power <=".intval($tmp)." AND ";
+                    $query=$query." power <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['temperature_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['temperature_min']);
-                    $query=$query." temperature >=".intval($tmp)." AND ";
+                    $query=$query." temperature >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['temperature_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['temperature_max']);
-                    $query=$query." temperature <=".intval($tmp)." AND ";
+                    $query=$query." temperature <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['analog_input_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['analog_input_min']);
-                    $query=$query." analog_input >=".intval($tmp)." AND ";
+                    $query=$query." analog_input >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['analog_input_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['analog_input_max']);
-                    $query=$query." analog_input <=".intval($tmp)." AND ";
+                    $query=$query." analog_input <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['FoMW_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['FoMW_min']);
-                    $query=$query." FoMW >=".intval($tmp)." AND ";
+                    $query=$query." FoMW >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['FoMW_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['FoMW_max']);
-                    $query=$query." FoMW <=".intval($tmp)." AND ";
+                    $query=$query." FoMW <=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['max_DNL_min'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['max_DNL_min']);
-                    $query=$query." max_DNL >=".intval($tmp)." AND ";
+                    $query=$query." max_DNL >=".floatval($tmp)." AND ";
                 }
                 if(isset($_GET['max_DNL_max'])){
                     $tmp=$this->mysqli->real_escape_string($_GET['max_DNL_max']);
-                    $query=$query." max_DNL <=".intval($tmp)." AND ";
+                    $query=$query." max_DNL <=".floatval($tmp)." AND ";
                 }
                 $query=substr($query, 0,-4);
                 if(isset($_GET['lid'])){
@@ -419,7 +419,7 @@
                             }
                         }
                     }
-                    if($key=="model" OR 
+                    if(
                     $key=="description" OR
                     $key=="resolution" OR
                     $key=="channels" OR
@@ -434,7 +434,10 @@
                     $key=="analog_input" OR
                     $key=="FoMW" OR
                     $key=="max_DNL"){
-                        $query=$query.'`'.$key.'`              ="'.$val.'"';   
+                        $query=$query.' `'.$key.'`              ="'.flaotval($val).'"';   
+                    }
+                    elseif($key=="model"){
+                        $query=$query.' `model`              ="'.$this->mysqli->real_escape_string($val).'"';   
                     }
                     $query=$query.' WHERE `id`='.intval($id).';';
                 $ret=$this->mysqli->query($query);
