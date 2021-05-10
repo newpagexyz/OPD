@@ -173,8 +173,9 @@ new Vue({
 
       fetch('https://adc.newpage.xyz/api/search_adc/?model='+this.search_txt).then(res => res.json())
                 .then(resJson => {
-                   this.ARCs =  resJson;
-                  this.new_ADCs = resJson;
+                  var PredMass, PredNewMass;
+                  PredMass =  resJson;
+                  PredNewMass = resJson;
                   console.log(resJson);
                   var Mass_archs=[]
                   var Mass_interf=[]
@@ -185,12 +186,14 @@ new Vue({
                       fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
                         .then(resJson3 => {
                           Mass_interf=resJson3;
-                          for(var i=0; i<this.ARCs.length; i++){
-                            this.ARCs[i].arch=Mass_archs[this.ARCs[i].arch];
-                            this.ARCs[i].interface=Mass_interf[this.ARCs[i].interface];
+                          for(var i=0; i<PredMass.length; i++){
+                            PredMass[i].arch=Mass_archs[PredMass[i].arch];
+                            PredMass[i].interface=Mass_interf[PredMass[i].interface];
                             console.log('test');
                             
                           }
+                           this.ARCs =  PredMass;
+                          this.new_ADCs = PredNewMass;
                         })
                     })
                 })
@@ -245,20 +248,22 @@ new Vue({
         fetch('https://adc.newpage.xyz/api/search_adc/?'+str).then(res => res.json())
                 .then(resJson => {
                   this.new_ADCs =  resJson;
+                   var PredMass, PredNewMass;
+                  
                   console.log(resJson);
                   if(resJson != false){
-                  this.ARCs = this.new_ADCs
+                 PredMass = this.new_ADCs
                   fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
                     .then(resJson2 => {
                       Mass_archs=resJson2
                       fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
                         .then(resJson3 => {
                           Mass_interf=resJson3;
-                          for(var i=0; i<this.ARCs.length; i++){
-                           this.ARCs[i].arch=Mass_archs[this.ARCs[i].arch];
-                            this.ARCs[i].interface=Mass_interf[this.ARCs[i].interface];
+                          for(var i=0; i<PredMass.length; i++){
+                           PredMass[i].arch=Mass_archs[PredMass[i].arch];
+                            PredMass[i].interface=Mass_interf[PredMass[i].interface];
                             console.log('test');
-                            
+                             this.ARCs =  PredMass;
                           }
                         })
                     })
@@ -438,8 +443,9 @@ new Vue({
       GetADCs: function(c_mane){
         fetch('https://adc.newpage.xyz/api/search_adc/?max_INL_max=10000000000000/').then(res => res.json())
                 .then(resJson => {
-                  this.ARCs =  resJson;
-                  this.new_ADCs = resJson;
+                   var PredMass, PredNewMass;
+                  PredMass =  resJson;
+                  PredNewMass = resJson;
                   console.log(resJson);
                   var Mass_archs=[]
                   var Mass_interf=[]
@@ -450,12 +456,14 @@ new Vue({
                       fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
                         .then(resJson3 => {
                           Mass_interf=resJson3;
-                          for(var i=0; i<this.ARCs.length; i++){
-                            this.ARCs[i].arch=Mass_archs[this.ARCs[i].arch];
-                            this.ARCs[i].interface=Mass_interf[this.ARCs[i].interface];
+                          for(var i=0; i<PredMass.length; i++){
+                            PredMass[i].arch=Mass_archs[PredMass[i].arch];
+                            PredMass[i].interface=Mass_interf[PredMass[i].interface];
                             console.log('test');
                             
                           }
+                           this.ARCs =  PredMass;
+                          this.new_ADCs = PredNewMass;
                         })
                     })
                   
