@@ -7,6 +7,7 @@ new Vue({
       ADC_Id: '',
       ADC_this: [],
       Names: {},
+      Ed: {},
       
      },
      mounted() {
@@ -57,6 +58,23 @@ new Vue({
                     arch: 'Архитектура',
                   }
                    this.ADC_this.names = this.Names
+                   this.Ed = {
+                    model: ' ',
+                    FoMW: ' ',
+                    SFDR: 'дБ',
+                    SNR: 'дБ',
+                    analog_input: 'МГц',
+                    channels: ' ',
+                    max_DNL: '+/-ЛСН',
+                    max_INL: '+/-ЛСБ',
+                    max_sample_rate: 'МСПС',
+                    power: 'Потребляемая мощность',
+                    resolution: 'мВ',
+                    temperature: 'С',
+                    interface: ' ',
+                    arch: ' ',
+                  }
+                   this.ADC_this.ed = this.Ed
                   console.log(resJson);
                       fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
                     .then(resJson2 => {

@@ -62,10 +62,11 @@
                               <tbody>
                                 <tr
                                   v-for="item,name in ADC_this"
-                                 v-if="name != 'image' & name != 'tech' & name != 'cxeme' & name != 'id' & name != 'model' & name != 'description' & name != 'names'"
+                                 v-if="name != 'image' & name != 'tech' & name != 'cxeme' & name != 'id' & name != 'model' & name != 'description' & name != 'names'  & name != 'ed'"
                                 >
                                   <td>{{ ADC_this.names[name]}}</td>
                                   <td >{{ item }}</td>
+                                  <td>{{ ADC_this.ed[name]}}</td>
                                 </tr>
                               </tbody>
                             </template>
