@@ -93,6 +93,7 @@ new Vue({
               
           
               for (el in this.ADC_this){
+                console.log(el);
                 if(el != 'image'& el != 'cxeme' & el != 'tech'){
                   var val =( el == 'arch')? this.getKeyByValue(this.Arches,form.get('arch')) : (el == 'interface')? this.getKeyByValue(this.Interfaces,form.get('interface')) : form.get(el);
                   
@@ -127,7 +128,7 @@ new Vue({
                   if(this.isChangeTech){
                     var Vform = new FormData();
                     Vform.append('tech',form.get('tech'))
-                    fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token, {
+                    fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token+'&id='+this.ADC_this.id, {
                     method: 'POST',
                     body: Vform
                     }).then(res => res.json())

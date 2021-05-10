@@ -48,7 +48,7 @@
                 </div>-->
               
                 <div class="toolbox__item">
-                    <a class="toolbox__lable" href="/static/create_adc/">Добавть АЦП</a>
+                    <a class="toolbox__lable" href="/static/create_adc/">Добавить АЦП</a>
                 </div>
               </div>
               
@@ -57,7 +57,7 @@
             <div class="filterbar" v-if='hide_filter'>
                <header>
                   <a class="filterbar__lable" @click='FilterReload()'>Сбросить фильтр</a>
-                  <a class="filterbar__lable" @click='FilterSearch()'>Применть</a>
+                  <a class="filterbar__lable" @click='FilterSearch()'>Применить</a>
                </header>
                <div class="filterbar__content">
                   <div class="filterbar__item" v-for='(item,id) in params'>
@@ -167,7 +167,8 @@
                             <div class="item__del" @click='toDel(id)' v-if="token!= '' & token != 'empty'">
                               <img src="/static/img/del.png" alt="dell item">
                             </div>
-                              <div class="list__lable">Техническое описание</div>
+                              <div class="list__lable" v-if='item.tech != null'>Техническое описание</div>
+                              <div class="list__lable" v-else>&#160;</div>
                            <div class="list__pdf" @click="OpenTech(id)">
                             <img :src="src+'/img/logo.png'" alt="pdf" v-if='item.tech != null'>
                             <!-- Здесь может быть изображение грустного файлика(отсутствующего-->
