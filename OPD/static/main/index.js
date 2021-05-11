@@ -206,6 +206,7 @@ new Vue({
         this.paramsSelect.arch.check = true;
       }
     },
+
       //фильтр
       FilterSearch:function(id){
         console.log(id);
@@ -242,35 +243,42 @@ new Vue({
         console.log(str2);
         str=str2+str;
         str=str.substr(0, str.length-1)
-        console.log(str);
+        console.log('str'+str);
+        if(str == ''){
+          alert('Параметры для фильтрации не выбранны.')
+        }
+        else{
         //
 
-        fetch('https://adc.newpage.xyz/api/search_adc/?'+str).then(res => res.json())
-                .then(resJson => {
-                  this.new_ADCs =  resJson;
-                   var PredMass, PredNewMass;
-                  
-                  console.log(resJson);
-                  if(resJson != false){
-                 PredMass = this.new_ADCs
-                  fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
-                    .then(resJson2 => {
-                      Mass_archs=resJson2
-                      fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
-                        .then(resJson3 => {
-                          Mass_interf=resJson3;
-                          for(var i=0; i<PredMass.length; i++){
-                           PredMass[i].arch=Mass_archs[PredMass[i].arch];
-                            PredMass[i].interface=Mass_interf[PredMass[i].interface];
-                             this.ARCs =  PredMass;
-                          }
-                        })
-                    })
-                }
-                else{
-                  alert('Ничего не найдено')
-                }
-        })
+          fetch('https://adc.newpage.xyz/api/search_adc/?'+str).then(res => res.json())
+                  .then(resJson => {
+                    this.new_ADCs =  resJson;
+                     var PredMass, PredNewMass;
+                    
+                    console.log(resJson);
+                    if(resJson != false){
+                   PredMass = this.new_ADCs
+                    fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
+                      .then(resJson2 => {
+                        Mass_archs=resJson2
+                        fetch('https://adc.newpage.xyz/api/interfaces/').then(res => res.json())
+                          .then(resJson3 => {
+                            Mass_interf=resJson3;
+                            for(var i=0; i<PredMass.length; i++){
+                             PredMass[i].arch=Mass_archs[PredMass[i].arch];
+                              PredMass[i].interface=Mass_interf[PredMass[i].interface];
+                               this.ARCs =  PredMass;
+                            }
+                          })
+                      })
+                  }
+                  else{
+                    
+                    this.ARCs=[]
+
+                  }
+          })
+        }
       },
       FilterReload: function(){
         this.GetADCs();
@@ -424,9 +432,9 @@ new Vue({
         fetch('https://adc.newpage.xyz/api/delete_adc/?session='+this.session+'&token='+this.token+'&id='+this.ARCs[id__name].id).then(res => res.json())
                 .then(resJson => {
                   alert('АЦП: ' +this.ARCs[id__name].model + 'был удален.')
-
+                  this.GetADCs('start')
                 })
-        console.log('ждем апи по удалению');;
+        
   
       },
       OpenTech: function(id_name){

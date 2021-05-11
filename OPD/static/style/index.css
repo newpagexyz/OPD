@@ -25,6 +25,9 @@
 .navBtn__text {
   font-size: 2.5vh; }
 
+.list__error {
+  font-size: 2.6vh; }
+
 main {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
