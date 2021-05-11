@@ -165,6 +165,11 @@ new Vue({
         }
      },
      methods: {
+      //добавление ацп свыше 100
+      AddNewArC:function(){
+        this.GetADCs()
+        alert('ох, откуда так много ацп?')
+      },
       //кнопка вверх
     toTop () {
       this.$vuetify.goTo(0)
@@ -246,6 +251,7 @@ new Vue({
         console.log('str'+str);
         if(str == ''){
           alert('Параметры для фильтрации не выбранны.')
+          this.GetADCs()
         }
         else{
         //
@@ -280,6 +286,7 @@ new Vue({
           })
         }
       },
+      //сброс фильтров
       FilterReload: function(){
         this.GetADCs();
         this.paramsSelect={
