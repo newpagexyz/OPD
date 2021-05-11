@@ -1,7 +1,7 @@
 .navBtn {
   position: fixed;
   bottom: 3vh;
-  right: 3vw;
+  right: 1.5vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -341,7 +341,7 @@ main {
     cursor: pointer; }
 
 .list__content {
-  margin-left: 1.7vw;
+  margin-right: 2vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
