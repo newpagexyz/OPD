@@ -148,7 +148,7 @@
                   <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
                --></header>
                <div class="list__content">
-                  <div class="list__error" v-if="ARCs == ''">Ничего не найденно</div>
+                  <div class="list__error" v-if="ARCs == ''">Ничего не найдено</div>
                   <div class="list__item" v-for="item,id in ARCs">
                      <div class="list__img" @click='GoToInfo(id)'>
                       <img :src="src+'/img/photo.jpg'" alt="img" v-if="item.image == null">

@@ -226,3 +226,73 @@ cursor: pointer;
 .panel_footer {
    margin-top: 2vh;
 }
+//диалоговое окно болрьба со vue
+.v-dialog{
+  border-radius: 1vh;
+  margin: 2vh;
+  overflow: auto;
+   &::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0.05);
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+   }
+   &::-webkit-scrollbar-thumb{
+cursor: pointer;
+    background-color: #0f1e81;
+  border-radius: 30px;
+   }
+}
+.v-sheet.v-card{
+  border-radius: 1vh;
+}
+.v-dialog>.v-card>.v-card__title{
+  padding: 3vh 4vh 0vh;
+}
+.v-dialog>.v-card>.v-card__actions{
+  padding: 0vh 2vh;
+}
+.container{
+  padding: 1vh;
+}
+.v-input--selection-controls{
+  margin-top: 2vh;
+  padding-top: 2vh;
+}
+.v-input__slot{
+  margin-bottom: 2vh;
+}
+.v-application--is-ltr .v-input--selection-controls__input{
+  margin-right: 1vh;
+}
+.v-input--selection-controls__input{
+  height: 3vh;
+  width: 3vh;
+}
+.v-input .v-label{
+  line-height: 2.5vh;
+}
+.v-label{
+  font-size: 2.5vh;
+  min-height: 1vh;
+}
+.v-messages{
+  display: none;
+}
+.v-application .headline{
+  font-size: 3vh;
+}
+.headline{
+  font-size: 3vh;
+}
+.v-dialog>.v-card>.v-card__title{
+    font-size: 3vh;
+
+}
+.v-input--selection-controls__ripple{
+  height: 3vh;
+  width: 3vh;
+  left: -1vh;
+  top: -1vh;
+  margin: 1vh;  
+}
