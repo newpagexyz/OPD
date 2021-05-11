@@ -8,7 +8,7 @@ new Vue({
       ADC_this: [],
       Names: {},
       Ed: {},
-      MassIds: [],
+      MassIds1: [],
       btns: [true,true]
      },
      mounted() {
@@ -19,7 +19,7 @@ new Vue({
         if (this.token == undefined || this.token == "empty") {
          // window.location.href = `/static/auth/`
         }
-        this.MassIds=localStorage.MassIds.split(',')
+        this.MassIds1=localStorage.MassIds.split(',')
         console.log(this.MassIds);
         this.ADC_Id=localStorage.id;
          console.log(localStorage.id);
@@ -30,9 +30,9 @@ new Vue({
       OpenACD:function(value,btn){
 
         console.log(value + ' value');
-        this.btns= this.MassIds.length >1? [true,true] : [false,false]
-        var IndexNow = this.MassIds.indexOf(localStorage.id);
-        if ((IndexNow == this.MassIds.length-1 && btn == 1) || (IndexNow == 0 && btn == 0)){
+        this.btns= this.MassIds1.length >1? [true,true] : [false,false]
+        var IndexNow = this.MassIds1.indexOf(localStorage.id);
+        if ((IndexNow == this.MassIds1.length-1 && btn == 1) || (IndexNow == 0 && btn == 0)){
           if (btn == 1){
             this.btns[1] =false
           }
@@ -44,9 +44,9 @@ new Vue({
             console.log(IndexNow);
           var IndexNew = parseInt(IndexNow) + parseInt(value);
            console.log(IndexNew);
-          if(IndexNew <= this.MassIds.length-1){
+          if(IndexNew <= this.MassIds1.length-1){
             if( IndexNew >= 0 ){
-               var NewId = this.MassIds[IndexNew];
+               var NewId = this.MassIds1[IndexNew];
                localStorage.id = NewId;
             }else{
               this.btns[0] =false

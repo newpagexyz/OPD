@@ -144,7 +144,6 @@ new Vue({
         }
         console.log(localStorage.MassIds);
         this.GetADCs('start')
-      
         //скрытие всех полей
         for(Num in this.params){
           var elem = document.getElementById("filter1"+Num);
@@ -191,7 +190,6 @@ new Vue({
                           for(var i=0; i<PredMass.length; i++){
                             PredMass[i].arch=Mass_archs[PredMass[i].arch];
                             PredMass[i].interface=Mass_interf[PredMass[i].interface];
-                            console.log('test');
                             
                           }
                            this.ARCs =  PredMass;
@@ -264,7 +262,6 @@ new Vue({
                           for(var i=0; i<PredMass.length; i++){
                            PredMass[i].arch=Mass_archs[PredMass[i].arch];
                             PredMass[i].interface=Mass_interf[PredMass[i].interface];
-                            console.log('test');
                              this.ARCs =  PredMass;
                           }
                         })
@@ -399,7 +396,9 @@ new Vue({
       },
       GoToInfo: function(id__name){
         localStorage.id = this.ARCs[id__name].id;
-        localStorage.MassIds = this.getIdsByFilterList().join(',')
+        if(this.getIdsByFilterList().join(',') != ''){
+          localStorage.MassIds = this.getIdsByFilterList().join(',')
+        }
         
        window.location.href = '/static/info/'
       },
@@ -415,7 +414,9 @@ new Vue({
       //доп кнопки
       GoToEdit:function(id__name){
         localStorage.id = this.ARCs[id__name].id;
-        localStorage.MassIds = this.getIdsByFilterList().join(',')
+        if(this.getIdsByFilterList().join(',') != ''){
+          localStorage.MassIds = this.getIdsByFilterList().join(',')
+        }
        
        window.location.href = '/static/edit_adc/'
       },
@@ -474,26 +475,24 @@ new Vue({
                           for(var i=0; i<PredMass.length; i++){
                             PredMass[i].arch=Mass_archs[PredMass[i].arch];
                             PredMass[i].interface=Mass_interf[PredMass[i].interface];
-                            console.log('test');
-                          
                           }
-
-                             this.ARCs =  PredMass;
+                          this.ARCs =  PredMass;
                           this.new_ADCs = PredNewMass;
-                          if(c_mane != undefined){
-                              var arr = this.ARCs;
-                           this.ARCs={}
-                           var k=0
-                           arr.forEach(el =>{
 
-                            for (var i=0;i<localStorage.MassIds.slice(",").length; i++){
-                              if(el.id == localStorage.MassIds.slice(",")[i])
-                              this.ARCs[i]=el
+                          if(localStorage.MassIds != undefined){
+                            if(c_mane != undefined){
+                              var arr = this.ARCs;
+                              this.ARCs={}
+                              var k=0
+                              arr.forEach(el =>{
+                                for (var i=0;i<localStorage.MassIds.slice(",").length; i++){
+                                  if(el.id == localStorage.MassIds.slice(",")[i])
+                                  this.ARCs[i]=el
+                                }
+                                k++;
+                              })
+
                             }
-                            k++;
-                           })
-                            console.log(typeof(this.ARCs));
-                            
                           }
                         })
                     })
