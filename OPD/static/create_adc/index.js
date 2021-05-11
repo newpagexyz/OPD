@@ -77,7 +77,12 @@ new Vue({
                 }).then(res => res.json())
                 .then(resJson => {
                   if(resJson != false){
+                    localStorage.MassIds = '';
                     alert('АЦП добавлен.')
+                     window.location.href = `/static/main/`
+                  }
+                  else{
+                    alert('Проверьте введенные данные.')
                   }
                   
                   console.log(resJson);

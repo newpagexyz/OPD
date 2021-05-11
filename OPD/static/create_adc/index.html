@@ -69,7 +69,7 @@
             
                
             <div class="toolbox__item">
-               <a class="toolbox__lable" onclick="window.history.back()">← назад</a>
+               <a class="toolbox__lable" onclick="window.location.href = `/static/main/`">← назад</a>
             </div>
             <div class="toolbox__item">
                <div class="panel__title" >Добавление модели</div>
@@ -261,7 +261,7 @@
               </div>
              </div>
              <div class="panel_footer">
-                <btn_dark-blue text='Отмена' _submit=true _tabindex=5  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
+                <btn_dark-blue text='Отмена' _submit=true _tabindex=5  onclick="window.location.href = `/static/main/`" v-on:keyup.enter="onEnter"></btn_dark-blue>
                             
                 <btn_blues text='Сохранить' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
                        

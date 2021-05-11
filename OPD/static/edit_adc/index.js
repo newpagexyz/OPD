@@ -146,6 +146,8 @@ new Vue({
                   }
                 }
               }
+              alert('Изменения внесены.')
+               window.location.href = `/static/main/`
       }
      },
 });

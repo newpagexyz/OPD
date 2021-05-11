@@ -288,6 +288,7 @@ new Vue({
       },
       //сброс фильтров
       FilterReload: function(){
+        localStorage.MassIds='';
         this.GetADCs();
         this.paramsSelect={
         interface:{
@@ -494,19 +495,23 @@ new Vue({
                           this.ARCs =  PredMass;
                           this.new_ADCs = PredNewMass;
 
-                          if(localStorage.MassIds != undefined){
+                          if(localStorage.MassIds != undefined & localStorage.MassIds != '' ){
+
                             if(c_mane != undefined){
                               var arr = this.ARCs;
                               this.ARCs={}
                               var k=0
                               arr.forEach(el =>{
-                                for (var i=0;i<localStorage.MassIds.slice(",").length; i++){
-                                  if(el.id == localStorage.MassIds.slice(",")[i])
-                                  this.ARCs[i]=el
+                                for (var i=0;i<localStorage.MassIds.split(",").length; i++){
+                                  if(el.id == localStorage.MassIds.split(",")[i])
+                                  {
+
+                                    this.ARCs[i]=el
+                                  }
+
                                 }
                                 k++;
                               })
-
                             }
                           }
                         })
