@@ -118,9 +118,9 @@
                 $query='
                     INSERT INTO `ADC` SET
                     `model`             ="'.$this->mysqli->real_escape_string($model).'",
-                    `description`       ="'.floatval($description).'",
+                    `description`       ="'.$this->mysqli->real_escape_string($description).'",
                     `resolution`        ="'.floatval($resolution).'",
-                    `channels`          ="'.floatval($channels).'",
+                    `channels`          ="'.intval($channels).'",
                     `max_sample_rate`   ="'.floatval($max_sample_rate).'",
                     `interface`         ="'.floatval($interface).'",
                     `arch`              ="'.floatval($arch).'",
@@ -170,7 +170,6 @@
                     `FoMW`              ="'.floatval($FoMW).'",
                     `max_DNL`           ="'.floatval($max_DNL).'";
                     ';
-
                 $ret=$this->mysqli->query($query);
                 return $this->mysqli->insert_id;
         }
@@ -344,13 +343,14 @@
                     $query=" WHERE `id`> ".intval($_GET['lid'])." ";    
                 }
                 $query=$query." LIMIT 100 ;";
-                $ret=$this->mysqli->query($query);
-                if($ret->num_rows>0){
-                    $arr=array();
-                    while($ar=$ret->fetch_assoc()){
-                        array_push($arr,$ar);
+                if($ret=$this->mysqli->query($query)){
+                    if($ret->num_rows>0){
+                        $arr=array();
+                        while($ar=$ret->fetch_assoc()){
+                            array_push($arr,$ar);
+                        }
+                        return $arr;
                     }
-                    return $arr;
                 }
             }
             return false;
@@ -397,7 +397,7 @@
                             }
                         }
                         if(isset($_FILES['cxeme'])){
-                            if($this->check_img($_FILES['tech']['name'])){
+                            if($this->check_img($_FILES['cxeme']['name'])){
                                 $token=self::gen_token().".".(pathinfo($_FILES['cxeme']['name']))['extension'];
                                 while(file_exists($_SERVER['DOCUMENT_ROOT'].'/files/cxeme/'.$token)){
                                     $token=self::gen_token().".".(pathinfo($_FILES['cxeme']['name']))['extension'];
@@ -420,7 +420,6 @@
                         }
                     }
                     if(
-                    $key=="description" OR
                     $key=="resolution" OR
                     $key=="channels" OR
                     $key=="max_sample_rate" OR
@@ -435,6 +434,9 @@
                     $key=="FoMW" OR
                     $key=="max_DNL"){
                         $query=$query.' `'.$key.'`              ="'.floatval($val).'"';   
+                    }
+                    elseif($key=="description"){
+                        $query=$query.' `description`              ="'.$this->mysqli->real_escape_string($val).'"';   
                     }
                     elseif($key=="model"){
                         $query=$query.' `model`              ="'.$this->mysqli->real_escape_string($val).'"';   
@@ -560,19 +562,21 @@
             return false;
         }
         protected function check_doc($file){
-            $file=(pathinfo($file))['extension'];
-            foreach (self::DOC_FORMATS as  $key => $value) {
-                if($value==$file){
-                    return true;
+            if($file=(pathinfo($file))){
+                foreach (self::DOC_FORMATS as  $key => $value) {
+                    if($value==$file['extension']){
+                        return true;
+                    }
                 }
             }
             return false;
         }
         protected function check_img($file){
-            $file=(pathinfo($file))['extension'];
-            foreach (self::IMAGE_FORMATS as  $key => $value) {
-                if($value==$file){
-                    return true;
+            if($file=(pathinfo($file))){
+                foreach (self::IMAGE_FORMATS as  $key => $value) {
+                    if($value==$file['extension']){
+                        return true;
+                    }
                 }
             }
             return false;
