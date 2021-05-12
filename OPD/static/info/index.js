@@ -106,7 +106,7 @@ new Vue({
                     max_DNL: '+/-ЛСН',
                     max_INL: '+/-ЛСБ',
                     max_sample_rate: 'МСПС',
-                    power: 'мВ',
+                    power: 'мВт',
                     resolution: 'бит',
                     temperature: 'С',
                     interface: ' ',
