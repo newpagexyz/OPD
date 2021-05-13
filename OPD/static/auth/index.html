@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Авторизация</title>
 </head>
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -34,7 +34,6 @@
         <div class="auth-card ">
             <div class="card card__container">
                 <div class="card__logo">
-                    
                     <div class="card__title" >Авторизация</div>
                 </div>
                     <form action="" method="get" class="card__main" id="login-form">
@@ -43,22 +42,17 @@
                         Для редактирования и добавления данных авторизируйтесь как Администратор.
                       </div>
                       </div>
-                      
                         <div class="card__inputs">
                             <input__text1 _type="email"  required
                             _placeholder="Логин"  _name="email" _tabindex="1" v-model="email" autocomplete = "email"></input__text1>
                             <input__text1 _type="password" 
                                 _placeholder="Пароль" required _name="password" _tabindex="2" v-model="password" autocomplete = "current-password" v-on:keyup.enter="onEnter" v-on:keyup.enter="onEnterClick"></input__text1>
-                           
                         </div>
                         <div class="card__futter">
                             <btn_dark-blue text='Назад' a =true _tabindex=3  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
-                            
                             <btn_blues text='Вход' _submit=true _tabindex=4  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
                         </div>
-                        
                     </form>
-           
                 <div class="card__bottom"></div>
             </div>
     </div>

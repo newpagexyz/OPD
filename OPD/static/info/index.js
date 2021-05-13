@@ -20,16 +20,12 @@ new Vue({
          // window.location.href = `/static/auth/`
         }
         this.MassIds1=localStorage.MassIds.split(',')
-        console.log(this.MassIds);
         this.ADC_Id=localStorage.id;
-         console.log(localStorage.id);
         this.GetInfoADC(localStorage.id)
      },
      methods: {
       //перейти к новой АДЦ
       OpenACD:function(value,btn){
-
-        console.log(value + ' value');
         this.btns= this.MassIds1.length >1? [true,true] : [false,false]
         var IndexNow = this.MassIds1.indexOf(localStorage.id);
         if ((IndexNow == this.MassIds1.length-1 && btn == 1) || (IndexNow == 0 && btn == 0)){
@@ -41,9 +37,7 @@ new Vue({
           }
         }
         else{
-            console.log(IndexNow);
           var IndexNew = parseInt(IndexNow) + parseInt(value);
-           console.log(IndexNew);
           if(IndexNew <= this.MassIds1.length-1){
             if( IndexNew >= 0 ){
                var NewId = this.MassIds1[IndexNew];
@@ -68,7 +62,6 @@ new Vue({
       },
       //открыть документацию
       OpenTech: function(id_name){
-        console.log();
         if(this.ADC_this.tech != null){
          window.location.href = `https://adc.newpage.xyz/file/tech/`+this.ADC_this.tech
         }
@@ -113,7 +106,6 @@ new Vue({
                     arch: ' ',
                   }
                    this.ADC_this.ed = this.Ed
-                  console.log(resJson);
                       fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
                     .then(resJson2 => {
                       this.ADC_this.arch=resJson2[this.ADC_this.arch]

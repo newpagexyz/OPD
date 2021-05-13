@@ -6,7 +6,8 @@
     <title>ОПД</title>
 </head>
   <link rel="stylesheet" type="text/css" href="/static/style/header.css">
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -29,9 +30,6 @@
  </div>
    <v-app class="wrapper" id="app">
       <header1></header1>
-      
-      
-      
          <main>
           <a class="navBtn"  @click="toTop">
          <div class="navBtn__ico">&#8657;</div>
@@ -43,15 +41,10 @@
                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
               </div>
               <div class="toolbox__box">
-                  <!--<div class="toolbox__item">
-                   <a class="toolbox__lable" @click="hide_filter == true ? false: true">Скрыть фильтр</a>
-                </div>-->
-              
                 <div class="toolbox__item">
                     <a class="toolbox__lable" href="/static/create_adc/" v-if="token!= '' & token != 'empty' & token != undefined">Добавить АЦП</a>
                 </div>
               </div>
-              
          </div>
          <div class="content">
             <div class="filterbar" v-if='hide_filter'>
@@ -65,7 +58,6 @@
                         <v-checkbox
                             :input-value="item.check"
                             v-model='item.check'
-
                             value
                           ></v-checkbox>
                         <div class="filterbar__title">{{item.title}}</div>
@@ -143,10 +135,7 @@
               </div>
             </div>
             <div class="list">
-               <header>
-                <!--  <div class="list__lable">Страницы: </div>
-                  <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
-               --></header>
+               <header></header>
                <div class="list__content">
                   <div class="list__error" v-if="ARCs == ''">Ничего не найдено</div>
                   <div class="list__item" v-for="item,id in ARCs">
@@ -186,8 +175,6 @@
             </div>
        </div>
          </main>
-      
-
    </v-app>
 </body>
   <link rel="stylesheet" type="text/css" href="/static/style/header.css">

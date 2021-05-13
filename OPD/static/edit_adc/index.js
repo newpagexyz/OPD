@@ -25,7 +25,6 @@ new Vue({
           window.location.href = `/static/auth/`
         }
         this.ADC_Id=localStorage.id;
-         console.log(localStorage.id);
         this.GetInfoADC(localStorage.id)
         
      },
@@ -42,7 +41,6 @@ new Vue({
           fetch('https://adc.newpage.xyz/api/show_adc/?id='+id_name).then(res => res.json())
           .then(resJson => {
             this.ADC_this =  resJson;
-            console.log(resJson);
                 fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
               .then(resJson2 => {
                 this.Arches=resJson2
@@ -74,7 +72,6 @@ new Vue({
       },
       //ввод файлов
       onAddfileImg:function(){
-        console.log('test');
         this.isChangeImg = true;
       },
       onAddfileCxeme:function(){
@@ -88,27 +85,13 @@ new Vue({
       },
       handleSubmit: function(){
          var form = new FormData(document.getElementById('adc-form'));
-              /*console.log(form.get('model'));
-
-              console.log(form.get('arch'));
-              console.log(form.get('interface'));
-              console.log(form.get('image'));
-              console.log(form.get('cxeme'));
-              console.log(form.get('tech'));
-              console.log(form.get('description'));
-              console.log(form.get('resolution'));
-              console.log(form.get('resolution'));*/
-              
-          
               for (el in this.ADC_this){
-                console.log(el);
                 if(el != 'image'& el != 'cxeme' & el != 'tech'){
                   var val =( el == 'arch')? this.getKeyByValue(this.Arches,form.get('arch')) : (el == 'interface')? this.getKeyByValue(this.Interfaces,form.get('interface')) : form.get(el);
                   
                   fetch('https://adc.newpage.xyz/api/edit_adc/?session='+this.session+'&token='+this.token+'&key='+el+'&val='+val+'&id='+this.ADC_this.id, {
                     }).then(res => res.json())
                     .then(resJson => {
-                      console.log(resJson);
                     })
                 }else{
                   if(this.isChangeImg){
@@ -119,7 +102,6 @@ new Vue({
                     body: Vform
                     }).then(res => res.json())
                     .then(resJson => {
-                      console.log(resJson);
                     })
                   }
                   if(this.isChangeCxeme){
@@ -130,7 +112,6 @@ new Vue({
                     body: Vform
                     }).then(res => res.json())
                     .then(resJson => {
-                      console.log(resJson);
                     })
                   }
                   if(this.isChangeTech){
@@ -141,7 +122,6 @@ new Vue({
                     body: Vform
                     }).then(res => res.json())
                     .then(resJson => {
-                      console.log(resJson);
                     })
                   }
                 }

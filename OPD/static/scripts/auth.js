@@ -40,7 +40,6 @@ new Vue({
          //send form
           fetch('https://adc.newpage.xyz/api/auth?'+'email='+form.get('email')+'&'+'password='+form.get('password')).then(res => res.json())
                 .then(resJson => {
-                  console.log(resJson)
                   this.answer =  resJson;
                    if (this.answer.length == 0){
                      alert('server bugs... mb');
@@ -65,7 +64,6 @@ new Vue({
                 })
       },
       onEnter: function() {
-        console.log('test');
       },
       EventForgotPassword: function(c_nme){
         const formBody = new FormData();

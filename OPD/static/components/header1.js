@@ -28,8 +28,6 @@ Vue.component('header1', {
         else{
          this.isAuth=true;
         }
-        console.log(this.isAuth);
-        
      },
      methods: {
       Exit:function(c_name){
@@ -37,7 +35,6 @@ Vue.component('header1', {
         document.cookie = "token="+'empty'+"; path=/; ";
         document.cookie = "session="+'empty'+"; path=/; ";
         window.location.href = `/static/auth/`
-        console.log('test');
       },
       ///
       //работа с куки

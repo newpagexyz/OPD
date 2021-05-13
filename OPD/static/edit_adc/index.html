@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>ОПД</title>
 </head>
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -28,7 +29,6 @@
  </div>
    <v-app class="wrapper" id="app">
      <header1></header1>
-      
       <main>
          <v-dialog v-model="dialogInterface" max-width="27vw"  >
           <v-card class='dialog' >
@@ -65,15 +65,12 @@
           </v-card>
         </v-dialog>
         <div class="toolbox">
-            
-               
             <div class="toolbox__item">
                <a class="toolbox__lable"  onclick="window.location.href = `/static/main/`" >← назад</a>
             </div>
             <div class="toolbox__item">
                <div class="panel__title" >Редактирование модели</div>
             </div>
-           
          </div>
          <div class="content">
            <form method="POST" class="panel" id="adc-form">
@@ -139,7 +136,6 @@
                             tabindex=1
                             @change='onAddfileTech()'
                             name='tech'
-                            
                           ></v-file-input>  
                         </div>
                         <div class="panel__item item_dop" >
@@ -148,7 +144,6 @@
                             <textarea name="description"
                             :value="ADC_this.description"
                              id="" cols="50" rows="10" class="panel__text">
-                              
                             </textarea>
                         </div>
                         
@@ -263,16 +258,11 @@
              </div>
              <div class="panel_footer">
                 <btn_dark-blue text='Отмена' _submit=true _tabindex=5 onclick="window.location.href = `/static/main/`"  v-on:keyup.enter="onEnter"></btn_dark-blue>
-                            
                 <btn_blues text='Сохранить' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
-                       
              </div>
            </form>
          </div>
-
       </main>
-      
-
    </v-app>
 </body>
  

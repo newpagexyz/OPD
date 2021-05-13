@@ -142,7 +142,6 @@ new Vue({
         if (this.token == undefined || this.token == "empty") {
          // window.location.href = `/static/auth/`
         }
-        console.log(localStorage.MassIds);
         this.GetADCs('start')
         //скрытие всех полей
         for(Num in this.params){
@@ -175,14 +174,11 @@ new Vue({
       this.$vuetify.goTo(0)
     },
     Search: function(){
-      console.log(this.search_txt);
-
       fetch('https://adc.newpage.xyz/api/search_adc/?model='+this.search_txt).then(res => res.json())
                 .then(resJson => {
                   var PredMass, PredNewMass;
                   PredMass =  resJson;
                   PredNewMass = resJson;
-                  console.log(resJson);
                   var Mass_archs=[]
                   var Mass_interf=[]
 
@@ -214,7 +210,6 @@ new Vue({
 
       //фильтр
       FilterSearch:function(id){
-        console.log(id);
         var str = '';
         var str2= '';
         var Arr =this.params;
@@ -245,10 +240,8 @@ new Vue({
           }
         }
         
-        console.log(str2);
         str=str2+str;
         str=str.substr(0, str.length-1)
-        console.log('str'+str);
         if(str == ''){
           alert('Параметры для фильтрации не выбранны.')
           this.GetADCs()
@@ -261,7 +254,6 @@ new Vue({
                     this.new_ADCs =  resJson;
                      var PredMass, PredNewMass;
                     
-                    console.log(resJson);
                     if(resJson != false){
                    PredMass = this.new_ADCs
                     fetch('https://adc.newpage.xyz/api/archs/').then(res => res.json())
@@ -424,7 +416,6 @@ new Vue({
         for ( var i=0; i<this.ARCs.length; i++){
           Mass[i]=this.ARCs[i].id;
         }
-        console.log(Mass);
         return Mass
       },
       //доп кнопки
@@ -460,10 +451,7 @@ new Vue({
         })
       },*/
       Hiden: function(Num,text,par){
-        console.log( par[Num].hide);
         par[Num].hide =  par[Num].hide == 1? 0: 1;
-        console.log( par[Num].hide);
-        console.log(text+Num);
         var elem = document.getElementById(text+Num);
         if(par[Num].hide == 0){
           elem.style.display = 'none'
@@ -478,7 +466,6 @@ new Vue({
                    var PredMass, PredNewMass;
                   PredMass =  resJson;
                   PredNewMass = resJson;
-                  console.log(resJson);
                   var Mass_archs=[]
                   var Mass_interf=[]
 
