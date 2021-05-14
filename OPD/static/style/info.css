@@ -129,6 +129,18 @@ main {
 .v-data-table > .v-data-table__wrapper > table > tbody > tr > td, .v-data-table > .v-data-table__wrapper > table > tbody > tr > th, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > td, .v-data-table > .v-data-table__wrapper > table > tfoot > tr > th, .v-data-table > .v-data-table__wrapper > table > thead > tr > td, .v-data-table > .v-data-table__wrapper > table > thead > tr > th {
   padding: 0 1vw; }
 
+.v-window-item--active {
+  overflow: auto; }
+  .v-window-item--active::-webkit-scrollbar {
+    background-color: rgba(0, 0, 0, 0.05);
+    width: 10px;
+    height: 10px;
+    cursor: pointer; }
+  .v-window-item--active::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: #0f1e81;
+    border-radius: 30px; }
+
 .panel__slide {
   height: 60vh;
   -webkit-box-flex: 1;

@@ -12,6 +12,7 @@ new Vue({
       dialog: false,
       dialog2: false,
       forgotEmail: '',
+      answer: '',
     },
     mounted() {
       this.token=this.getCookie('token')
@@ -35,15 +36,12 @@ new Vue({
      alert('Enter was pressed');
     },
       handleSubmit() {
-         this.form = new FormData(document.getElementById('login-form'));
+         var form = new FormData(document.getElementById('login-form'));
          //send form
-        /*fetch('https://tm.newpage.xyz/api/auth/', {
-                    method: 'POST',
-                    body: this.form
-                }).then(res => res.json())
+          fetch('https://adc.newpage.xyz/api/auth?'+'email='+form.get('email')+'&'+'password='+form.get('password')).then(res => res.json())
                 .then(resJson => {
-                  this.answer = resJson
-                  if (this.answer.length == 0){
+                  this.answer =  resJson;
+                   if (this.answer.length == 0){
                      alert('server bugs... mb');
                   }
                   else{
@@ -56,17 +54,16 @@ new Vue({
                         document.cookie = "session="+this.answer.session+"; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT; ";
                         if (this.getCookie('token') == this.answer.token & this.getCookie('session') == this.answer.session){
                           //пока фронтенд жифет отдельно
-                           window.location.href = `https://test2.newpage.xyz/static/show_users/`
+                          window.location.href = `/static/main/`
                            // пири соединение с беком:
                            //window.location.href = `/static/show_users/`
                           //
                         }
                      }
                   }
-                })*/
+                })
       },
       onEnter: function() {
-        console.log('test');
       },
       EventForgotPassword: function(c_nme){
         const formBody = new FormData();

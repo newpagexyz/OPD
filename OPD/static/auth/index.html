@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Авторизация</title>
 </head>
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -30,62 +30,29 @@
  </div>
     <div id="app">
  <v-app id="inspire" >
-  <header class="header">
-         <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
-         <div class="header__items">
-            <div class="header__lable"><a href="/info">Список</a></div>
-            <div class="header__lable"><a href="#">Авторизация</a></div>
-         </div>
-      </header>
+<header1></header1>
         <div class="auth-card ">
             <div class="card card__container">
                 <div class="card__logo">
-                    
                     <div class="card__title" >Авторизация</div>
                 </div>
-                    <form action="" method="post" class="card__main" id="login-form">
+                    <form action="" method="get" class="card__main" id="login-form">
                       <div class="card__block">
                         <div class="card__subtitle">
                         Для редактирования и добавления данных авторизируйтесь как Администратор.
                       </div>
                       </div>
-                      
                         <div class="card__inputs">
                             <input__text1 _type="email"  required
                             _placeholder="Логин"  _name="email" _tabindex="1" v-model="email" autocomplete = "email"></input__text1>
                             <input__text1 _type="password" 
                                 _placeholder="Пароль" required _name="password" _tabindex="2" v-model="password" autocomplete = "current-password" v-on:keyup.enter="onEnter" v-on:keyup.enter="onEnterClick"></input__text1>
-                           
-                            <v-dialog v-model="dialog" max-width="480px">
-                              <v-card clas='purple darken-2 text-center'>
-                                <v-card-title class="headline">Введите почту. Будет выслано письмо для восстановления пароля.</v-card-title>
-                                <v-card-actions>
-                                  <v-spacer></v-spacer>
-                                  <input__text1 _type="email"  required
-                                    _placeholder="Enter Email"  _name="email" _tabindex="1"
-                                     v-model="forgotEmail" ></input__text1>
-                                     <v-spacer></v-spacer>
-                                     <v-spacer></v-spacer>
-                                     <v-card-actions>
-                                     <btn_blues text='Восстановить' _submit=true 
-                                      @click='EventForgotPassword'_tabindex=5 ></btn_blues>
-                                  <v-spacer></v-spacer>
-                                </v-card-actions>
-                              </v-card>
-                            </v-dialog>
                         </div>
                         <div class="card__futter">
-                            <btn_dark-blue text='Назад' _submit=true _tabindex=5  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
-                            <v-dialog v-model="dialog2" max-width="500px">
-                              <v-card clas='purple darken-2 text-center'>
-                                <v-card-title class="headline">Для регистрации отправьте заявку на почту ВШТМ.</v-card-title>
-                              </v-card>
-                            </v-dialog>
-                            <btn_blues text='Вход' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="onEnter"></btn_blues>
+                            <btn_dark-blue text='Назад' a =true _tabindex=3  @click="window.history.back()" onclick="window.history.back()" v-on:keyup.enter="onEnter"></btn_dark-blue>
+                            <btn_blues text='Вход' _submit=true _tabindex=4  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
                         </div>
-                        
                     </form>
-           
                 <div class="card__bottom"></div>
             </div>
     </div>
@@ -93,12 +60,12 @@
     </div>
 </body>
   <link rel="stylesheet" type="text/css" href="/static/style/header.css">
-
+<link rel="stylesheet" type="text/css" href="/static/style/header.css">
 <script src="/static/components/btns/btn_standart.js"></script>
 <script src="/static/components/btns/btn_blue.js"></script>
 <script src="/static/components/btns/btn_dark-blue.js"></script>
 <script src="/static/components/input_texts/input__text1.js"></script>
-
+<script src="/static/components/header1.js"></script>
 <script src='https://jeromeetienne.github.io/threex.terrain/examples/vendor/three.js/build/three-min.js'></script>
 <script src='https://jeromeetienne.github.io/threex.terrain/examples/vendor/three.js/examples/js/SimplexNoise.js'></script>
 <script src='https://jeromeetienne.github.io/threex.terrain/threex.terrain.js'></script>

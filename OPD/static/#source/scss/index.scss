@@ -1,7 +1,7 @@
 .navBtn {
    position: fixed;
    bottom: 3vh;
-   right: 3vw;
+   right: 1.5vw;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -20,7 +20,9 @@
    font-size: 2.5vh;
 
 }
-
+.list__error{
+   font-size: 2.6vh;
+}
 
 main{
    flex: 1 1 auto;
@@ -34,10 +36,17 @@ main{
    display: flex;
    
    align-items: center;
-   justify-content: flex-end;
+  justify-content: space-between;
    gap: 3.1vw;
    border-bottom: 0.1vh solid #000;
    padding-bottom: 1.2vh;
+   padding-right: 8vw;
+}
+.toolbox__box{
+   flex: 0 0 20vw;
+   display: flex;
+   justify-content: flex-end;
+   gap: 4vw;
 }
 .toolbox__item {
    color: #534999;
@@ -49,7 +58,7 @@ main{
 }
 .toolbox__search {
    position: relative;
-   flex: 1 1 auto;
+   flex: 0 1 50vw;
    //max-width: 40vw;
    border: 0.3vh solid #000;
    height: 7vh;
@@ -87,7 +96,7 @@ main{
    width: 100%;
 }
 .filterbar {
-   flex: 0 0 16vw;
+   flex: 0 0 21vw;
    & header{
       display: flex;
       justify-content: flex-start;
@@ -98,7 +107,7 @@ main{
       border-bottom: 0.4vh solid #0b2765;
       gap: 1.6vw;
       & a{
-         font-size: 1.7vh;
+         font-size: 2vh;
       }
 
    }
@@ -156,7 +165,7 @@ main{
    }
 //
 .filterbar__title {
-      font-size: 2vh;
+      font-size: 1.9vh;
       color: #000
 }
 .filterbar__arrow {
@@ -171,6 +180,18 @@ main{
    height: 19.4vh;
    display: flex;
    flex-direction: column;
+   overflow: auto;
+     &::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0.05);
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+   }
+   &::-webkit-scrollbar-thumb{
+cursor: pointer;
+    background-color: #0f1e81;
+  border-radius: 30px;
+   }
 }
 //полузунок в фильтрах
 .v-input__append-outer, .v-input__prepend-outer{
@@ -199,7 +220,7 @@ left: 1.2vw;
 }
    //размеры ползунка
    .v-input{
-      font-size: 2vh;
+      font-size: 1.5vh;
       flex: 0 0 10vh;
    }
    .v-application--is-ltr .v-input__prepend-outer, .v-application--is-rtl .v-input__append-outer{
@@ -248,11 +269,11 @@ left: 1.2vw;
 
 .filterbar__output {
    background-color: #cccccc;
-   margin: 0 auto;
-   margin-top: 1.2vh;
+   margin: 1.5vh auto;
 
    width: 8.7vw;
-   height: 6vh;
+   flex: 0 0 6vh;
+  
    display: flex;
    justify-content: center;
    align-items: center;
@@ -284,7 +305,7 @@ left: 1.2vw;
    }
 }
 .list__content {
-   margin-left: 1.7vw;
+   margin-right: 2vw;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -342,12 +363,37 @@ left: 1.2vw;
    justify-content: space-between;
 }
 .list__info {
+   position: relative;
    cursor: pointer;
    display: flex;
    justify-content: center;
    .list__lable{
       font-size: 1.8vh;
       color: #5c5c5c;
+   }
+}
+.item__edit {
+   position: absolute;
+   left: -4vw;
+   top: -0.4vh;
+
+   width: 3vh;
+   height: 3vh;
+   & img{
+      width: 100%;
+      height: 100%;
+   }
+}
+.item__del {
+   position: absolute;
+    left: -2vw;
+   top: -0.4vh;
+
+   width: 3vh;
+   height: 3vh;
+    & img{
+      width: 100%;
+      height: 100%;
    }
 }
 .list__pdf {

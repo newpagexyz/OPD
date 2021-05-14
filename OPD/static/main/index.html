@@ -6,7 +6,8 @@
     <title>ОПД</title>
 </head>
   <link rel="stylesheet" type="text/css" href="/static/style/header.css">
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -28,155 +29,158 @@
   </div>
  </div>
    <v-app class="wrapper" id="app">
-      <a class="navBtn">
+      <header1></header1>
+         <main>
+          <a class="navBtn"  @click="toTop">
          <div class="navBtn__ico">&#8657;</div>
          <div class="navBtn__text">Вверх</div>
-      </a>
-      <header class="header">
-         <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
-         <div class="header__items">
-            <div class="header__lable"><a href="/info">Список</a></div>
-            <div class="header__lable"><a href="/auth/">Авторизация</a></div>
-         </div>
-      </header>
-      
-         <main>
-         <div class="toolbox">
-            
-               <div class="toolbox__search">
-                  <input type="text" name="" placeholder="Поиск">
-                  <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
-               </div>
-            
-            <div class="toolbox__item">
-               <a class="toolbox__lable">Скрыть фильтр</a>
-            </div>
-            <div class="toolbox__item">
-               <a class="toolbox__lable">Сортировать по: &nbsp;</a>
-               <a class="toolbox__lable"> Названию </a>  
-              <!-- <v-seclect>
-                  <option>название</option>
-                  <option>название</option>
-                  <option>название</option>
-               </v-seclect> -->
-            </div>
-            <div class="toolbox__item">
-                <a class="toolbox__lable">Сохранить в Excel</a>
-            </div>
+        </a>
+            <div class="toolbox" name="top">
+              <div class="toolbox__search">
+                 <input type="text" name="" v-model='search_txt'  placeholder="Поиск"  @keydown="Search">
+                 <div class="toolbox_searchIco"><img src="/static/img/loop.png" alt=""></div>
+              </div>
+              <div class="toolbox__box">
+                <div class="toolbox__item">
+                    <a class="toolbox__lable" href="/static/create_adc/" v-if="token!= '' & token != 'empty' & token != undefined">Добавить АЦП</a>
+                </div>
+              </div>
          </div>
          <div class="content">
-            <div class="filterbar">
+            <div class="filterbar" v-if='hide_filter'>
                <header>
-                  <a class="filterbar__lable">Сбросить фильтр</a>
-                  <a class="filterbar__lable">Применть</a>
+                  <a class="filterbar__lable" @click='FilterReload()'>Сбросить фильтр</a>
+                  <a class="filterbar__lable" @click='FilterSearch(0)'>Применить</a>
                </header>
                <div class="filterbar__content">
-                  <div class="filterbar__item" v-for='(item,id) in hides'>
+                  <div class="filterbar__item" v-for='(item,id) in params'>
                      <div class="filterbar__header">
                         <v-checkbox
-                            input-value="true"
+                            :input-value="item.check"
+                            v-model='item.check'
                             value
                           ></v-checkbox>
-                        <div class="filterbar__title">Разрешение (bits)</div>
-                        <div class="filterbar__arrow" @click="Hiden(id)">&#9660;</div>
+                        <div class="filterbar__title">{{item.title}}</div>
+                        <div class="filterbar__arrow"  @click="Hiden(item.name,'filter1',params)">&#9660;</div>
                      </div>
-                     <div class="filterbar__body" v-if='item & id == (hides.length-1)'>
-                     <template>
-                        <v-container fluid>
-                          <v-checkbox
-                            v-model="selected"
-                            label="John"
-                            value="John"
-                          ></v-checkbox>
-                          <v-checkbox
-                            v-model="selected"
-                            label="Jacob"
-                            value="Jacob"
-                          ></v-checkbox>
-                        </v-container>
-                      </template>
-                        <div class="filterbar__output">
-                           <div class="filterbar__count">94 шт</div>
-                        </div>
-                     </div>
-                     <div class="filterbar__body" v-if='item & id != (hides.length-1)'>
-                     <template>
-                               <v-range-slider
-                                 v-model="range"
-                                 :max="max"
-                                 :min="min"
-                                 hide-details
-                                 class="align-center"
-                               >
-                                 <template v-slot:prepend>
-                                    <div class="filter_bound upper">>></div> 
-                                   <v-text-field
-                                     :value="range[0]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(range, 0, $event)"
-                                   ></v-text-field>
-                                 </template>
-                                 <template v-slot:append>
-                                    <div class="filter_bound bottom "><<</div>      
-                                   <v-text-field
-                                     :value="range[1]"
-                                     class="mt-0 pt-0"
-                                     hide-details
-                                     single-line
-                                     type="number"
-                                     style="width: 3vw"
-                                     @change="$set(range, 1, $event)"
-                                   ></v-text-field>
-                                 </template>
-                               </v-range-slider>
-                     </template>
+                     <div class="filterbar__body" :id="'filter1'+item.name"> 
+                       <template>
+                                 <v-range-slider
+                                   v-model="item.range"
+                                   :max="item.max"
+                                   :min="item.min"
+                                   :step="item.name == 'channels'? 1 : item.name == 'resolution'? 0.1 : item.name == 'max_DNL'? 0.000001 :item.name == 'max_INL'? 0.0001 : item.name == 'analog_input'? 0.0001 : item.name == 'FoMW'? 0.0001 :0.01"
+                                   hide-details
+                                   class="align-center"
+                                   @change="FilterSearch(id)"
+                                 >
+                                   <template v-slot:prepend>
+                                      <div class="filter_bound upper">>></div> 
+                                     <v-text-field
+                                       :value="item.range[0]"
+                                       class="mt-0 pt-0"
+                                       hide-details
+                                       single-line
+                                       type="number"
+                                       style="width: 3vw"
+                                       @change="$set(item.range, 0, $event)"
+                                     ></v-text-field>
+                                   </template>
+                                   <template v-slot:append>
+                                      <div class="filter_bound bottom "><<</div>      
+                                     <v-text-field
+                                       :value="item.range[1]"
+                                       class="mt-0 pt-0"
+                                       hide-details
+                                       single-line
+                                       type="number"
+                                       style="width: 3vw"
+                                       @change="$set(item.range, 1, $event)"
+                                     ></v-text-field>
+                                   </template>
+                                 </v-range-slider>
+                       </template>
               
                         <div class="filterbar__output">
-                           <div class="filterbar__count">94 шт</div>
+                           <div class="filterbar__count">{{new_ADCs.length}}</div>
+                        </div>
+                     </div>
+                </div>
+                  <div class="filterbar__item" v-for='(item,num) in paramsSelect'>
+                     <div class="filterbar__header">
+                        <v-checkbox
+                            :input-value="item.check"
+                            v-model='item.check'
+                            value
+                          ></v-checkbox>
+                        <div class="filterbar__title">{{item.title}}</div>
+                        <div class="filterbar__arrow"  @click="Hiden(item.name, 'filter2',paramsSelect)">&#9660;</div>
+                     </div>
+                      <div class="filterbar__body":id="'filter2'+item.name">
+                       <template>
+                          <v-container fluid>
+                            <v-checkbox v-for="el,id in item.values"
+                              v-model="item.selected"
+                              :label="el"
+                              :value="id+1"
+                             @click="CheckOn(num)"
+                            ></v-checkbox>
+                          </v-container>
+                        </template>
+                        <div class="filterbar__output">
+                           <div class="filterbar__count">{{new_ADCs.length}}</div>
                         </div>
                      </div>
                   </div>
-               </div>
+              </div>
             </div>
             <div class="list">
-               <header>
-                  <div class="list__lable">Страницы: </div>
-                  <div class="list__nav"><u> Первая</u> ... <a>2</a> <a>3</a> <a>4</a> ... <u>Последняя</u></div>
-               </header>
+               <header></header>
                <div class="list__content">
-                  <div class="list__item" v-for="item in 3">
-                     <div class="list__img"><img :src="src+'/img/photo.jpg'" alt="img"></div>
+                  <div class="list__error" v-if="ARCs == ''">Ничего не найдено</div>
+                  <div class="list__item" v-for="item,id in ARCs">
+                     <div class="list__img" @click='GoToInfo(id)'>
+                      <img :src="src+'/img/photo.jpg'" alt="img" v-if="item.image == null">
+                      <img :src="'https://adc.newpage.xyz/file/image/'+item.image" alt="img" v-else>
+                    </div>
+                     
                      <div class="list__body">
-                        <div class="list__title">ADS8167</div>
-                        <div class="list__subtitle">Прецизионный</div>
-                        <div class="list__text">16-bit 500r-sb 8-ch FFKS c VREFF Vreef буфер прямого инфрерсей</div>
+                        <div class="list__title" @click='GoToInfo(id)'>{{item.model}}</div>
+                        <div class="list__subtitle">{{item.arch}}</div>
+                        <div class="list__text">{{item.interface}}, {{item.resolution}} - бит, {{item.channels}} - число входных каналов, {{item.max_sample_rate}} - МСПС, {{item.max_INL}} - (+/-ЛСБ)</div>
                      </div>
                      <!--Правая часть item-->
                      <div class="list__btns">
-                        <div class="list__info">
-                              <div class="list__lable">Техническое описание</div>
-                           <div class="list__pdf"><img :src="src+'/img/logo.png'" alt="pdf"></div>
+                        <div class="list__info" >
+                            <div class="item__edit" @click='GoToEdit(id)' v-if="token!= '' & token != 'empty' & token != undefined">
+                              <img src="/static/img/edit.png" alt="edit item">
+                            </div>
+                            <div class="item__del" @click='toDel(id)' v-if="token!= '' & token != 'empty' & token != undefined">
+                              <img src="/static/img/del.png" alt="dell item">
+                            </div>
+                              <div class="list__lable" v-if='item.tech != null'  @click="OpenTech(id)" >Техническое описание</div>
+                              <div class="list__lable" v-else >&#160;</div>
+                           <div class="list__pdf" @click="OpenTech(id)">
+                            <img :src="src+'/img/logo.png'" alt="pdf" v-if='item.tech != null'>
+                            <!-- Здесь может быть изображение грустного файлика(отсутствующего-->
+                          </div>
                         </div>
-                        <div class="list__btn">
-                           <a href="/info/">Подробнее > </a>
+                        <div class="list__btn" @click='GoToInfo(id)'>
+                           <a >Подробнее > </a>
                         </div>
                      </div>
                   </div>
+                  <div class="list__error" style="cursor: pointer; border: #000 0.1vh solid;" v-if="ARCs.length >=99" @click='AddNewArC(ARCs.length)'>загрузить еще</div>
                </div>
             </div>
-         </div>
+       </div>
          </main>
-      
-
    </v-app>
 </body>
   <link rel="stylesheet" type="text/css" href="/static/style/header.css">
 
  <link rel="stylesheet" type="text/css" href="/static/style/index.css">
+<script src="/static/components/header1.js"></script>
 
 <script type="text/javascript" src="/static/main/index.js"></script>
 

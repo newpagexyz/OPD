@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>ОПД</title>
 </head>
- <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
@@ -27,84 +28,56 @@
   </div>
  </div>
    <v-app class="wrapper" id="app">
-      <header class="header">
-         <div class="header__title">Открытая база аналого-цифровых преобразователей</div>
-         <div class="header__items">
-            <div class="header__lable"><a href="#">Список</a></div>
-            <div class="header__lable"><a href="/auth/">Авторизация</a></div>
-         </div>
-      </header>
+     <header1></header1>
       <main>
         <div class="toolbox">
-            
-               
             <div class="toolbox__item">
-               <a class="toolbox__lable" href="/">← Обратно к поиску</a>
+               <a class="toolbox__lable" href="/static/main/">← Обратно к поиску</a>
             </div>
-           
          </div>
          <div class="content">
            <div class="panel">
-            <div class="panel__title">Информация о <a class="panel__name"><b>ADS8167</b></a></div>
+            <div class="panel__title">Информация о <a class="panel__name"><b>{{ADC_this.model}}</b></a></div>
              <div class="panel__card">
               <div class="panel__slide">
                 <template>
                   <v-card>
                     <v-tabs
-                      color="blue accent-4"
-                      left
+                    color="blue accent-4"
+                    left
                     >
                       <v-tab>Параметры</v-tab>
                       <v-tab>Техническое описание</v-tab>
-                      <v-tab-item
-                        
-                        :key="1"
-                      >
+                      <v-tab-item :key="1">
                          <template>
                           <v-simple-table dense>
                             <template v-slot:default>
-
                               <tbody>
                                 <tr
-                                  v-for="item in desserts"
-                                  :key="item.name"
+                                  v-for="item,name in ADC_this"
+                                 v-if="name != 'image' & name != 'tech' & name != 'cxeme' & name != 'id' & name != 'model' & name != 'description' & name != 'names'  & name != 'ed'"
                                 >
-                                  <td>{{ item.name }}</td>
-                                  <td>{{ item.calories }}</td>
+                                  <td>{{ ADC_this.names[name]}}</td>
+                                  <td >{{ item }}</td>
+                                  <td>{{ ADC_this.ed[name]}}</td>
                                 </tr>
                               </tbody>
                             </template>
                           </v-simple-table>
                         </template>
-                      </v-tab-item>
-                      <v-tab-item
-                        
-                        :key="2"
-                      >
+                    </v-tab-item>
+                    <v-tab-item :key="2">
                          <div class="panel__text">
-                           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officirud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                           consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officiia deserunt mollit anim id est laborum.
-                           proident, suproident, sunt in culpa qui officia deserunt mollit anim id est laborum.nt in culpa qui officia deserunt mollit anim id est laborum.
-                           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                         </div>
+                          {{ADC_this.description}}
+                           </div>
                          <div class="panel__href">
                            ДОКУМЕНТАЦИЯ
                          </div>
-                         <div class="panel__file">
-                           <div class="panel__ico"> <img src="/static/img/logo.png" alt="pdf"></div>
+                         <div class="panel__file" @click="OpenTech()">
+                           <div class="panel__ico" >
+                            <img :src="src+'/img/logo.png'" alt="pdf" v-if='ADC_this.tech != null'>
+                            <!-- Здесь может быть изображение грустного файлика(отсутствующего-->
+                          </div>
                            <div class="panel__filename">Техническое описание</div>
                          </div>
                       </v-tab-item>
@@ -120,12 +93,10 @@
                       left
                     >
                       <v-tab>Архитектура</v-tab>
-                      <v-tab-item
-                        
-                        :key="1"
-                      >
+                      <v-tab-item :key="1">
                       <div class="panel__img">
-                         <img src="/static/img/lExwQBh4NLU.jpg">
+                          <img src="/static/img/lExwQBh4NLU.jpg" alt="cxeme" v-if="ADC_this.cxeme == null">
+                          <img :src="'https://adc.newpage.xyz/file/cxeme/'+ADC_this.cxeme" alt="cxeme" v-else>
                       </div>
                       </v-tab-item>
                     </v-tabs>
@@ -134,21 +105,18 @@
                </div>
              </div>
              <div class="panel_footer">
-               <div class="panel_before">← К предыдущему</div>
-               <div class="panel__after">К следующему →</div>
+               <div class="panel_before" v-if="btns[0]" @click='OpenACD(-1,0)'>← К предыдущему</div>
+               <div class="panel__after" v-if="btns[1]" @click='OpenACD(1,1)'>К следующему →</div>
              </div>
            </div>
          </div>
-
       </main>
-      
-
    </v-app>
 </body>
  <link rel="stylesheet" type="text/css" href="/static/style/info.css">
   <link rel="stylesheet" type="text/css" href="/static/style/header.css">
 
-
-<script type="text/javascript" src="static/info/index.js"></script>
+<script src="/static/components/header1.js"></script>
+<script type="text/javascript" src="/static/info/index.js"></script>
 
 </html>

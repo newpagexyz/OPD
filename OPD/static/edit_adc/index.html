@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ОПД</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="/static/style/null.css">
+ <link rel="shortcut icon" href="/static/img/logo.png">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+<body>
+  <div class="preloader">
+  <link rel="stylesheet" href="/static/style/preloader.css">
+  <script src="/static/components/preloader.js"></script>
+  <div class="preloader__row">
+    <div class="preloader__item"></div>
+    <div class="preloader__item"></div>
+  </div>
+ </div>
+   <v-app class="wrapper" id="app">
+     <header1></header1>
+      <main>
+         <v-dialog v-model="dialogInterface" max-width="27vw"  >
+          <v-card class='dialog' >
+            <v-card-title >Выберите тип интерфейса</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-container fluid>
+              <v-checkbox v-for="el,id in Interfaces"
+                 v-model="selected_interface"
+                  :label="el"
+                  :value="el"
+                 @click="dialogInterface = false"
+                ></v-checkbox>
+                </v-container>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogArch" max-width="27vw"  >
+          <v-card class='dialog' >
+            <v-card-title >Выберите тип архитектуры</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-container fluid>
+              <v-checkbox v-for="el,id in Arches"
+                 v-model="selected_arch"
+                  :label="el"
+                  :value="el"
+                 @click="dialogArch = false"
+                ></v-checkbox>
+                </v-container>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <div class="toolbox">
+            <div class="toolbox__item">
+               <a class="toolbox__lable"  onclick="window.location.href = `/static/main/`" >← назад</a>
+            </div>
+            <div class="toolbox__item">
+               <div class="panel__title" >Редактирование модели</div>
+            </div>
+         </div>
+         <div class="content">
+           <form method="POST" class="panel" id="adc-form">
+             <div class="panel__card">
+              <div class="panel__info">
+               <div class="panel__subtitle">Основная информация</div>
+                <div class="panel__body">
+                    <div class="panel__item" >
+                          <div class="panel__label">Название</div>
+                          <input__text1 _type="text" 
+                                        _placeholder="" required _name="model"
+                                         _tabindex="1" :_value="ADC_this.model"
+                                        autocomplete = "current-password"></input__text1>
+                        </div>
+                        <div class="panel__item" @click="dialogArch = true;selected_arch='';">
+                          <div class="panel__label">Архитектура</div>
+                          <input__text1 _type="text" _readonly="true"
+                                    readonly
+                                        _placeholder="" required _name="arch"
+                                         _tabindex="3" 
+                                         :_value="selected_arch"
+                                        autocomplete = "current-password"></input__text1>
+                        </div>
+                        <div class="panel__item"  @click="dialogInterface = true;selected_interface='';">
+                          <div class="panel__label">Тип интерфейса</div>
+                          <input__text1 _type="text" readonly
+                                        _readonly="true"
+                                        _placeholder="" required _name="interface"
+                                         _tabindex="4" 
+                                         :_value="selected_interface"
+                                        autocomplete = "current-password"></input__text1>
+                        </div>
+                        <div class="panel__item" >
+                          <div class="panel__label">Изображение</div>
+                         <v-file-input
+                              class="file_input"
+                            small-chips
+                            truncate-length="50"
+                            tabindex=1
+                            @change='onAddfileImg()'
+                            name='image'
+                            
+                          ></v-file-input>  
+                        </div>
+                        <div class="panel__item" >
+                          <div class="panel__label">Схема</div>
+                         <v-file-input
+                              class="file_input"
+                            small-chips
+                            truncate-length="50"
+                            tabindex=1
+                             @change='onAddfileCxeme()'
+                            name='cxeme'
+                            
+                          ></v-file-input>  
+                        </div>
+                         <div class="panel__item" >
+                          <div class="panel__label">Техническое описание</div>
+                          <v-file-input
+                              class="file_input"
+                            small-chips
+                            truncate-length="50"
+                            tabindex=1
+                            @change='onAddfileTech()'
+                            name='tech'
+                          ></v-file-input>  
+                        </div>
+                        <div class="panel__item item_dop" >
+                          <div class="panel__label">Краткое описание</div>
+                          
+                            <textarea name="description"
+                            :value="ADC_this.description"
+                             id="" cols="50" rows="10" class="panel__text">
+                            </textarea>
+                        </div>
+                        
+                  </div>
+              </div>
+              <div class="panel__params">
+                <div class="panel__subtitle">Параметры</div>
+                <div class="panel__body">
+                  <div class="panel__item">
+                     <div class="panel__label">Разрешение</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="resolution"
+                             _tabindex="8" v-bind:_value="ADC_this.resolution"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">бит</div>
+                  </div>
+                  <div class="panel__item">
+                     <div class="panel__label">Число входных каналов</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="channels"
+                             _tabindex="9" v-bind:_value="ADC_this.channels"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">шт.</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Макс. Частота дискретизации</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="max_sample_rate"
+                             _tabindex="10" :_value="ADC_this.max_sample_rate"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">МСПС</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Макс. Интегральная нелинейность</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="max_INL"
+                             _tabindex="11" :_value="ADC_this.max_INL"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">+/- ЛСБ</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Отношение сигнал/шум</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="SNR"
+                             _tabindex="12" :_value="ADC_this.SNR"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">дБ</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Реальный динамический диапазон</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="SFDR"
+                             _tabindex="13" :_value="ADC_this.SFDR"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">дБ</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Потребляемая мощность</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="power"
+                             _tabindex="14" :_value="ADC_this.power"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">мВт</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Диапазон рабочих температур</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="temperature"
+                             _tabindex="15" :_value="ADC_this.temperature"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">С</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Аналоговый вход</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="analog_input"
+                             _tabindex="16" :_value="ADC_this.analog_input"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">МГц</div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Коэффициент качества по Уолдену</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="FoMW"
+                             _tabindex="17" :_value="ADC_this.FoMW"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel"></div>
+                  </div><div class="panel__item">
+                     <div class="panel__label">Макс. Дифференциальная нелинейность</div>
+                          <input__text1 
+                            _type="text" 
+                            _placeholder="" required _name="max_DNL"
+                             _tabindex="18" :_value="ADC_this.max_DNL"
+                            autocomplete = "current-password"
+                          ></input__text1>
+                     <div class="panel__sublabel">+/- ЛСБ</div>
+                  </div>
+                </div>
+              </div>
+             </div>
+             <div class="panel_footer">
+                <btn_dark-blue text='Отмена' _submit=true _tabindex=5 onclick="window.location.href = `/static/main/`"  v-on:keyup.enter="onEnter"></btn_dark-blue>
+                <btn_blues text='Сохранить' _submit=true _tabindex=5  @click="handleSubmit" v-on:keyup.enter="handleSubmit"></btn_blues>
+             </div>
+           </form>
+         </div>
+      </main>
+   </v-app>
+</body>
+ 
+  <link rel="stylesheet" type="text/css" href="/static/style/header.css">
+<link rel="stylesheet" type="text/css" href="/static/style/create_adc.css">
+<script src="/static/components/btns/btn_blue.js"></script>
+<script src="/static/components/btns/btn_dark-blue.js"></script>
+<script src="/static/components/input_texts/input__text1.js"></script>
+
+<script src="/static/components/header1.js"></script>
+<script type="text/javascript" src="/static/edit_adc/index.js"></script>
+
+</html>

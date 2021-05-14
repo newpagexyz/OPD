@@ -434,6 +434,12 @@
                     $key=="FoMW" OR
                     $key=="max_DNL"){
                         $query=$query.' `'.$key.'`              ="'.floatval($val).'"';   
+<<<<<<< HEAD
+=======
+                    }
+                    elseif($key=="description"){
+                        $query=$query.' `description`              ="'.$this->mysqli->real_escape_string($val).'"';   
+>>>>>>> 876270db1dfc3adc5349b77739ea321ab0182556
                     }
 		    elseif($key=="description"){
 		    	$query=$query.' `description`              ="'.$this->mysqli->real_escape_string($val).'"';
